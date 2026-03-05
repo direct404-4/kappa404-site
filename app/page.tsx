@@ -3,93 +3,111 @@ import CardProject from "@/components/CardProject";
 import CardService from "@/components/CardService";
 import ContactBlock from "@/components/ContactBlock";
 import SectionTitle from "@/components/SectionTitle";
+import { GlowFollow } from "@/components/hero/GlowFollow";
+import { Reveal } from "@/components/motion/Reveal";
 import { HOME_ABOUT, PROCESS_STEPS, PROJECTS, SERVICES } from "@/lib/content";
 
 export default function HomePage() {
   return (
     <div className="kappa-home">
-      <section className="kappa-hero">
+      <section className="kappa-hero relative overflow-hidden">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(1200px_circle_at_20%_0%,rgba(139,92,246,0.18),transparent_50%),radial-gradient(1000px_circle_at_80%_20%,rgba(59,130,246,0.16),transparent_55%)]" />
         <div className="kappa-hero-nebula" />
         <div className="kappa-hero-grid" />
         <div className="kappa-hero-orb" />
+        <GlowFollow />
 
         <div className="container-main relative z-10 py-24 text-center md:py-32">
-          <span className="kappa-hero-chip kappa-reveal">KAPPA404 // Digital Vision Craft</span>
+          <Reveal>
+            <span className="kappa-hero-chip">KAPPA404 // Digital Vision Craft</span>
 
-          <h1 className="kappa-hero-title kappa-reveal" style={{ animationDelay: "120ms" }}>
-            KAPPA404
-            <span>AI Visual Engineering</span>
-          </h1>
+            <h1 className="kappa-hero-title">
+              KAPPA404
+              <span>AI Visual Engineering</span>
+            </h1>
 
-          <p className="kappa-hero-copy kappa-reveal" style={{ animationDelay: "220ms" }}>
-            Ecosistemi digitali premium dove design futuristico, sviluppo moderno e automazione intelligente lavorano insieme per creare presenza, valore e risultato.
-          </p>
+            <p className="kappa-hero-copy">
+              Ecosistemi digitali premium dove design futuristico, sviluppo moderno e automazione intelligente lavorano insieme per creare presenza, valore e risultato.
+            </p>
+          </Reveal>
 
-          <div className="mt-10 flex flex-wrap justify-center gap-3 kappa-reveal" style={{ animationDelay: "320ms" }}>
-            <Link href="/contatti#form" className="btn-primary">
-              Inizia ora
-            </Link>
-            <Link href="/progetti" className="btn-secondary">
-              Guarda i progetti
-            </Link>
-          </div>
+          <Reveal delay={0.08}>
+            <div className="mt-10 flex flex-wrap justify-center gap-3">
+              <Link
+                href="/contatti#form"
+                className="btn-primary transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_28px_rgba(0,229,255,0.35)]"
+              >
+                Inizia ora
+              </Link>
+              <Link
+                href="/progetti"
+                className="btn-secondary transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_24px_rgba(139,92,246,0.3)]"
+              >
+                Guarda i progetti
+              </Link>
+            </div>
+          </Reveal>
 
-          <div className="mt-12 flex flex-wrap justify-center gap-3 kappa-reveal" style={{ animationDelay: "420ms" }}>
-            <span className="kappa-pill">Creative Direction</span>
-            <span className="kappa-pill">Web Systems</span>
-            <span className="kappa-pill">AI Visual Workflow</span>
-          </div>
+          <Reveal delay={0.12}>
+            <div className="mt-12 flex flex-wrap justify-center gap-3">
+              <span className="kappa-pill">Creative Direction</span>
+              <span className="kappa-pill">Web Systems</span>
+              <span className="kappa-pill">AI Visual Workflow</span>
+            </div>
+          </Reveal>
         </div>
       </section>
 
       <section className="section-gap kappa-about-wrap">
         <div className="container-main">
-          <div className="grid items-center gap-12 lg:grid-cols-2">
-            <div>
-              <span className="kappa-hero-chip">{HOME_ABOUT.label}</span>
+          <Reveal>
+            <div className="grid items-center gap-12 lg:grid-cols-2">
+              <div>
+                <span className="kappa-hero-chip">{HOME_ABOUT.label}</span>
 
-              <h2 className="mt-5 max-w-2xl text-4xl font-semibold leading-tight text-white md:text-5xl">{HOME_ABOUT.headline}</h2>
+                <h2 className="mt-5 max-w-2xl text-4xl font-semibold leading-tight text-white md:text-5xl">{HOME_ABOUT.headline}</h2>
 
-              <p className="mt-6 max-w-2xl text-base leading-8 text-slate-300 md:text-lg">{HOME_ABOUT.mainText}</p>
+                <p className="mt-6 max-w-2xl text-base leading-8 text-slate-300 md:text-lg">{HOME_ABOUT.mainText}</p>
 
-              <p className="mt-4 max-w-2xl text-base leading-8 text-slate-400 md:text-lg">{HOME_ABOUT.secondaryText}</p>
+                <p className="mt-4 max-w-2xl text-base leading-8 text-slate-400 md:text-lg">{HOME_ABOUT.secondaryText}</p>
 
-              <div className="mt-8 rounded-2xl border border-cyan/20 bg-cyan/5 p-5">
-                <p className="text-sm uppercase tracking-[0.16em] text-cyan/75">Identita</p>
-                <p className="mt-3 text-sm text-white/80">{HOME_ABOUT.identityIntro}</p>
-                <ul className="mt-4 space-y-2 text-sm text-white/72">
-                  {HOME_ABOUT.identityPoints.map((item) => (
-                    <li key={item}>• {item}</li>
+                <div className="mt-8 rounded-2xl border border-cyan/20 bg-cyan/5 p-5">
+                  <p className="text-sm uppercase tracking-[0.16em] text-cyan/75">Identita</p>
+                  <p className="mt-3 text-sm text-white/80">{HOME_ABOUT.identityIntro}</p>
+                  <ul className="mt-4 space-y-2 text-sm text-white/72">
+                    {HOME_ABOUT.identityPoints.map((item) => (
+                      <li key={item}>• {item}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="mt-8 flex flex-wrap gap-3">
+                  {HOME_ABOUT.badges.map((badge) => (
+                    <span key={badge} className="kappa-pill">
+                      {badge}
+                    </span>
                   ))}
-                </ul>
+                </div>
+
+                <p className="mt-8 text-base font-medium text-cyan">{HOME_ABOUT.closing}</p>
               </div>
 
-              <div className="mt-8 flex flex-wrap gap-3">
-                {HOME_ABOUT.badges.map((badge) => (
-                  <span key={badge} className="kappa-pill">
-                    {badge}
-                  </span>
-                ))}
-              </div>
+              <div className="relative">
+                <div className="kappa-about-glow" />
+                <div className="kappa-about-card">
+                  <div className="kappa-about-visual" />
 
-              <p className="mt-8 text-base font-medium text-cyan">{HOME_ABOUT.closing}</p>
-            </div>
-
-            <div className="relative">
-              <div className="kappa-about-glow" />
-              <div className="kappa-about-card">
-                <div className="kappa-about-visual" />
-
-                <div className="mt-6 grid gap-3 sm:grid-cols-3">
-                  {HOME_ABOUT.sideLabels.map((label) => (
-                    <div key={label} className="kappa-about-mini-card">
-                      {label}
-                    </div>
-                  ))}
+                  <div className="mt-6 grid gap-3 sm:grid-cols-3">
+                    {HOME_ABOUT.sideLabels.map((label, index) => (
+                      <Reveal key={label} delay={index * 0.06}>
+                        <div className="kappa-about-mini-card">{label}</div>
+                      </Reveal>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -101,8 +119,10 @@ export default function HomePage() {
           />
 
           <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {SERVICES.map((service) => (
-              <CardService key={service.slug} service={service} />
+            {SERVICES.map((service, index) => (
+              <Reveal key={service.slug} delay={index * 0.05}>
+                <CardService service={service} />
+              </Reveal>
             ))}
           </div>
         </div>
@@ -116,8 +136,10 @@ export default function HomePage() {
           />
 
           <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {PROJECTS.map((project) => (
-              <CardProject key={project.slug} project={project} />
+            {PROJECTS.map((project, index) => (
+              <Reveal key={project.slug} delay={index * 0.06}>
+                <CardProject project={project} />
+              </Reveal>
             ))}
           </div>
         </div>
@@ -133,8 +155,10 @@ export default function HomePage() {
           <ol className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {PROCESS_STEPS.map((step, index) => (
               <li key={step} className="kappa-step-card">
-                <p className="text-xs uppercase tracking-[0.18em] text-cyan/75">Step {index + 1}</p>
-                <p className="mt-3 text-sm text-white/82">{step}</p>
+                <Reveal delay={index * 0.04}>
+                  <p className="text-xs uppercase tracking-[0.18em] text-cyan/75">Step {index + 1}</p>
+                  <p className="mt-3 text-sm text-white/82">{step}</p>
+                </Reveal>
               </li>
             ))}
           </ol>

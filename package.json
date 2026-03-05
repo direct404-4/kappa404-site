@@ -9,6 +9,7 @@
     "lint": "echo \"Lint placeholder\""
   },
   "dependencies": {
+    "framer-motion": "^12.35.0",
     "gsap": "^3.12.5",
     "next": "^15.0.0",
     "react": "^18.3.1",
