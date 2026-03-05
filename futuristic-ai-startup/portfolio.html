@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio | NeonForge AI</title>
+    <meta name="description" content="Portfolio of futuristic AI startup products, automation systems, and cyberpunk interfaces." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-row">
+        <a class="logo" href="index.html">NeonForge AI</a>
+        <button class="menu-toggle" aria-label="Apri menu">☰</button>
+        <nav class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="services.html">Services</a>
+          <a href="portfolio.html">Portfolio</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero container" style="min-height: 62vh;">
+        <div class="reveal">
+          <span class="badge">Portfolio</span>
+          <h1>
+            Product Cases from
+            <span class="gradient-text">AI to Automation</span>
+          </h1>
+          <p class="subtitle">Filter by category and explore startup-ready systems designed for speed and clarity.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="filter-row reveal">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="automation">Automation</button>
+            <button class="filter-btn" data-filter="vision">Vision</button>
+            <button class="filter-btn" data-filter="nlp">NLP</button>
+            <button class="filter-btn" data-filter="data">Data</button>
+          </div>
+
+          <div class="grid cols-3" id="portfolio-grid">
+            <article class="project-card reveal" data-category="automation data">
+              <div class="project-visual"></div>
+              <div class="project-content">
+                <h3>Revenue Autopilot</h3>
+                <p>Automated lifecycle messaging and CRM intelligence for B2B SaaS acquisition.</p>
+              </div>
+            </article>
+
+            <article class="project-card reveal" data-category="vision">
+              <div class="project-visual"></div>
+              <div class="project-content">
+                <h3>Visual Signal Engine</h3>
+                <p>Real-time visual pattern scoring for creative quality control and content ranking.</p>
+              </div>
+            </article>
+
+            <article class="project-card reveal" data-category="nlp">
+              <div class="project-visual"></div>
+              <div class="project-content">
+                <h3>Ops Knowledge Bot</h3>
+                <p>Internal assistant that indexes SOPs and answers team queries across tools.</p>
+              </div>
+            </article>
+
+            <article class="project-card reveal" data-category="automation">
+              <div class="project-visual"></div>
+              <div class="project-content">
+                <h3>Onboarding Workflow Grid</h3>
+                <p>Workflow automation for customer onboarding with dynamic branching and alerts.</p>
+              </div>
+            </article>
+
+            <article class="project-card reveal" data-category="data">
+              <div class="project-visual"></div>
+              <div class="project-content">
+                <h3>Pulse Analytics Hub</h3>
+                <p>Unified startup dashboard with anomaly detection and predictive performance markers.</p>
+              </div>
+            </article>
+
+            <article class="project-card reveal" data-category="nlp data">
+              <div class="project-visual"></div>
+              <div class="project-content">
+                <h3>Sentiment Command Center</h3>
+                <p>Cross-channel sentiment intelligence with AI-driven escalation signals.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-row">
+        <span>Portfolio curated for AI-native product teams.</span>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="services.html">Services</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

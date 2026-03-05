@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact | NeonForge AI</title>
+    <meta name="description" content="Contact NeonForge AI for futuristic startup websites, AI products, and automation systems." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-row">
+        <a class="logo" href="index.html">NeonForge AI</a>
+        <button class="menu-toggle" aria-label="Apri menu">☰</button>
+        <nav class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="services.html">Services</a>
+          <a href="portfolio.html">Portfolio</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero container" style="min-height: 56vh;">
+        <div class="reveal">
+          <span class="badge">Contact</span>
+          <h1>
+            Let’s Build Your
+            <span class="gradient-text">Next AI Product</span>
+          </h1>
+          <p class="subtitle">Tell us your growth goal, timeline, and technical constraints. We will respond within one business day.</p>
+        </div>
+      </section>
+
+      <section class="section" style="padding-top: 20px;">
+        <div class="container contact-layout">
+          <article class="card reveal">
+            <h3>Project Brief</h3>
+            <p class="small" style="margin-top: 10px; margin-bottom: 16px;">This demo form simulates submission using vanilla JavaScript.</p>
+
+            <form id="contact-form">
+              <div class="form-row">
+                <label>
+                  Name
+                  <input type="text" name="name" required />
+                </label>
+                <label>
+                  Email
+                  <input type="email" name="email" required />
+                </label>
+              </div>
+
+              <div class="form-row">
+                <label>
+                  Company
+                  <input type="text" name="company" />
+                </label>
+                <label>
+                  Budget Range
+                  <input type="text" name="budget" placeholder="$10k - $25k" />
+                </label>
+              </div>
+
+              <label>
+                Message
+                <textarea rows="6" name="message" required></textarea>
+              </label>
+
+              <button class="btn" type="submit" style="border: 0;">Send Request</button>
+              <p id="form-status" class="small" style="margin-top: 12px;"></p>
+            </form>
+          </article>
+
+          <article class="card reveal">
+            <h3>Direct Channels</h3>
+            <p class="small" style="margin-top: 12px;">Prefer direct contact? Use one of the channels below.</p>
+
+            <div class="chips" style="margin-top: 16px;">
+              <a class="chip" href="mailto:hello@neonforge.ai">hello@neonforge.ai</a>
+              <a class="chip" href="https://wa.me/393520007587" target="_blank" rel="noreferrer">WhatsApp</a>
+              <a class="chip" href="#">LinkedIn</a>
+              <a class="chip" href="#">X / Twitter</a>
+            </div>
+
+            <div class="card" style="margin-top: 20px; background: rgba(255,255,255,0.02);">
+              <h3>HQ Node</h3>
+              <p>Milano, Italy</p>
+              <p class="small" style="margin-top: 10px;">Remote-first engineering studio serving global startups.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-row">
+        <span>Ready when you are — NeonForge AI.</span>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="services.html">Services</a>
+          <a href="portfolio.html">Portfolio</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

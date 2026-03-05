@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kappa404 | Contact</title>
+    <meta
+      name="description"
+      content="Contact Kappa404 to launch your AI startup platform with modern autonomous infrastructure."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-row">
+        <a class="logo" href="../index.html">Kappa404</a>
+        <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+        <nav class="nav-links" aria-label="Main navigation">
+          <a href="../index.html">Home</a>
+          <a href="services.html">Services</a>
+          <a href="portfolio.html">Portfolio</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container reveal">
+          <span class="badge">Contact</span>
+          <h1>
+            Let’s launch your <span class="gradient-text">AI startup</span> together.
+          </h1>
+          <p class="subtitle">
+            Send your idea, challenge, or roadmap. We respond with a concrete technical proposal.
+          </p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container contact-layout">
+          <article class="card reveal">
+            <h3>Project Brief</h3>
+            <p class="small">
+              Tell us where you are now, what you want to automate, and your timeline.
+            </p>
+            <form id="contact-form" style="margin-top: 20px;">
+              <div class="form-row">
+                <label>
+                  Name
+                  <input type="text" name="name" placeholder="Your name" required />
+                </label>
+                <label>
+                  Email
+                  <input type="email" name="email" placeholder="you@startup.com" required />
+                </label>
+              </div>
+              <label>
+                Company
+                <input type="text" name="company" placeholder="Startup name" />
+              </label>
+              <label>
+                Message
+                <textarea
+                  name="message"
+                  rows="5"
+                  placeholder="Describe your product goals and current bottlenecks"
+                  required
+                ></textarea>
+              </label>
+              <button class="btn" type="submit">Send Brief</button>
+              <p id="form-status" class="small" style="margin-top: 12px;"></p>
+            </form>
+          </article>
+
+          <aside class="card reveal">
+            <h3>Direct Channel</h3>
+            <p class="small">Milan, Italy<br />Remote worldwide engagements.</p>
+            <div class="chips" style="margin-top: 14px;">
+              <span class="chip">hello@kappa404.ai</span>
+              <span class="chip">Response in 24h</span>
+              <span class="chip">NDA-ready</span>
+            </div>
+            <p class="small" style="margin-top: 18px;">
+              For enterprise or investor-backed projects, include current stack details and expected
+              user volume.
+            </p>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-row">
+        <span>© 2026 Kappa404. Built for AI-native founders.</span>
+        <div class="footer-links">
+          <a href="services.html">Services</a>
+          <a href="portfolio.html">Portfolio</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="../script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kappa404 | Portfolio</title>
+    <meta
+      name="description"
+      content="Portfolio of Kappa404 AI startup projects in automation, predictive intelligence, and autonomous agents."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-row">
+        <a class="logo" href="../index.html">Kappa404</a>
+        <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+        <nav class="nav-links" aria-label="Main navigation">
+          <a href="../index.html">Home</a>
+          <a href="services.html">Services</a>
+          <a href="portfolio.html">Portfolio</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container reveal">
+          <span class="badge">Portfolio</span>
+          <h1>
+            Deployed <span class="gradient-text">AI products</span> with startup speed.
+          </h1>
+          <p class="subtitle">
+            Real projects solving real operational bottlenecks with autonomous intelligence and
+            measurable ROI.
+          </p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="filter-row reveal">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="agents">Agents</button>
+            <button class="filter-btn" data-filter="analytics">Analytics</button>
+            <button class="filter-btn" data-filter="automation">Automation</button>
+          </div>
+
+          <div class="grid cols-3">
+            <article class="project-card reveal" data-category="agents automation">
+              <div class="project-visual"></div>
+              <div class="project-content">
+                <h3>NeuroDesk Assistant</h3>
+                <p>
+                  Multi-agent customer support brain integrated with helpdesk + CRM for SaaS teams.
+                </p>
+              </div>
+            </article>
+
+            <article class="project-card reveal" data-category="analytics">
+              <div class="project-visual"></div>
+              <div class="project-content">
+                <h3>PulseForecast</h3>
+                <p>
+                  Predictive revenue dashboard that combines sales signals and trend analysis.
+                </p>
+              </div>
+            </article>
+
+            <article class="project-card reveal" data-category="automation agents">
+              <div class="project-visual"></div>
+              <div class="project-content">
+                <h3>HyperFlow</h3>
+                <p>
+                  Workflow orchestrator that auto-generates tasks and closes repetitive operations.
+                </p>
+              </div>
+            </article>
+
+            <article class="project-card reveal" data-category="analytics automation">
+              <div class="project-visual"></div>
+              <div class="project-content">
+                <h3>SignalGrid</h3>
+                <p>
+                  Performance monitor that tracks model drift and alerts teams before regressions.
+                </p>
+              </div>
+            </article>
+
+            <article class="project-card reveal" data-category="agents">
+              <div class="project-visual"></div>
+              <div class="project-content">
+                <h3>Atlas Copilot</h3>
+                <p>
+                  Founder copilot with strategic recommendations based on internal startup data.
+                </p>
+              </div>
+            </article>
+
+            <article class="project-card reveal" data-category="automation">
+              <div class="project-visual"></div>
+              <div class="project-content">
+                <h3>Dockline AI</h3>
+                <p>
+                  Back-office automation layer for invoices, operations, and compliance routing.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-row">
+        <span>Want your product featured here next?</span>
+        <div class="footer-links">
+          <a href="contact.html">Book a discovery call</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="../script.js"></script>
+  </body>
+</html>
