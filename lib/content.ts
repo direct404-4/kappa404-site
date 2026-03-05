@@ -23,6 +23,19 @@ export type Project = {
   stack: string[];
 };
 
+
+export type HomeAbout = {
+  label: string;
+  headline: string;
+  mainText: string;
+  secondaryText: string;
+  identityIntro: string;
+  identityPoints: string[];
+  badges: string[];
+  sideLabels: string[];
+  closing: string;
+};
+
 export type ContactInfo = {
   email: string;
   whatsapp: string;
@@ -186,3 +199,23 @@ export const AI_SOLUTIONS = [
   "Internal tools per analisi e controllo operativo",
   "Workflow documentation con assistenza AI"
 ];
+
+
+export const HOME_ABOUT: HomeAbout = {
+  label: "Chi sono",
+  headline: "Creo esperienze digitali, visual design e soluzioni AI con identita forte.",
+  mainText:
+    "Sono KAPPA404. Unisco creativita, tecnologia e visione strategica per costruire siti web, contenuti visuali, automazioni e sistemi digitali con un impatto reale. Il mio approccio parte dall'estetica, ma punta sempre alla funzione: ogni progetto deve apparire premium, comunicare valore e generare risultati.",
+  secondaryText:
+    "Lavoro tra design futuristico, sviluppo web, branding visivo, contenuti creativi e integrazione di strumenti AI per trasformare idee in prodotti, immagini, pagine e sistemi pronti da usare. Non mi interessa creare qualcosa di vuoto: ogni elemento deve avere presenza, coerenza e direzione.",
+  identityIntro: "KAPPA404 non e solo un nome. E un'identita digitale costruita per unire:",
+  identityPoints: [
+    "design visivo ad alto impatto",
+    "sviluppo moderno",
+    "automazione intelligente",
+    "contenuti creativi orientati al brand"
+  ],
+  badges: ["Web Design", "AI Automation", "Visual Content"],
+  sideLabels: ["Creative Direction", "Web Systems", "AI Visual Workflow"],
+  closing: "Non costruisco semplici pagine. Costruisco presenza digitale."
+};
