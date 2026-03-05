@@ -20,8 +20,13 @@ export function Reveal({ children, delay = 0, className }: RevealProps) {
     const update = () => setReduceMotion(media.matches);
     update();
 
-    media.addEventListener("change", update);
-    return () => media.removeEventListener("change", update);
+    if ("addEventListener" in media) {
+      media.addEventListener("change", update);
+      return () => media.removeEventListener("change", update);
+    }
+
+    media.addListener(update);
+    return () => media.removeListener(update);
   }, []);
 
   useEffect(() => {

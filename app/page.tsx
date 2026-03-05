@@ -5,12 +5,43 @@ import Link from "next/link";
 import CardProject from "@/components/CardProject";
 import CardService from "@/components/CardService";
 import ContactBlock from "@/components/ContactBlock";
+import RailSafeBoundary from "@/components/rail3d/RailSafeBoundary";
 import SectionTitle from "@/components/SectionTitle";
 import { GlowFollow } from "@/components/hero/GlowFollow";
 import { Reveal } from "@/components/motion/Reveal";
 import { HOME_ABOUT, PROCESS_STEPS, PROJECTS, SERVICES } from "@/lib/content";
 
-const RailStage = dynamic(() => import("@/components/rail3d/RailStage"), { ssr: false });
+const RailStage = dynamic(
+  () =>
+    import("@/components/rail3d/RailStage")
+      .then((mod) => mod.default)
+      .catch(() => {
+        const Fallback = () => (
+          <section className="relative h-screen border-y border-white/10 bg-[#030611]">
+            <div className="container-main flex h-full items-center justify-center">
+              <div className="max-w-xl rounded-2xl border border-cyan/35 bg-[#070d22]/82 px-6 py-5 text-center shadow-[0_20px_80px_rgba(0,0,0,0.45)] backdrop-blur-md">
+                <p className="text-xs uppercase tracking-[0.16em] text-cyan/90">3D disabled</p>
+                <p className="mt-3 text-sm text-white/78">Caricamento scena 3D non riuscito.</p>
+              </div>
+            </div>
+          </section>
+        );
+
+        return Fallback;
+      }),
+  {
+    ssr: false,
+    loading: () => (
+      <section className="relative h-screen border-y border-white/10 bg-[#030611]">
+        <div className="container-main flex h-full items-center justify-center">
+          <p className="rounded-full border border-cyan/35 bg-cyan/10 px-5 py-2 text-xs uppercase tracking-[0.16em] text-cyan/90">
+            Project Rail Loading...
+          </p>
+        </div>
+      </section>
+    ),
+  },
+);
 
 export default function HomePage() {
   return (
@@ -132,7 +163,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      <RailStage />
+      <RailSafeBoundary>
+        <RailStage />
+      </RailSafeBoundary>
 
       <section className="section-gap border-y border-white/10 bg-[#070b1a]">
         <div className="container-main">
