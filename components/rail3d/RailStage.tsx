@@ -3,11 +3,12 @@
 import Link from "next/link";
 import { Line } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { useEffect, useMemo, useRef, useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 import { CableRail } from "./CableRail";
 import { getActiveRailProject, getCameraPosition, getRailPhase, RAIL_LANE_X, RAIL_PROJECTS } from "./projects";
-import { useScrollTimeline } from "./useScrollTimeline";
 
 type RailSceneProps = {
   progress: number;
@@ -92,14 +93,93 @@ function RailScene({ progress, renderActive, activeProjectId }: RailSceneProps) 
   );
 }
 
-export default function RailStage() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const pinRef = useRef<HTMLDivElement>(null);
+type CanvasBoundaryProps = {
+  children: React.ReactNode;
+  fallback: React.ReactNode;
+  onError: () => void;
+};
 
-  const { progress, isActive } = useScrollTimeline({
-    triggerRef: sectionRef,
-    pinRef,
-  });
+type CanvasBoundaryState = {
+  hasError: boolean;
+};
+
+class CanvasBoundary extends React.Component<CanvasBoundaryProps, CanvasBoundaryState> {
+  constructor(props: CanvasBoundaryProps) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  componentDidCatch() {
+    this.props.onError();
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return this.props.fallback;
+    }
+
+    return this.props.children;
+  }
+}
+
+function RailFallback({ reason }: { reason: string }) {
+  return (
+    <div className="flex h-full items-center justify-center px-4">
+      <div className="max-w-xl rounded-2xl border border-cyan/35 bg-[#070d22]/82 px-6 py-5 text-center shadow-[0_20px_80px_rgba(0,0,0,0.45)] backdrop-blur-md">
+        <p className="text-xs uppercase tracking-[0.16em] text-cyan/90">3D disabled</p>
+        <p className="mt-3 text-sm text-white/78">{reason}</p>
+      </div>
+    </div>
+  );
+}
+
+export default function RailStage() {
+  const wrapperRef = useRef<HTMLElement>(null);
+  const pinRef = useRef<HTMLDivElement>(null);
+  const [progress, setProgress] = useState(0);
+  const [isActive, setIsActive] = useState(false);
+  const [canvasFailed, setCanvasFailed] = useState(false);
+  const [webglStatus, setWebglStatus] = useState<"checking" | "ready" | "disabled">("checking");
+  const [canvasMounted, setCanvasMounted] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const wrapper = wrapperRef.current;
+    const pin = pinRef.current;
+    if (!wrapper || !pin) return;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    let rafId = 0;
+    const ctx = gsap.context(() => {
+      ScrollTrigger.create({
+        trigger: wrapper,
+        pin,
+        scrub: true,
+        start: "top top",
+        end: "+=300%",
+        anticipatePin: 1,
+        onUpdate: (self) => {
+          const value = self.progress;
+          cancelAnimationFrame(rafId);
+          rafId = window.requestAnimationFrame(() => {
+            setProgress((prev) => (Math.abs(prev - value) > 0.001 ? value : prev));
+          });
+        },
+        onToggle: (self) => setIsActive(self.isActive),
+      });
+    }, wrapper);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      ctx.revert();
+    };
+  }, []);
 
   const [documentHidden, setDocumentHidden] = useState(false);
 
@@ -111,7 +191,33 @@ export default function RailStage() {
     return () => document.removeEventListener("visibilitychange", handleVisibility);
   }, []);
 
-  const renderActive = isActive && !documentHidden;
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    try {
+      const testCanvas = document.createElement("canvas");
+      const context = testCanvas.getContext("webgl2") ?? testCanvas.getContext("webgl");
+      setWebglStatus(context ? "ready" : "disabled");
+    } catch {
+      setWebglStatus("disabled");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (webglStatus !== "ready") return;
+    if (canvasMounted) return;
+
+    const timeout = window.setTimeout(() => {
+      if (!canvasMounted) {
+        setCanvasFailed(true);
+      }
+    }, 2200);
+
+    return () => window.clearTimeout(timeout);
+  }, [webglStatus, canvasMounted]);
+
+  const renderActive = isActive && !documentHidden && webglStatus === "ready" && !canvasFailed;
   const activeProject = useMemo(() => getActiveRailProject(progress, 15.5), [progress]);
   const phase = getRailPhase(progress);
 
@@ -123,16 +229,26 @@ export default function RailStage() {
         : "Rail · project run";
 
   return (
-    <section ref={sectionRef} className="relative h-[300vh]" aria-label="Project Cable Rail Stage">
+    <section ref={wrapperRef} className="relative h-[300vh]" aria-label="Project Cable Rail Stage">
       <div ref={pinRef} className="relative h-screen overflow-hidden border-y border-white/10 bg-[#030611]">
-        <Canvas
-          dpr={[1, 1.75]}
-          camera={{ position: [0, 1, 28], fov: 47, near: 0.1, far: 700 }}
-          frameloop={renderActive ? "always" : "never"}
-          gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
-        >
-          <RailScene progress={progress} renderActive={renderActive} activeProjectId={activeProject?.id ?? null} />
-        </Canvas>
+        {webglStatus === "ready" && !canvasFailed ? (
+          <CanvasBoundary
+            onError={() => setCanvasFailed(true)}
+            fallback={<RailFallback reason="Rendering 3D non supportato in questo ambiente." />}
+          >
+            <Canvas
+              dpr={[1, 1.75]}
+              camera={{ position: [0, 1, 28], fov: 47, near: 0.1, far: 700 }}
+              frameloop={renderActive ? "always" : "never"}
+              gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
+              onCreated={() => setCanvasMounted(true)}
+            >
+              <RailScene progress={progress} renderActive={renderActive} activeProjectId={activeProject?.id ?? null} />
+            </Canvas>
+          </CanvasBoundary>
+        ) : (
+          <RailFallback reason={webglStatus === "checking" ? "Inizializzazione scena 3D..." : "WebGL non disponibile su questo dispositivo/browser."} />
+        )}
 
         <div className="pointer-events-none absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-[#030611] via-[#030611]/70 to-transparent" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#030611] via-[#030611]/76 to-transparent" />

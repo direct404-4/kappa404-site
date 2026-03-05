@@ -1,3 +1,5 @@
+"use client";
+
 import { CONTACT_INFO } from "@/lib/content";
 
 export default function ContactBlock() {

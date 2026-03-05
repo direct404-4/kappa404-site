@@ -1,12 +1,16 @@
+"use client";
+
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import CardProject from "@/components/CardProject";
 import CardService from "@/components/CardService";
 import ContactBlock from "@/components/ContactBlock";
-import RailStageClient from "@/components/rail3d/RailStageClient";
 import SectionTitle from "@/components/SectionTitle";
 import { GlowFollow } from "@/components/hero/GlowFollow";
 import { Reveal } from "@/components/motion/Reveal";
 import { HOME_ABOUT, PROCESS_STEPS, PROJECTS, SERVICES } from "@/lib/content";
+
+const RailStage = dynamic(() => import("@/components/rail3d/RailStage"), { ssr: false });
 
 export default function HomePage() {
   return (
@@ -128,7 +132,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <RailStageClient />
+      <RailStage />
 
       <section className="section-gap border-y border-white/10 bg-[#070b1a]">
         <div className="container-main">
