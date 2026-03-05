@@ -2,6 +2,7 @@ import Link from "next/link";
 import CardProject from "@/components/CardProject";
 import CardService from "@/components/CardService";
 import ContactBlock from "@/components/ContactBlock";
+import RailStage from "@/components/rail3d/RailStage";
 import SectionTitle from "@/components/SectionTitle";
 import { GlowFollow } from "@/components/hero/GlowFollow";
 import { Reveal } from "@/components/motion/Reveal";
@@ -126,6 +127,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <RailStage />
 
       <section className="section-gap border-y border-white/10 bg-[#070b1a]">
         <div className="container-main">
