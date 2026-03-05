@@ -124,21 +124,6 @@ main {
   opacity: 0.32;
 }
 
-.kappa-hero-orb {
-  position: absolute;
-  left: 50%;
-  bottom: 16%;
-  width: min(38vw, 460px);
-  aspect-ratio: 1;
-  transform: translateX(-50%);
-  border-radius: 999px;
-  background:
-    radial-gradient(circle at 50% 35%, rgba(255, 255, 255, 0.88), rgba(102, 217, 255, 0.45) 24%, rgba(76, 106, 255, 0.24) 52%, transparent 72%);
-  filter: blur(2px);
-  box-shadow: 0 0 80px rgba(122, 150, 255, 0.6);
-  animation: kappa-pulse 5.8s ease-in-out infinite;
-}
-
 .kappa-hero-chip {
   display: inline-flex;
   border-radius: 999px;
@@ -271,18 +256,6 @@ main {
   }
 }
 
-@keyframes kappa-pulse {
-  0%,
-  100% {
-    transform: translateX(-50%) scale(0.98);
-    opacity: 0.82;
-  }
-  50% {
-    transform: translateX(-50%) scale(1.05);
-    opacity: 1;
-  }
-}
-
 @keyframes kappa-drift {
   0%,
   100% {
@@ -294,17 +267,12 @@ main {
 }
 
 @media (max-width: 1024px) {
-  .kappa-hero-orb {
-    width: min(60vw, 360px);
-  }
-
   .kappa-about-visual {
     height: 240px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .kappa-hero-orb,
   .kappa-about-visual,
   .kappa-reveal {
     animation: none !important;

@@ -14,7 +14,6 @@ export default function HomePage() {
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(1200px_circle_at_20%_0%,rgba(139,92,246,0.18),transparent_50%),radial-gradient(1000px_circle_at_80%_20%,rgba(59,130,246,0.16),transparent_55%)]" />
         <div className="kappa-hero-nebula" />
         <div className="kappa-hero-grid" />
-        <div className="kappa-hero-orb" />
         <GlowFollow />
 
         <div className="container-main relative z-10 py-24 text-center md:py-32">
