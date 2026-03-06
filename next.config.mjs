@@ -15,3 +15,5 @@ export default {
     ignoreDuringBuilds: true
   }
 };
+
+import('@opennextjs/cloudflare').then(m => m.initOpenNextCloudflareForDev());
