@@ -11,31 +11,41 @@ export function useLenisSmoothScroll(enabled = true) {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduceMotion) return;
 
-    const lenis = new Lenis({
-      duration: 1.1,
-      smoothWheel: true,
-      smoothTouch: false,
-      wheelMultiplier: 0.95,
-      touchMultiplier: 0.85,
-    });
-
-    const onLenisScroll = () => {
-      ScrollTrigger.update();
-    };
-    lenis.on("scroll", onLenisScroll);
-
     let frame = 0;
-    const raf = (time: number) => {
-      lenis.raf(time);
+    let lenis: Lenis | null = null;
+
+    try {
+      lenis = new Lenis({
+        duration: 1.1,
+        smoothWheel: true,
+        smoothTouch: false,
+        wheelMultiplier: 0.95,
+        touchMultiplier: 0.85,
+      });
+
+      const onLenisScroll = () => {
+        ScrollTrigger.update();
+      };
+
+      lenis.on("scroll", onLenisScroll);
+
+      const raf = (time: number) => {
+        lenis?.raf(time);
+        frame = window.requestAnimationFrame(raf);
+      };
+
       frame = window.requestAnimationFrame(raf);
-    };
 
-    frame = window.requestAnimationFrame(raf);
-
-    return () => {
-      window.cancelAnimationFrame(frame);
-      lenis.off("scroll", onLenisScroll);
-      lenis.destroy();
-    };
+      return () => {
+        window.cancelAnimationFrame(frame);
+        lenis?.off("scroll", onLenisScroll);
+        lenis?.destroy();
+      };
+    } catch (error) {
+      console.error("Lenis init failed, fallback to native scroll:", error);
+      return () => {
+        window.cancelAnimationFrame(frame);
+      };
+    }
   }, [enabled]);
 }
