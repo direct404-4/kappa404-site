@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Lenis from "lenis";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export function useLenisSmoothScroll(enabled = true) {
   useEffect(() => {
@@ -18,6 +19,11 @@ export function useLenisSmoothScroll(enabled = true) {
       touchMultiplier: 0.85,
     });
 
+    const onLenisScroll = () => {
+      ScrollTrigger.update();
+    };
+    lenis.on("scroll", onLenisScroll);
+
     let frame = 0;
     const raf = (time: number) => {
       lenis.raf(time);
@@ -28,6 +34,7 @@ export function useLenisSmoothScroll(enabled = true) {
 
     return () => {
       window.cancelAnimationFrame(frame);
+      lenis.off("scroll", onLenisScroll);
       lenis.destroy();
     };
   }, [enabled]);

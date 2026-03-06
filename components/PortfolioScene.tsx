@@ -7,7 +7,7 @@ import { Canvas } from "@react-three/fiber";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
-import { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 
 type RailProject = {
   id: string;
@@ -21,6 +21,29 @@ type RailProject = {
 const RAIL_PROJECTS = projects as RailProject[];
 
 const clamp01 = (value: number) => Math.max(0, Math.min(1, value));
+
+class CanvasBoundary extends React.Component<
+  { children: React.ReactNode; onError: () => void; fallback: React.ReactNode },
+  { hasError: boolean }
+> {
+  constructor(props: { children: React.ReactNode; onError: () => void; fallback: React.ReactNode }) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  componentDidCatch() {
+    this.props.onError();
+  }
+
+  render() {
+    if (this.state.hasError) return this.props.fallback;
+    return this.props.children;
+  }
+}
 
 function getPhase(progress: number): "Gather" | "Twist" | "Rail" {
   if (progress < 0.3) return "Gather";
@@ -62,7 +85,7 @@ export default function PortfolioScene() {
   const [isActive, setIsActive] = useState(false);
   const [webglStatus, setWebglStatus] = useState<"checking" | "ready" | "disabled">("checking");
   const [canvasMounted, setCanvasMounted] = useState(false);
-  const [canvasFailed, setCanvasFailed] = useState(false);
+  const [canvasCrashed, setCanvasCrashed] = useState(false);
   const [documentHidden, setDocumentHidden] = useState(false);
 
   useEffect(() => {
@@ -120,20 +143,6 @@ export default function PortfolioScene() {
   }, []);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    if (webglStatus !== "ready") return;
-    if (canvasMounted) return;
-
-    const timeout = window.setTimeout(() => {
-      if (!canvasMounted) {
-        setCanvasFailed(true);
-      }
-    }, 2600);
-
-    return () => window.clearTimeout(timeout);
-  }, [webglStatus, canvasMounted]);
-
-  useEffect(() => {
     if (typeof document === "undefined") return;
 
     const onVisibility = () => setDocumentHidden(document.hidden);
@@ -145,30 +154,55 @@ export default function PortfolioScene() {
 
   const activeProject = useMemo(() => getActiveProject(progress), [progress]);
   const phase = getPhase(progress);
-  const renderActive = isActive && !documentHidden && webglStatus === "ready" && !canvasFailed;
+  const renderActive = isActive && !documentHidden && webglStatus === "ready" && !canvasCrashed;
+
+  const fallbackMessage =
+    webglStatus === "checking"
+      ? "Inizializzazione ambiente WebGL..."
+      : webglStatus === "disabled"
+        ? "Il dispositivo non supporta la scena 3D. La navigazione resta disponibile."
+        : "La scena 3D ha avuto un errore durante l'apertura. Ricarica la pagina.";
 
   return (
     <section ref={wrapperRef} className="relative h-[320vh]" aria-label="Portfolio WebGL Stage">
       <div ref={pinRef} className="relative h-screen overflow-hidden border-y border-white/10 bg-[#02040f]">
-        {webglStatus === "ready" && !canvasFailed ? (
-          <Canvas
-            dpr={[1, 1.7]}
-            camera={{ position: [0, 1.2, 29], fov: 45, near: 0.1, far: 800 }}
-            frameloop={renderActive ? "always" : "demand"}
-            gl={{ antialias: true, alpha: false, powerPreference: "high-performance" }}
-            onCreated={() => setCanvasMounted(true)}
+        {webglStatus === "ready" && !canvasCrashed ? (
+          <CanvasBoundary
+            onError={() => setCanvasCrashed(true)}
+            fallback={
+              <div className="flex h-full items-center justify-center px-6">
+                <div className="rounded-2xl border border-cyan/35 bg-[#070d22]/82 px-6 py-5 text-center backdrop-blur-md">
+                  <p className="text-xs uppercase tracking-[0.16em] text-cyan/90">3D disabled</p>
+                  <p className="mt-3 text-sm text-white/76">La scena 3D ha avuto un errore durante l&apos;apertura.</p>
+                </div>
+              </div>
+            }
           >
-            <SceneManager progress={progress} renderActive={renderActive} activeProjectId={activeProject?.id ?? null} />
-          </Canvas>
+            <>
+              {!canvasMounted && (
+                <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center">
+                  <p className="rounded-full border border-cyan/35 bg-cyan/10 px-5 py-2 text-xs uppercase tracking-[0.16em] text-cyan/90">
+                    Loading 3D scene...
+                  </p>
+                </div>
+              )}
+
+              <Canvas
+                dpr={[1, 1.7]}
+                camera={{ position: [0, 1.2, 29], fov: 45, near: 0.1, far: 800 }}
+                frameloop={renderActive ? "always" : "demand"}
+                gl={{ antialias: true, alpha: false, powerPreference: "high-performance" }}
+                onCreated={() => setCanvasMounted(true)}
+              >
+                <SceneManager progress={progress} renderActive={renderActive} activeProjectId={activeProject?.id ?? null} />
+              </Canvas>
+            </>
+          </CanvasBoundary>
         ) : (
           <div className="flex h-full items-center justify-center px-6">
             <div className="rounded-2xl border border-cyan/35 bg-[#070d22]/82 px-6 py-5 text-center backdrop-blur-md">
               <p className="text-xs uppercase tracking-[0.16em] text-cyan/90">3D disabled</p>
-              <p className="mt-3 text-sm text-white/76">
-                {webglStatus === "checking"
-                  ? "Inizializzazione ambiente WebGL..."
-                  : "Il dispositivo non supporta la scena 3D. La navigazione resta disponibile."}
-              </p>
+              <p className="mt-3 text-sm text-white/76">{fallbackMessage}</p>
             </div>
           </div>
         )}
