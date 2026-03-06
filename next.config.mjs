@@ -10,8 +10,5 @@ export default {
   outputFileTracingRoot: __dirname,
   typescript: {
     ignoreBuildErrors: true
-  },
-  eslint: {
-    ignoreDuringBuilds: true
   }
 };
