@@ -9,7 +9,8 @@ export function useLenisSmoothScroll(enabled = true) {
     if (!enabled || typeof window === "undefined") return;
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduceMotion) return;
+    const isTouchViewport = window.matchMedia("(max-width: 1024px)").matches;
+    if (reduceMotion || isTouchViewport) return;
 
     let frame = 0;
     let lenis: Lenis | null = null;

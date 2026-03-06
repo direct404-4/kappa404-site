@@ -76,10 +76,10 @@ function createCablePoints(
   }
 
   const curve = new THREE.CatmullRomCurve3(points, false, "catmullrom", 0.28);
-  return curve.getPoints(72);
+  return curve.getPoints(56);
 }
 
-export function CableRail({ progress, cableCount = 22, controlPointCount = 14 }: CableRailProps) {
+export function CableRail({ progress, cableCount = 16, controlPointCount = 12 }: CableRailProps) {
   const seeds = useMemo<CableSeed[]>(
     () =>
       Array.from({ length: cableCount }, (_, index) => ({
@@ -93,10 +93,7 @@ export function CableRail({ progress, cableCount = 22, controlPointCount = 14 }:
   );
 
   const cableLines = useMemo(
-    () =>
-      seeds.map((seed, index) =>
-        createCablePoints(seed, index, cableCount, progress, controlPointCount),
-      ),
+    () => seeds.map((seed, index) => createCablePoints(seed, index, cableCount, progress, controlPointCount)),
     [seeds, cableCount, progress, controlPointCount],
   );
 

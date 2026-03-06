@@ -142,9 +142,9 @@ export default function RailStage() {
   const pinRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
   const [isActive, setIsActive] = useState(false);
+  const [isInView, setIsInView] = useState(false);
   const [canvasFailed, setCanvasFailed] = useState(false);
   const [webglStatus, setWebglStatus] = useState<"checking" | "ready" | "disabled">("checking");
-  const [canvasMounted, setCanvasMounted] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -193,10 +193,12 @@ export default function RailStage() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-
     try {
       const testCanvas = document.createElement("canvas");
-      const context = testCanvas.getContext("webgl2") ?? testCanvas.getContext("webgl");
+      const context =
+        testCanvas.getContext("webgl2") ??
+        testCanvas.getContext("webgl") ??
+        testCanvas.getContext("experimental-webgl");
       setWebglStatus(context ? "ready" : "disabled");
     } catch {
       setWebglStatus("disabled");
@@ -205,19 +207,26 @@ export default function RailStage() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    if (webglStatus !== "ready") return;
-    if (canvasMounted) return;
+    const node = pinRef.current;
+    if (!node || !("IntersectionObserver" in window)) {
+      setIsInView(true);
+      return;
+    }
 
-    const timeout = window.setTimeout(() => {
-      if (!canvasMounted) {
-        setCanvasFailed(true);
-      }
-    }, 2200);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]) {
+          setIsInView(entries[0].isIntersecting);
+        }
+      },
+      { threshold: 0.08 },
+    );
 
-    return () => window.clearTimeout(timeout);
-  }, [webglStatus, canvasMounted]);
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
 
-  const renderActive = isActive && !documentHidden && webglStatus === "ready" && !canvasFailed;
+  const renderActive = (isActive || isInView) && !documentHidden && webglStatus === "ready" && !canvasFailed;
   const activeProject = useMemo(() => getActiveRailProject(progress, 15.5), [progress]);
   const phase = getRailPhase(progress);
 
@@ -237,11 +246,10 @@ export default function RailStage() {
             fallback={<RailFallback reason="Rendering 3D non supportato in questo ambiente." />}
           >
             <Canvas
-              dpr={[1, 1.75]}
+              dpr={[1, 1.4]}
               camera={{ position: [0, 1, 28], fov: 47, near: 0.1, far: 700 }}
-              frameloop={renderActive ? "always" : "never"}
-              gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
-              onCreated={() => setCanvasMounted(true)}
+              frameloop={renderActive ? "always" : "demand"}
+              gl={{ antialias: false, alpha: true, powerPreference: "high-performance" }}
             >
               <RailScene progress={progress} renderActive={renderActive} activeProjectId={activeProject?.id ?? null} />
             </Canvas>
