@@ -5,7 +5,9 @@
   "engines": {
     "node": "20.x"
   },
+  "packageManager": "npm@10",
   "scripts": {
+    "preinstall": "node scripts/check-node-version.cjs",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
