@@ -380,3 +380,87 @@ main {
     animation: none !important;
   }
 }
+
+.kappa-rail-fallback {
+  position: relative;
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 1rem;
+  background:
+    radial-gradient(circle at 50% 28%, rgba(99, 140, 255, 0.2), transparent 38%),
+    radial-gradient(circle at 25% 12%, rgba(50, 186, 255, 0.14), transparent 42%),
+    radial-gradient(circle at 75% 14%, rgba(169, 90, 255, 0.16), transparent 44%),
+    #030611;
+}
+
+.kappa-rail-fallback__grid {
+  position: absolute;
+  inset: 42% 0 -24%;
+  background-image:
+    repeating-linear-gradient(90deg, rgba(121, 150, 255, 0.13) 0 1px, transparent 1px 64px),
+    repeating-linear-gradient(0deg, rgba(121, 150, 255, 0.13) 0 1px, transparent 1px 64px);
+  transform: perspective(900px) rotateX(72deg);
+  transform-origin: center bottom;
+  opacity: 0.35;
+}
+
+.kappa-rail-fallback__lane {
+  position: absolute;
+  top: 18%;
+  bottom: -8%;
+  width: 2px;
+  background: linear-gradient(to bottom, rgba(120, 231, 255, 0.72), rgba(116, 127, 255, 0.2), transparent 92%);
+  filter: drop-shadow(0 0 9px rgba(108, 220, 255, 0.5));
+  animation: kappa-rail-lane-drift 7.6s ease-in-out infinite;
+}
+
+.kappa-rail-fallback__lane--a { left: 31%; animation-delay: -0.3s; }
+.kappa-rail-fallback__lane--b { left: 44%; animation-delay: -1.1s; }
+.kappa-rail-fallback__lane--c { left: 56%; animation-delay: -1.8s; }
+.kappa-rail-fallback__lane--d { left: 69%; animation-delay: -2.4s; }
+
+.kappa-rail-fallback__marker {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: #d6f4ff;
+  box-shadow: 0 0 0 6px rgba(108, 214, 255, 0.22), 0 0 24px rgba(108, 214, 255, 0.8);
+  animation: kappa-rail-marker-pulse 2.6s ease-in-out infinite;
+}
+
+.kappa-rail-fallback__marker--a { left: 30.5%; top: 42%; animation-delay: -0.2s; }
+.kappa-rail-fallback__marker--b { left: 43.5%; top: 56%; animation-delay: -0.9s; }
+.kappa-rail-fallback__marker--c { left: 55.5%; top: 68%; animation-delay: -1.6s; }
+
+@keyframes kappa-rail-lane-drift {
+  0%, 100% {
+    transform: translateY(0) scaleY(1);
+    opacity: 0.86;
+  }
+  50% {
+    transform: translateY(6px) scaleY(1.03);
+    opacity: 1;
+  }
+}
+
+@keyframes kappa-rail-marker-pulse {
+  0%, 100% {
+    transform: scale(0.96);
+    opacity: 0.74;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kappa-rail-fallback__lane,
+  .kappa-rail-fallback__marker {
+    animation: none !important;
+  }
+}

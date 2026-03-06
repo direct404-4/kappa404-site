@@ -128,9 +128,18 @@ class CanvasBoundary extends React.Component<CanvasBoundaryProps, CanvasBoundary
 
 function RailFallback({ reason }: { reason: string }) {
   return (
-    <div className="flex h-full items-center justify-center px-4">
-      <div className="max-w-xl rounded-2xl border border-cyan/35 bg-[#070d22]/82 px-6 py-5 text-center shadow-[0_20px_80px_rgba(0,0,0,0.45)] backdrop-blur-md">
-        <p className="text-xs uppercase tracking-[0.16em] text-cyan/90">3D disabled</p>
+    <div className="kappa-rail-fallback">
+      <div className="kappa-rail-fallback__grid" />
+      <div className="kappa-rail-fallback__lane kappa-rail-fallback__lane--a" />
+      <div className="kappa-rail-fallback__lane kappa-rail-fallback__lane--b" />
+      <div className="kappa-rail-fallback__lane kappa-rail-fallback__lane--c" />
+      <div className="kappa-rail-fallback__lane kappa-rail-fallback__lane--d" />
+      <div className="kappa-rail-fallback__marker kappa-rail-fallback__marker--a" />
+      <div className="kappa-rail-fallback__marker kappa-rail-fallback__marker--b" />
+      <div className="kappa-rail-fallback__marker kappa-rail-fallback__marker--c" />
+
+      <div className="relative z-10 mx-auto w-full max-w-xl rounded-2xl border border-cyan/35 bg-[#070d22]/82 px-6 py-5 text-center shadow-[0_20px_80px_rgba(0,0,0,0.45)] backdrop-blur-md">
+        <p className="text-xs uppercase tracking-[0.16em] text-cyan/90">3D preview mode</p>
         <p className="mt-3 text-sm text-white/78">{reason}</p>
       </div>
     </div>
