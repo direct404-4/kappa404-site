@@ -13,14 +13,14 @@
     "@react-three/fiber": "^8.18.0",
     "gsap": "^3.12.5",
     "next": "^15.0.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "three": "^0.166.1"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
+    "@types/react": "^18.2.66",
+    "@types/react-dom": "^18.2.22",
     "@types/three": "^0.183.1",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.49",
