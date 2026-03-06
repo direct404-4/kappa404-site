@@ -1,0 +1,42 @@
+[
+  {
+    "id": "ai-video-lab",
+    "title": "AI Video Lab",
+    "tag": "AI Projects",
+    "description": "Generative video experiments con pipeline visuale ottimizzata per concept, storyboard e output social.",
+    "link": "/progetti/luxury-skyline-flight",
+    "markerPosition": [-4.8, 0.12, -42]
+  },
+  {
+    "id": "automation-systems",
+    "title": "Automation Systems",
+    "tag": "Automation",
+    "description": "Sistemi n8n e orchestrazioni custom per lead flow, controllo operativo e sincronizzazione dati.",
+    "link": "/servizi/ai-automation",
+    "markerPosition": [-1.7, 0.1, -88]
+  },
+  {
+    "id": "creative-coding",
+    "title": "Creative Coding",
+    "tag": "Visual Engineering",
+    "description": "Esperienze interattive WebGL e real-time visual design per brand premium e campagne immersive.",
+    "link": "/progetti/luxury-yacht-photoshoot",
+    "markerPosition": [1.6, 0.08, -134]
+  },
+  {
+    "id": "ai-visual-stack",
+    "title": "AI Visual Engineering",
+    "tag": "Cyber Tools",
+    "description": "Stack integrato tra AI generation, workflow creativi e infrastruttura frontend ad alte prestazioni.",
+    "link": "/servizi/software-custom",
+    "markerPosition": [4.9, 0.06, -180]
+  },
+  {
+    "id": "digital-ops",
+    "title": "Digital Ops Deck",
+    "tag": "Data Systems",
+    "description": "Dashboard operative per monitorare asset, performance contenuti e roadmap tecnica in tempo reale.",
+    "link": "/progetti/luxury-digital-architecture",
+    "markerPosition": [1.6, 0.08, -226]
+  }
+]

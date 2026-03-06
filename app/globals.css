@@ -282,3 +282,101 @@ main {
     opacity: 1;
   }
 }
+
+.kappa-cinematic-hero {
+  position: relative;
+  min-height: calc(100vh - 4rem);
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background:
+    radial-gradient(circle at 50% 36%, rgba(86, 114, 255, 0.3), transparent 32%),
+    radial-gradient(circle at 22% 18%, rgba(115, 52, 255, 0.22), transparent 36%),
+    radial-gradient(circle at 82% 26%, rgba(50, 182, 255, 0.2), transparent 40%),
+    #01020b;
+}
+
+.kappa-hero-deepfade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(3, 5, 17, 0.16), rgba(2, 4, 12, 0.92));
+  pointer-events: none;
+}
+
+.kappa-hero-stars {
+  position: absolute;
+  inset: -10%;
+  background-image:
+    radial-gradient(circle, rgba(184, 219, 255, 0.7) 0.8px, transparent 1.4px),
+    radial-gradient(circle, rgba(139, 157, 255, 0.45) 0.8px, transparent 1.4px);
+  background-size: 120px 120px, 180px 180px;
+  background-position: 0 0, 60px 42px;
+  opacity: 0.34;
+  animation: kappa-stars-drift 28s linear infinite;
+  pointer-events: none;
+}
+
+.kappa-hero-digital-noise {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.03) 0,
+    rgba(255, 255, 255, 0.03) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  mix-blend-mode: soft-light;
+  opacity: 0.28;
+  pointer-events: none;
+}
+
+.kappa-hero-energy-core {
+  position: absolute;
+  left: 50%;
+  bottom: -16%;
+  width: min(1200px, 88vw);
+  height: min(560px, 52vh);
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 40%, rgba(195, 235, 255, 0.58) 0%, rgba(78, 177, 255, 0.25) 19%, rgba(121, 95, 255, 0.21) 38%, transparent 72%),
+    radial-gradient(circle at 50% 88%, rgba(255, 255, 255, 0.35), rgba(120, 190, 255, 0.04) 58%, transparent 78%);
+  filter: blur(16px);
+  animation: kappa-energy-pulse 6.8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.kappa-logo-glow {
+  text-shadow:
+    0 0 20px rgba(120, 210, 255, 0.54),
+    0 0 54px rgba(108, 126, 255, 0.42),
+    0 0 96px rgba(160, 88, 255, 0.3);
+}
+
+@keyframes kappa-stars-drift {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(-26px, 32px, 0) scale(1.03);
+  }
+}
+
+@keyframes kappa-energy-pulse {
+  0%,
+  100% {
+    opacity: 0.72;
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1.04);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kappa-hero-stars,
+  .kappa-hero-energy-core {
+    animation: none !important;
+  }
+}
