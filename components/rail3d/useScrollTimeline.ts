@@ -7,9 +7,11 @@ import { RefObject, useEffect, useState } from "react";
 type UseScrollTimelineArgs = {
   triggerRef: RefObject<HTMLElement | null>;
   pinRef: RefObject<HTMLElement | null>;
+  start?: string;
+  end?: string;
 };
 
-export function useScrollTimeline({ triggerRef, pinRef }: UseScrollTimelineArgs) {
+export function useScrollTimeline({ triggerRef, pinRef, start = "top top", end = "+=300%" }: UseScrollTimelineArgs) {
   const [progress, setProgress] = useState(0);
   const [isActive, setIsActive] = useState(false);
 
@@ -26,9 +28,8 @@ export function useScrollTimeline({ triggerRef, pinRef }: UseScrollTimelineArgs)
       ScrollTrigger.create({
         trigger,
         pin,
-        pinSpacing: false,
-        start: "top top",
-        end: "bottom top",
+        start,
+        end,
         scrub: true,
         anticipatePin: 1,
         onUpdate: (self) => {
@@ -42,7 +43,7 @@ export function useScrollTimeline({ triggerRef, pinRef }: UseScrollTimelineArgs)
     return () => {
       ctx.revert();
     };
-  }, [triggerRef, pinRef]);
+  }, [end, pinRef, start, triggerRef]);
 
   return { progress, isActive };
 }

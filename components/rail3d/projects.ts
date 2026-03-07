@@ -1,4 +1,8 @@
 export type MarkerPosition = [number, number, number];
+export type RailCameraPose = {
+  position: MarkerPosition;
+  lookAt: MarkerPosition;
+};
 
 export type RailProject = {
   id: string;
@@ -58,6 +62,47 @@ const clamp01 = (value: number) => Math.max(0, Math.min(1, value));
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 const smooth = (t: number) => t * t * (3 - 2 * t);
 
+export function getCameraPose(progress: number): RailCameraPose {
+  const p = clamp01(progress);
+
+  if (p < 0.3) {
+    const t = smooth(p / 0.3);
+
+    return {
+      position: [lerp(0, 0.72, t), lerp(1.3, 0.96, t), lerp(33, 12, t)],
+      lookAt: [0, 0, lerp(-28, -76, t)],
+    };
+  }
+
+  if (p < 0.65) {
+    const t = smooth((p - 0.3) / 0.35);
+
+    return {
+      position: [Math.sin(t * Math.PI * 1.45) * 1.35, lerp(0.96, 0.72, t), lerp(12, -26, t)],
+      lookAt: [Math.cos(t * Math.PI * 2.1) * 0.26, Math.sin(t * 2.2) * 0.12, lerp(-76, -132, t)],
+    };
+  }
+
+  const railT = smooth((p - 0.65) / 0.35);
+  const segmentCount = RAIL_PROJECTS.length - 1;
+  const segmentFloat = railT * segmentCount;
+  const segmentIndex = Math.min(Math.floor(segmentFloat), segmentCount - 1);
+  const localT = smooth(segmentFloat - segmentIndex);
+
+  const from = RAIL_PROJECTS[segmentIndex];
+  const to = RAIL_PROJECTS[Math.min(segmentIndex + 1, RAIL_PROJECTS.length - 1)];
+
+  const positionX = lerp(from.markerPosition[0] * 0.34, to.markerPosition[0] * 0.34, localT);
+  const lookX = lerp(from.markerPosition[0] * 0.9, to.markerPosition[0] * 0.9, localT);
+  const positionZ = lerp(from.markerPosition[2] + 22, to.markerPosition[2] + 22, localT);
+  const lookZ = lerp(from.markerPosition[2] - 8, to.markerPosition[2] - 8, localT);
+
+  return {
+    position: [positionX + Math.sin(railT * Math.PI * 5.8) * 0.12, lerp(0.72, 0.34, railT), positionZ],
+    lookAt: [lookX, 0.06, lookZ],
+  };
+}
+
 export function getRailPhase(progress: number): "gather" | "twist" | "rail" {
   if (progress < 0.3) return "gather";
   if (progress < 0.65) return "twist";
@@ -65,21 +110,7 @@ export function getRailPhase(progress: number): "gather" | "twist" | "rail" {
 }
 
 export function getCameraPosition(progress: number): MarkerPosition {
-  const p = clamp01(progress);
-  const gatherTwistT = smooth(clamp01(p / 0.65));
-
-  if (p < 0.65) {
-    const x = Math.sin(gatherTwistT * Math.PI * 0.95) * 1.2;
-    const y = lerp(1.0, 0.72, gatherTwistT);
-    const z = lerp(28, 8, gatherTwistT);
-    return [x, y, z];
-  }
-
-  const railT = smooth(clamp01((p - 0.65) / 0.35));
-  const x = Math.sin(railT * Math.PI * 1.1) * 0.9;
-  const y = lerp(0.72, 0.34, railT);
-  const z = lerp(8, -236, railT);
-  return [x, y, z];
+  return getCameraPose(progress).position;
 }
 
 export function getActiveRailProject(progress: number, threshold = 16): RailProject | null {

@@ -3,128 +3,13 @@
 import Link from "next/link";
 import { Line } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 import { CableRail } from "./CableRail";
-import { getActiveRailProject, getCameraPosition, getRailPhase, RAIL_LANE_X, RAIL_PROJECTS } from "./projects";
+import { getActiveRailProject, getCameraPose, getRailPhase, RAIL_LANE_X, RAIL_PROJECTS } from "./projects";
+import { useScrollTimeline } from "./useScrollTimeline";
 
-type RailSceneProps = {
-  progress: number;
-  renderActive: boolean;
-  activeProjectId: string | null;
-};
-
-function LaneGuides() {
-  return (
-    <group>
-      {RAIL_LANE_X.map((laneX) => (
-        <Line
-          key={`lane-guide-${laneX}`}
-          points={[new THREE.Vector3(laneX, -0.95, 8), new THREE.Vector3(laneX, -0.95, -252)]}
-          color="#4a62b4"
-          lineWidth={0.8}
-          transparent
-          opacity={0.26}
-        />
-      ))}
-    </group>
-  );
-}
-
-function ProjectMarkers({ activeProjectId }: { activeProjectId: string | null }) {
-  return (
-    <group>
-      {RAIL_PROJECTS.map((project) => {
-        const isActive = project.id === activeProjectId;
-
-        return (
-          <group key={project.id} position={project.markerPosition}>
-            <mesh>
-              <boxGeometry args={[1.2, 0.32, 0.32]} />
-              <meshStandardMaterial
-                color={isActive ? "#e6f4ff" : "#b9d9ff"}
-                emissive={isActive ? "#67d5ff" : "#5468cf"}
-                emissiveIntensity={isActive ? 1.2 : 0.48}
-                roughness={0.24}
-                metalness={0.42}
-              />
-            </mesh>
-
-            <mesh position={[0, 0.48, 0]}>
-              <boxGeometry args={[0.06, 0.92, 0.06]} />
-              <meshStandardMaterial color="#dff2ff" emissive="#5ac3ff" emissiveIntensity={0.75} />
-            </mesh>
-          </group>
-        );
-      })}
-    </group>
-  );
-}
-
-function RailScene({ progress, renderActive, activeProjectId }: RailSceneProps) {
-  const { camera } = useThree();
-  const cameraTarget = useMemo(() => new THREE.Vector3(), []);
-  const lookAtTarget = useMemo(() => new THREE.Vector3(), []);
-
-  useFrame(() => {
-    const [x, y, z] = getCameraPosition(progress);
-    cameraTarget.set(x, y, z);
-    camera.position.lerp(cameraTarget, renderActive ? 0.18 : 0.08);
-
-    lookAtTarget.set(x * 0.2, 0, z - 30);
-    camera.lookAt(lookAtTarget);
-  });
-
-  return (
-    <>
-      <color attach="background" args={["#030611"]} />
-      <fog attach="fog" args={["#030611", 38, 280]} />
-
-      <ambientLight intensity={0.5} />
-      <directionalLight position={[9, 7, 4]} intensity={0.65} color="#92dbff" />
-      <directionalLight position={[-8, 4, -16]} intensity={0.42} color="#8f80ff" />
-
-      <LaneGuides />
-      <CableRail progress={progress} />
-      <ProjectMarkers activeProjectId={activeProjectId} />
-    </>
-  );
-}
-
-type CanvasBoundaryProps = {
-  children: React.ReactNode;
-  fallback: React.ReactNode;
-  onError: () => void;
-};
-
-type CanvasBoundaryState = {
-  hasError: boolean;
-};
-
-class CanvasBoundary extends React.Component<CanvasBoundaryProps, CanvasBoundaryState> {
-  constructor(props: CanvasBoundaryProps) {
-    super(props);
-    this.state = { hasError: false };
-  }
-
-  static getDerivedStateFromError() {
-    return { hasError: true };
-  }
-
-  componentDidCatch() {
-    this.props.onError();
-  }
-
-  render() {
-    if (this.state.hasError) {
-      return this.props.fallback;
-    }
-
-    return this.props.children;
-  }
-}
+const clamp01 = (value: number) => Math.max(0, Math.min(1, value));
 
 function RailFallback({ reason }: { reason: string }) {
   return (
@@ -139,83 +24,279 @@ function RailFallback({ reason }: { reason: string }) {
       <div className="kappa-rail-fallback__marker kappa-rail-fallback__marker--c" />
 
       <div className="relative z-10 mx-auto w-full max-w-xl rounded-2xl border border-cyan/35 bg-[#070d22]/82 px-6 py-5 text-center shadow-[0_20px_80px_rgba(0,0,0,0.45)] backdrop-blur-md">
-        <p className="text-xs uppercase tracking-[0.16em] text-cyan/90">3D preview mode</p>
+        <p className="text-xs uppercase tracking-[0.16em] text-cyan/90">Project Rail Preview</p>
         <p className="mt-3 text-sm text-white/78">{reason}</p>
       </div>
     </div>
   );
 }
 
+function DigitalGrid() {
+  const vertices = useMemo(() => {
+    const lines: number[] = [];
+    const halfWidth = 80;
+    const depthStart = 18;
+    const depthEnd = -286;
+    const step = 4;
+
+    for (let x = -halfWidth; x <= halfWidth; x += step) {
+      lines.push(x, -1.12, depthStart, x, -1.12, depthEnd);
+    }
+
+    for (let z = depthStart; z >= depthEnd; z -= step) {
+      lines.push(-halfWidth, -1.12, z, halfWidth, -1.12, z);
+    }
+
+    return new Float32Array(lines);
+  }, []);
+
+  return (
+    <lineSegments>
+      <bufferGeometry>
+        <bufferAttribute attach="attributes-position" count={vertices.length / 3} array={vertices} itemSize={3} />
+      </bufferGeometry>
+      <lineBasicMaterial color="#35519e" transparent opacity={0.18} />
+    </lineSegments>
+  );
+}
+
+function LaneGuides() {
+  return (
+    <group>
+      {RAIL_LANE_X.map((laneX) => (
+        <Line
+          key={`lane-guide-${laneX}`}
+          points={[new THREE.Vector3(laneX, -0.92, 10), new THREE.Vector3(laneX, -0.92, -260)]}
+          color="#5e7af2"
+          lineWidth={0.9}
+          transparent
+          opacity={0.34}
+        />
+      ))}
+    </group>
+  );
+}
+
+function DataStreams({ progress, active }: { progress: number; active: boolean }) {
+  const dustRef = useRef<THREE.Points>(null);
+  const streamRef = useRef<THREE.InstancedMesh>(null);
+  const streamDummy = useMemo(() => new THREE.Object3D(), []);
+
+  const dustPositions = useMemo(() => {
+    const count = 1800;
+    const positions = new Float32Array(count * 3);
+
+    for (let index = 0; index < count; index += 1) {
+      const stride = index * 3;
+      const theta = Math.random() * Math.PI * 2;
+      const radius = 6 + Math.random() * 18;
+
+      positions[stride] = Math.cos(theta) * radius;
+      positions[stride + 1] = (Math.random() - 0.5) * 9;
+      positions[stride + 2] = -Math.random() * 280;
+    }
+
+    return positions;
+  }, []);
+
+  const streams = useMemo(
+    () =>
+      Array.from({ length: 240 }, (_, index) => ({
+        lane: index % RAIL_LANE_X.length,
+        seed: Math.random() * Math.PI * 2,
+        speed: 0.3 + Math.random() * 0.58,
+        depth: Math.random() * 260,
+        height: (Math.random() - 0.5) * 2.8,
+      })),
+    [],
+  );
+
+  useFrame((state, delta) => {
+    const elapsed = state.clock.elapsedTime;
+    const railBoost = clamp01((progress - 0.65) / 0.35);
+
+    if (dustRef.current) {
+      dustRef.current.rotation.y += delta * 0.012;
+      dustRef.current.rotation.z = Math.sin(elapsed * 0.1) * 0.025;
+    }
+
+    if (!streamRef.current) return;
+
+    for (let index = 0; index < streams.length; index += 1) {
+      const stream = streams[index];
+      const travel = ((elapsed * stream.speed * (active ? 1 : 0.2) + stream.depth) % 278) - 258;
+      const laneX = RAIL_LANE_X[stream.lane];
+
+      streamDummy.position.set(
+        laneX + Math.sin(elapsed * 0.62 + stream.seed) * (0.34 - railBoost * 0.14),
+        stream.height + Math.cos(elapsed * 1.1 + stream.seed) * 0.05,
+        travel,
+      );
+      streamDummy.scale.set(0.03, 0.03, 0.96 + railBoost * 0.72);
+      streamDummy.rotation.x = Math.PI / 2;
+      streamDummy.updateMatrix();
+
+      streamRef.current.setMatrixAt(index, streamDummy.matrix);
+    }
+
+    streamRef.current.instanceMatrix.needsUpdate = true;
+  });
+
+  return (
+    <group>
+      <points ref={dustRef}>
+        <bufferGeometry>
+          <bufferAttribute attach="attributes-position" count={dustPositions.length / 3} array={dustPositions} itemSize={3} />
+        </bufferGeometry>
+        <pointsMaterial color="#9ccaff" size={0.042} sizeAttenuation transparent opacity={0.46} depthWrite={false} />
+      </points>
+
+      <instancedMesh ref={streamRef} args={[undefined, undefined, streams.length]}>
+        <boxGeometry args={[0.04, 0.04, 1]} />
+        <meshBasicMaterial color="#7de6ff" transparent opacity={0.7} />
+      </instancedMesh>
+    </group>
+  );
+}
+
+function ProjectMarkers({ activeProjectId }: { activeProjectId: string | null }) {
+  return (
+    <group>
+      {RAIL_PROJECTS.map((project) => {
+        const isActive = project.id === activeProjectId;
+
+        return (
+          <group key={project.id} position={project.markerPosition}>
+            <mesh>
+              <boxGeometry args={[1.3, 0.34, 0.34]} />
+              <meshStandardMaterial
+                color={isActive ? "#eff8ff" : "#c8dcff"}
+                emissive={isActive ? "#68e1ff" : "#546cd2"}
+                emissiveIntensity={isActive ? 1.4 : 0.5}
+                roughness={0.22}
+                metalness={0.48}
+              />
+            </mesh>
+
+            <mesh position={[0, 0.5, 0]}>
+              <boxGeometry args={[0.06, 0.96, 0.06]} />
+              <meshStandardMaterial color="#eff8ff" emissive="#63d7ff" emissiveIntensity={0.9} />
+            </mesh>
+          </group>
+        );
+      })}
+    </group>
+  );
+}
+
+function RailCameraRig({ progress, active }: { progress: number; active: boolean }) {
+  const { camera } = useThree();
+  const targetPosition = useMemo(() => new THREE.Vector3(), []);
+  const targetLookAt = useMemo(() => new THREE.Vector3(), []);
+
+  useFrame((state) => {
+    const pose = getCameraPose(progress);
+
+    targetPosition.set(...pose.position);
+    targetLookAt.set(...pose.lookAt);
+
+    if (active) {
+      targetPosition.x += Math.sin(state.clock.elapsedTime * 0.36) * 0.06;
+    }
+
+    camera.position.lerp(targetPosition, active ? 0.16 : 0.08);
+    camera.lookAt(targetLookAt);
+  });
+
+  return null;
+}
+
+function RailScene({
+  progress,
+  renderActive,
+  activeProjectId,
+}: {
+  progress: number;
+  renderActive: boolean;
+  activeProjectId: string | null;
+}) {
+  return (
+    <>
+      <color attach="background" args={["#020611"]} />
+      <fog attach="fog" args={["#020611", 40, 300]} />
+
+      <ambientLight intensity={0.56} />
+      <directionalLight position={[10, 6, 5]} intensity={0.78} color="#9ad6ff" />
+      <directionalLight position={[-9, 4, -16]} intensity={0.5} color="#9e87ff" />
+      <pointLight position={[0, 1.5, -16]} intensity={1.1} color="#41caff" distance={120} />
+
+      <RailCameraRig progress={progress} active={renderActive} />
+      <DigitalGrid />
+      <LaneGuides />
+      <CableRail progress={progress} cableCount={22} controlPointCount={14} />
+      <DataStreams progress={progress} active={renderActive} />
+      <ProjectMarkers activeProjectId={activeProjectId} />
+    </>
+  );
+}
+
 export default function RailStage() {
   const wrapperRef = useRef<HTMLElement>(null);
   const pinRef = useRef<HTMLDivElement>(null);
-  const [progress, setProgress] = useState(0);
-  const [isActive, setIsActive] = useState(false);
+  const [sceneReady, setSceneReady] = useState(false);
   const [isInView, setIsInView] = useState(false);
-  const [canvasFailed, setCanvasFailed] = useState(false);
-  const [webglStatus, setWebglStatus] = useState<"checking" | "ready" | "disabled">("checking");
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const wrapper = wrapperRef.current;
-    const pin = pinRef.current;
-    if (!wrapper || !pin) return;
-
-    gsap.registerPlugin(ScrollTrigger);
-
-    let rafId = 0;
-    const ctx = gsap.context(() => {
-      ScrollTrigger.create({
-        trigger: wrapper,
-        pin,
-        scrub: true,
-        start: "top top",
-        end: "+=300%",
-        anticipatePin: 1,
-        onUpdate: (self) => {
-          const value = self.progress;
-          cancelAnimationFrame(rafId);
-          rafId = window.requestAnimationFrame(() => {
-            setProgress((prev) => (Math.abs(prev - value) > 0.001 ? value : prev));
-          });
-        },
-        onToggle: (self) => setIsActive(self.isActive),
-      });
-    }, wrapper);
-
-    return () => {
-      cancelAnimationFrame(rafId);
-      ctx.revert();
-    };
-  }, []);
-
   const [documentHidden, setDocumentHidden] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
+  const [hasWebGL, setHasWebGL] = useState<boolean | null>(null);
 
-  useEffect(() => {
-    const handleVisibility = () => setDocumentHidden(document.hidden);
-    handleVisibility();
-    document.addEventListener("visibilitychange", handleVisibility);
-
-    return () => document.removeEventListener("visibilitychange", handleVisibility);
-  }, []);
+  const { progress, isActive } = useScrollTimeline({
+    triggerRef: wrapperRef,
+    pinRef,
+    start: "top top",
+    end: "+=300%",
+  });
 
   useEffect(() => {
     if (typeof window === "undefined") return;
+
     try {
-      const testCanvas = document.createElement("canvas");
-      const context =
-        testCanvas.getContext("webgl2") ??
-        testCanvas.getContext("webgl") ??
-        testCanvas.getContext("experimental-webgl");
-      setWebglStatus(context ? "ready" : "disabled");
+      const canvas = document.createElement("canvas");
+      const context = canvas.getContext("webgl2") ?? canvas.getContext("webgl") ?? canvas.getContext("experimental-webgl");
+      setHasWebGL(Boolean(context));
     } catch {
-      setWebglStatus("disabled");
+      setHasWebGL(false);
     }
   }, []);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
+
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setReducedMotion(media.matches);
+    update();
+
+    if ("addEventListener" in media) {
+      media.addEventListener("change", update);
+      return () => media.removeEventListener("change", update);
+    }
+
+    media.addListener(update);
+    return () => media.removeListener(update);
+  }, []);
+
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+
+    const onVisibilityChange = () => setDocumentHidden(document.hidden);
+    onVisibilityChange();
+
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    return () => document.removeEventListener("visibilitychange", onVisibilityChange);
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
     const node = pinRef.current;
     if (!node || !("IntersectionObserver" in window)) {
       setIsInView(true);
@@ -228,16 +309,17 @@ export default function RailStage() {
           setIsInView(entries[0].isIntersecting);
         }
       },
-      { threshold: 0.08 },
+      { threshold: 0.06, rootMargin: "18% 0px" },
     );
 
     observer.observe(node);
     return () => observer.disconnect();
   }, []);
 
-  const renderActive = (isActive || isInView) && !documentHidden && webglStatus === "ready" && !canvasFailed;
-  const activeProject = useMemo(() => getActiveRailProject(progress, 15.5), [progress]);
-  const phase = getRailPhase(progress);
+  const effectiveProgress = reducedMotion ? 0.82 : progress;
+  const renderActive = !reducedMotion && Boolean(hasWebGL) && (isActive || isInView) && !documentHidden;
+  const activeProject = useMemo(() => getActiveRailProject(effectiveProgress, 18), [effectiveProgress]);
+  const phase = getRailPhase(effectiveProgress);
 
   const phaseLabel =
     phase === "gather"
@@ -248,27 +330,42 @@ export default function RailStage() {
 
   return (
     <section ref={wrapperRef} className="relative h-[300vh]" aria-label="Project Cable Rail Stage">
-      <div ref={pinRef} className="relative h-screen overflow-hidden border-y border-white/10 bg-[#030611]">
-        {webglStatus === "ready" && !canvasFailed ? (
-          <CanvasBoundary
-            onError={() => setCanvasFailed(true)}
-            fallback={<RailFallback reason="Rendering 3D non supportato in questo ambiente." />}
-          >
-            <Canvas
-              dpr={[1, 1.4]}
-              camera={{ position: [0, 1, 28], fov: 47, near: 0.1, far: 700 }}
-              frameloop={renderActive ? "always" : "demand"}
-              gl={{ antialias: false, alpha: true, powerPreference: "high-performance" }}
-            >
-              <RailScene progress={progress} renderActive={renderActive} activeProjectId={activeProject?.id ?? null} />
-            </Canvas>
-          </CanvasBoundary>
+      <div ref={pinRef} className="relative h-screen overflow-hidden border-y border-white/10 bg-[#020611]">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(1200px_circle_at_50%_0%,rgba(91,94,255,0.18),transparent_55%),radial-gradient(900px_circle_at_50%_100%,rgba(0,214,255,0.11),transparent_50%)]" />
+        <div className="pointer-events-none absolute inset-0 opacity-70 [background-image:linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.025)_1px,transparent_1px)] [background-size:80px_80px]" />
+
+        {hasWebGL === false ? (
+          <RailFallback reason="WebGL non disponibile su questo browser o dispositivo." />
         ) : (
-          <RailFallback reason={webglStatus === "checking" ? "Inizializzazione scena 3D..." : "WebGL non disponibile su questo dispositivo/browser."} />
+          <>
+            {!sceneReady && (
+              <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center">
+                <p className="rounded-full border border-cyan/35 bg-cyan/10 px-5 py-2 text-xs uppercase tracking-[0.16em] text-cyan/90">
+                  Loading WebGL Rail...
+                </p>
+              </div>
+            )}
+
+            <Canvas
+              fallback={<RailFallback reason="Impossibile inizializzare il motore 3D in questo ambiente." />}
+              dpr={[1, 1.5]}
+              camera={{ position: [0, 1.2, 29], fov: 46, near: 0.1, far: 800 }}
+              frameloop={renderActive ? "always" : "demand"}
+              gl={{ antialias: true, alpha: false, powerPreference: "high-performance" }}
+              onCreated={({ gl }) => {
+                gl.setClearColor(new THREE.Color("#020611"));
+                setSceneReady(true);
+              }}
+            >
+              <Suspense fallback={null}>
+                <RailScene progress={effectiveProgress} renderActive={renderActive} activeProjectId={activeProject?.id ?? null} />
+              </Suspense>
+            </Canvas>
+          </>
         )}
 
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-[#030611] via-[#030611]/70 to-transparent" />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#030611] via-[#030611]/76 to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#020611] via-[#020611]/72 to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-[#020611] via-[#020611]/76 to-transparent" />
 
         <div className="pointer-events-none absolute inset-x-0 top-5 z-20 px-4">
           <div className="mx-auto flex w-full max-w-6xl items-center justify-between">
@@ -276,7 +373,7 @@ export default function RailStage() {
               Project Rail · {phaseLabel}
             </div>
             <div className="hidden rounded-full border border-white/20 bg-black/35 px-3 py-1.5 text-xs text-white/75 md:block">
-              Progresso {Math.round(progress * 100)}%
+              Progresso {Math.round(effectiveProgress * 100)}%
             </div>
           </div>
         </div>
@@ -302,7 +399,7 @@ export default function RailStage() {
                 </>
               ) : (
                 <p className="text-sm text-white/62">
-                  Scorri nel rail per raggiungere i marker e mostrare le schede progetto.
+                  Scorri nel rail: i cavi convergono, si intrecciano e poi si aprono in corsie che attraversano i marker progetto.
                 </p>
               )}
             </div>
