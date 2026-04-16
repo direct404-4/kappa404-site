@@ -47,7 +47,7 @@ function DigitalGrid() {
   return (
     <lineSegments>
       <bufferGeometry>
-        <bufferAttribute attach="attributes-position" count={vertices.length / 3} array={vertices} itemSize={3} />
+        <bufferAttribute attach="attributes-position" args={[vertices, 3]} />
       </bufferGeometry>
       <lineBasicMaterial color="#4964ba" transparent opacity={0.22} />
     </lineSegments>

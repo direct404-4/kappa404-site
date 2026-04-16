@@ -53,7 +53,7 @@ function DigitalGrid() {
   return (
     <lineSegments>
       <bufferGeometry>
-        <bufferAttribute attach="attributes-position" count={vertices.length / 3} array={vertices} itemSize={3} />
+        <bufferAttribute attach="attributes-position" args={[vertices, 3]} />
       </bufferGeometry>
       <lineBasicMaterial color="#35519e" transparent opacity={0.18} />
     </lineSegments>
@@ -146,7 +146,7 @@ function DataStreams({ progress, active }: { progress: number; active: boolean }
     <group>
       <points ref={dustRef}>
         <bufferGeometry>
-          <bufferAttribute attach="attributes-position" count={dustPositions.length / 3} array={dustPositions} itemSize={3} />
+          <bufferAttribute attach="attributes-position" args={[dustPositions, 3]} />
         </bufferGeometry>
         <pointsMaterial color="#9ccaff" size={0.042} sizeAttenuation transparent opacity={0.46} depthWrite={false} />
       </points>
@@ -280,8 +280,13 @@ export default function RailStage() {
       return () => media.removeEventListener("change", update);
     }
 
-    media.addListener(update);
-    return () => media.removeListener(update);
+    const legacyMedia = media as MediaQueryList & {
+      addListener: (listener: () => void) => void;
+      removeListener: (listener: () => void) => void;
+    };
+
+    legacyMedia.addListener(update);
+    return () => legacyMedia.removeListener(update);
   }, []);
 
   useEffect(() => {

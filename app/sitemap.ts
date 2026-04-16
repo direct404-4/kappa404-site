@@ -3,7 +3,7 @@ import { PROJECTS, SERVICES } from "@/lib/content";
 
 export const dynamic = "force-static";
 
-const BASE_URL = "https://kappa404.com";
+const BASE_URL = "https://www.kappa404.it";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();

@@ -83,7 +83,7 @@ export function ParticleField({ progress, active }: ParticleFieldProps) {
     <group>
       <points ref={dustRef}>
         <bufferGeometry>
-          <bufferAttribute attach="attributes-position" count={dustPositions.length / 3} array={dustPositions} itemSize={3} />
+          <bufferAttribute attach="attributes-position" args={[dustPositions, 3]} />
         </bufferGeometry>
         <pointsMaterial color="#9cc7ff" size={0.04} sizeAttenuation transparent opacity={0.46} depthWrite={false} />
       </points>

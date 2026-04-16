@@ -19,9 +19,7 @@ export function useLenisSmoothScroll(enabled = true) {
       lenis = new Lenis({
         duration: 1.1,
         smoothWheel: true,
-        smoothTouch: false,
         wheelMultiplier: 0.95,
-        touchMultiplier: 0.85,
       });
 
       const onLenisScroll = () => {

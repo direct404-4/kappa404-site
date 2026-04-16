@@ -7,8 +7,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/_next", "/api", "/private"]
+      disallow: ["/api", "/private"]
     },
-    sitemap: "https://kappa404.com/sitemap.xml"
+    sitemap: "https://www.kappa404.it/sitemap.xml"
   };
 }
