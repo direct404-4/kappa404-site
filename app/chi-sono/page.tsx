@@ -1,4 +1,6 @@
+import Link from "next/link";
 import ContactBlock from "@/components/ContactBlock";
+import PageHero from "@/components/PageHero";
 import SectionTitle from "@/components/SectionTitle";
 import { CONTACT_INFO } from "@/lib/content";
 
@@ -9,14 +11,16 @@ export const metadata = {
 export default function ChiSonoPage() {
   return (
     <>
-      <section className="section-gap border-b border-white/10 bg-[#060916]">
-        <div className="container-main">
-          <SectionTitle
-            title="Kappa404"
-            subtitle="Visual engineer e digital builder basato a Milan: sviluppo ecosistemi dove creativita e infrastruttura lavorano in sinergia."
-          />
-        </div>
-      </section>
+      <PageHero
+        eyebrow="IDENTITY // KAPPA404 PROFILE"
+        title="Chi sono"
+        description="Visual engineer e digital builder basato a Milano: progetto ecosistemi dove creativita, infrastruttura e automazione lavorano come un unico sistema."
+        chips={["Milan base", "Web engineering", "AI automation"]}
+        actions={[
+          { label: "Vai ai contatti", href: "/contatti" },
+          { label: "Esplora i servizi", href: "/servizi", tone: "secondary" }
+        ]}
+      />
 
       <section className="section-gap">
         <div className="container-main grid gap-6 md:grid-cols-2">
@@ -46,7 +50,11 @@ export default function ChiSonoPage() {
 
       <section className="border-y border-white/10 bg-[#070a18] py-20">
         <div className="container-main">
-          <h2 className="text-3xl font-semibold text-white">Timeline sintetica</h2>
+          <SectionTitle
+            title="Timeline sintetica"
+            subtitle="Il percorso si e costruito integrando progressivamente visual storytelling, sviluppo e architettura di sistemi digitali."
+            eyebrow="Career path // evolution"
+          />
           <ol className="mt-8 grid gap-4 md:grid-cols-3">
             <li className="card-shell text-sm text-white/80">
               <p className="text-xs uppercase tracking-[0.18em] text-cyan/80">Fase 1</p>
@@ -66,9 +74,9 @@ export default function ChiSonoPage() {
 
       <section className="section-gap">
         <div className="container-main">
-          <a href="/contatti#form" className="btn-primary mb-8 inline-flex">
+          <Link href="/contatti#form" className="btn-primary mb-8 inline-flex">
             Collabora
-          </a>
+          </Link>
           <ContactBlock />
         </div>
       </section>

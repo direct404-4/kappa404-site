@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import ContactBlock from "@/components/ContactBlock";
 import CardService from "@/components/CardService";
+import PageHero from "@/components/PageHero";
 import { SERVICES } from "@/lib/content";
 
 type ServicePageProps = {
@@ -43,13 +44,16 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
   return (
     <>
-      <section className="section-gap border-b border-white/10 bg-[#060915]">
-        <div className="container-main">
-          <p className="text-xs uppercase tracking-[0.24em] text-cyan/70">Servizio</p>
-          <h1 className="mt-4 text-4xl font-semibold text-white md:text-5xl">{service.nome}</h1>
-          <p className="mt-5 max-w-3xl text-base text-white/78">{service.descrizione}</p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow={`SERVICE NODE // ${service.slug.toUpperCase()}`}
+        title={service.nome}
+        description={service.descrizione}
+        chips={["Problema reale", "Soluzione modulare", "Output misurabile"]}
+        actions={[
+          { label: "Tutti i servizi", href: "/servizi", tone: "secondary" },
+          { label: "Richiedi contatto", href: "/contatti" }
+        ]}
+      />
 
       <section className="section-gap">
         <div className="container-main grid gap-6 md:grid-cols-2">
@@ -79,7 +83,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
       <section className="section-gap border-y border-white/10 bg-[#070a18]">
         <div className="container-main">
-          <h2 className="text-2xl font-semibold text-white">Servizi correlati</h2>
+          <h2 className="font-headline text-3xl font-bold uppercase tracking-[-0.03em] text-white">Servizi correlati</h2>
           <div className="mt-8 grid gap-6 md:grid-cols-2">
             {related.map((item) => (
               <CardService key={item.slug} service={item} />

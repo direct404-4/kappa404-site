@@ -7,6 +7,7 @@ export type Service = {
   slug: string;
   nome: string;
   descrizione: string;
+  homeHook: string;
   bullet: {
     problema: string;
     include: string;
@@ -17,10 +18,18 @@ export type Service = {
 export type Project = {
   slug: string;
   title: string;
+  client?: string;
   categoria: "Web" | "AI" | "Software" | "Visual" | "Automation";
   descrizione: string;
   highlights: string[];
   stack: string[];
+  liveUrl?: string;
+  image?: string;
+  imageAlt?: string;
+  overview?: string;
+  problem?: string;
+  solution?: string;
+  outcome?: string;
 };
 
 
@@ -37,13 +46,69 @@ export type HomeAbout = {
 };
 
 export type ContactInfo = {
-  email: string;
   whatsapp: string;
   instagram: string;
   tiktok: string;
   city: string;
   base: string;
   mission: string;
+};
+
+export type ContactChannel = {
+  id: string;
+  label: string;
+  value: string;
+  href: string;
+  note: string;
+};
+
+export type HomeHero = {
+  eyebrow: string;
+  title: string;
+  highlight: string;
+  description: string;
+  backgroundImage: string;
+  backgroundAlt: string;
+  primaryCta: {
+    label: string;
+    href: string;
+  };
+  secondaryCta: {
+    label: string;
+    href: string;
+  };
+  metadata: string[];
+};
+
+export type HomeOutcome = {
+  code: string;
+  title: string;
+  description: string;
+  tone: "cyan" | "violet" | "magenta";
+};
+
+export type HomeSystemModule = {
+  code: string;
+  title: string;
+  description: string;
+  href: string;
+  tone: "cyan" | "violet";
+};
+
+export type HomeProofSignal = {
+  label: string;
+  state: string;
+  title: string;
+  description: string;
+  tone: "cyan" | "violet" | "magenta";
+};
+
+export type HomeProtocolStep = {
+  step: string;
+  code: string;
+  title: string;
+  description: string;
+  tone: "cyan" | "violet";
 };
 
 export const NAV_LINKS: NavLink[] = [
@@ -61,6 +126,7 @@ export const SERVICES: Service[] = [
     nome: "Web Design & Development",
     descrizione:
       "Siti ad alte prestazioni con architettura moderna, UX curata e identita visiva allineata al posizionamento premium.",
+    homeHook: "Una presenza digitale chiara, solida e pronta a sostenere la crescita.",
     bullet: {
       problema: "Presenza digitale lenta, poco distintiva e senza conversioni costanti.",
       include: "Research, UI architecture, sviluppo frontend/backend e ottimizzazione Core Web Vitals.",
@@ -72,6 +138,7 @@ export const SERVICES: Service[] = [
     nome: "Landing Pages",
     descrizione:
       "Landing orientate a lead e vendite con narrativa visuale, copy strategico e componenti modulari da testare.",
+    homeHook: "Percorsi pensati per guidare l’attenzione e trasformarla in azione.",
     bullet: {
       problema: "Traffico pagato disperso su pagine generiche senza focus.",
       include: "Wireframe conversion-first, copy funnel, tracciamenti e varianti per A/B test.",
@@ -83,6 +150,7 @@ export const SERVICES: Service[] = [
     nome: "E-commerce",
     descrizione:
       "Store digitali con cataloghi performanti, checkout semplificato e integrazione operativa con logistica e CRM.",
+    homeHook: "Un sistema di vendita più ordinato, credibile e pronto a crescere.",
     bullet: {
       problema: "Vendite online discontinue e processi post-ordine frammentati.",
       include: "Design system commerce, automazioni carrello, setup analytics e monitoraggio ordini.",
@@ -94,6 +162,7 @@ export const SERVICES: Service[] = [
     nome: "AI Automation",
     descrizione:
       "Flussi AI per ridurre attivita manuali, migliorare i tempi di risposta e orchestrare operazioni ripetitive.",
+    homeHook: "Processi più fluidi, meno attrito operativo, più spazio per contare davvero.",
     bullet: {
       problema: "Team bloccati su compiti manuali e dati non sincronizzati.",
       include: "Mappatura workflow, integrazioni API, trigger intelligenti e supervisione operativa.",
@@ -105,6 +174,7 @@ export const SERVICES: Service[] = [
     nome: "Software Custom",
     descrizione:
       "Applicazioni su misura per casi complessi, con logica business dedicata e controllo completo dell'infrastruttura.",
+    homeHook: "Strumenti costruiti intorno al tuo modo di lavorare, non il contrario.",
     bullet: {
       problema: "Tool standard non adatti ai requisiti reali dell'azienda.",
       include: "Analisi requisiti, prototipazione tecnica, sviluppo modulare e hardening del rilascio.",
@@ -116,6 +186,7 @@ export const SERVICES: Service[] = [
     nome: "Video & Content AI",
     descrizione:
       "Pipeline creative che uniscono direzione visuale, AI generation e ottimizzazione cross-platform.",
+    homeHook: "Contenuti più rapidi da produrre, più coerenti da distribuire.",
     bullet: {
       problema: "Produzione contenuti lenta, costosa e non coerente nel tono.",
       include: "Creative strategy, prompt engineering, editing workflow e output multi-formato.",
@@ -126,54 +197,153 @@ export const SERVICES: Service[] = [
 
 export const PROJECTS: Project[] = [
   {
-    slug: "luxury-yacht-photoshoot",
-    title: "Luxury Yacht Photoshoot System",
-    categoria: "Visual",
+    slug: "kalamata-yachting-vip-services",
+    title: "Kalamata Yachting / Kapouleas Cruise",
+    client: "Kapouleas Cruise",
+    categoria: "Web",
     descrizione:
-      "Piattaforma visuale per produzioni nautiche di fascia alta con gestione shooting, naming asset e consegna rapida.",
+      "Sito ufficiale realizzato per Kapouleas Cruise e Kalamata Yachting, accompagnato da produzione foto e video con drone e fotocamera per raccontare fleet, charter ed esperienze luxury.",
     highlights: [
-      "Pipeline cloud per ingest e tagging automatico",
-      "Dashboard stato produzione in tempo reale",
-      "Pacchetti export dedicati a editorial e social"
+      "Realizzazione del sito per presentare fleet, cruises, destinations e VIP services",
+      "Produzione foto e video con drone e fotocamera per rafforzare il posizionamento premium",
+      "Linguaggio visivo coerente tra yacht charter, ospitalità e attività esclusive in Grecia"
     ],
-    stack: ["Next.js", "TypeScript", "Cloud Storage", "GSAP"]
-  },
-  {
-    slug: "luxury-digital-architecture",
-    title: "Luxury Digital Architecture Hub",
-    categoria: "Software",
-    descrizione:
-      "Hub operativo per studi di architettura premium, unificando revisioni, librerie materiali e approvazioni cliente.",
-    highlights: [
-      "Workflow revisioni multi-team",
-      "Ricerca semantica su tavole e documenti",
-      "Timeline consegne con alert predittivi"
-    ],
-    stack: ["Next.js", "Node.js", "PostgreSQL", "Three.js"]
-  },
-  {
-    slug: "luxury-skyline-flight",
-    title: "Luxury Skyline Flight AI",
-    categoria: "AI",
-    descrizione:
-      "Sistema AI per pre-visualizzare riprese drone urbane e ottimizzare piani di volo cinematici per campagne luxury.",
-    highlights: [
-      "Simulazioni traiettorie con variabili meteo",
-      "Scoring automatico delle scene",
-      "Output shot list pronti per troupe"
-    ],
-    stack: ["Python", "Computer Vision", "Three.js", "React"]
+    stack: ["Website", "Drone Video", "Photography", "Luxury Content"],
+    liveUrl: "https://kalamata-yachting.gr",
+    image: "/kalamata-yachting-yacht.jpg",
+    imageAlt: "Yacht Kalamata Yachting con gruppo a bordo in mare aperto",
+    overview:
+      "Per Kapouleas Cruise ho curato il sito di Kalamata Yachting e la produzione di contenuti visivi originali, costruendo una presenza digitale capace di unire presentazione dell’offerta, immaginario luxury e materiale reale girato sul campo.",
+    problem:
+      "Il brand aveva bisogno di mostrare non solo i servizi e la flotta, ma anche l’esperienza complessiva: sito, immagini e video dovevano lavorare insieme per trasmettere qualità, affidabilità e desiderabilità del servizio.",
+    solution:
+      "Ho realizzato il sito e prodotto foto e video con drone e fotocamera per costruire una narrazione più credibile e immersiva, mettendo in risalto yacht, crociere, destinazioni e servizi premium del brand.",
+    outcome:
+      "Il risultato è un progetto completo di presenza digitale e contenuti visuali: il sito presenta meglio l’universo Kalamata Yachting, mentre il materiale foto/video rafforza percezione premium e valore dell’esperienza a bordo."
   }
 ];
 
 export const CONTACT_INFO: ContactInfo = {
-  email: "u9248936053@id.gle",
   whatsapp: "https://wa.me/393520007587",
   instagram: "https://www.instagram.com/kappa404_?igsh=N3NlN29tcGY4aTRv&utm_source=qr",
   tiktok: "https://www.tiktok.com/@amk404_?_r=1&_t=ZN-94Qv7yuanwc",
   city: "Milan",
   base: "Milan",
   mission: "Engineering luxury visuals through drone cinema, digital systems, and creative direction."
+};
+
+export const CONTACT_CHANNELS: ContactChannel[] = [
+  {
+    id: "whatsapp",
+    label: "WhatsApp",
+    value: "+39 352 000 7587",
+    href: CONTACT_INFO.whatsapp,
+    note: "Canale rapido per allineamento e primo contatto."
+  },
+  {
+    id: "instagram",
+    label: "Instagram",
+    value: "@kappa404_",
+    href: CONTACT_INFO.instagram,
+    note: "Presenza visuale, update e mood del progetto."
+  },
+  {
+    id: "tiktok",
+    label: "TikTok",
+    value: "@amk404_",
+    href: CONTACT_INFO.tiktok,
+    note: "Output creativi e formati short."
+  }
+];
+
+export const HOME_HERO: HomeHero = {
+  eyebrow: "SYSTEM_CONNECTED // DIGITAL_ARCHITECT_ONLINE",
+  title: "Costruisco sistemi digitali",
+  highlight: "che generano risultati",
+  description:
+    "Ingegneria digitale avanzata per scalare il tuo business attraverso infrastrutture ad alte prestazioni e automazione intelligente.",
+  backgroundImage:
+    "https://lh3.googleusercontent.com/aida-public/AB6AXuDpaSKtEWMdkhsUR5YDuCLM4wSOWd49vuplT2oC8tu25jvjUgXUeinlluxU3B2NDGDK7g8AF4m4RFmKW1M__wrA3euwJuKZLCyNHAY7Ag_e6KfP7ErwNajOlyVaKFtH1uplQP5oJ1_Nwm0KHQVPCixACMode8yKIRh39w7zlGGX16tWWeprKCKmN3EUmfDGJ1flLg01NXxA8PYtVdKmt0qxNU0YRHCovFcla-ll7DxzcZ4unytgUvtTcrQQ8HLYw1XCMoSDXYF9AhCv",
+  backgroundAlt: "Neural core con energia cyan e magenta in ambiente obsidian",
+  primaryCta: {
+    label: "Avvia il progetto",
+    href: CONTACT_INFO.whatsapp
+  },
+  secondaryCta: {
+    label: "Esplora i servizi",
+    href: "/servizi"
+  },
+  metadata: ["Neural infrastructure", "Data stream systems", "AI visual engineering"]
+};
+
+export const HOME_OUTCOMES: HomeOutcome[] = [
+  {
+    code: "LEAD_GEN",
+    title: "Piu Lead",
+    description: "Acquisizione costante di contatti qualificati pronti alla conversione tramite funnel predittivi.",
+    tone: "cyan"
+  },
+  {
+    code: "REVENUE_FLOW",
+    title: "Piu Vendite",
+    description: "Sistemi e-commerce e transazionali ottimizzati per massimizzare il valore medio dell'ordine.",
+    tone: "violet"
+  },
+  {
+    code: "AUTO_SYNC",
+    title: "Automazione",
+    description: "Riduzione dei costi operativi e rimozione degli errori umani tramite workflow autonomi AI-driven.",
+    tone: "magenta"
+  }
+];
+
+export const HOME_SYSTEM_MODULES: HomeSystemModule[] = SERVICES.map((service, index) => ({
+  code: `MODULE_${String(index + 1).padStart(2, "0")}`,
+  title:
+    service.slug === "web-development"
+      ? "Web Ecosystems"
+      : service.slug === "landing-pages"
+        ? "Landing & Funnels"
+        : service.slug === "e-commerce"
+          ? "Scalable E-commerce"
+          : service.slug === "ai-automation"
+            ? "AI Automation"
+            : service.slug === "software-custom"
+              ? "Custom Software"
+              : "Video Content AI",
+  description: service.homeHook,
+  href: `/servizi/${service.slug}`,
+  tone: index % 2 === 0 ? "cyan" : "violet"
+}));
+
+export const HOME_PROOF_SIGNALS: HomeProofSignal[] = [
+  {
+    label: "ARCHITECTURE_SIGNAL",
+    state: "SYNCED",
+    title: "Framework su misura",
+    description: "Ogni progetto parte da una struttura tecnica chiara, non da template generici.",
+    tone: "cyan"
+  },
+  {
+    label: "DELIVERY_MODE",
+    state: "LIVE",
+    title: "Design e codice nello stesso flusso",
+    description: "Direzione visiva, UX e implementazione convivono nello stesso processo operativo.",
+    tone: "violet"
+  },
+  {
+    label: "CHANNEL_STATUS",
+    state: "READY",
+    title: "Conversion path reali",
+    description: "WhatsApp e social principali sono attivabili subito come ingressi concreti.",
+    tone: "magenta"
+  }
+];
+
+export const HOME_PROOF_VISUAL = {
+  image:
+    "https://lh3.googleusercontent.com/aida-public/AB6AXuCwsSxESHJrjbF-JGSB9axgZKYnpUiivmDx-822R8466_ck62L6UctzrPYOhe3mbI0qQdyz7dstRqE0TovZF-4sxafCEK_kV-g4kS9y0o1H8QLaVHrYLQ2xWya7fi4ba-gMCR3hgcpXycymKU9yI2CBYpqFSEgBz0oMvQMLWMH5x_vFlcsQcfpD049jDP4HAFukYFktvkRypEFLqF0MvEUVVnVYQ8-jjds7kDs0_InzvtsmwD_VElOxVCHVrIOEgpYRvd8Dx9zDj3L5",
+  alt: "Visualizzazione olografica dati in cyan e magenta"
 };
 
 export const TRUST_ITEMS = [
@@ -190,6 +360,51 @@ export const PROCESS_STEPS = [
   "Sviluppo e integrazione sistemi",
   "Rilascio, tracking e tuning",
   "Ottimizzazione continua"
+];
+
+export const HOME_PROTOCOL_STEPS: HomeProtocolStep[] = [
+  {
+    step: "01",
+    code: "DISCOVERY_NODE",
+    title: "Discovery",
+    description: PROCESS_STEPS[0],
+    tone: "cyan"
+  },
+  {
+    step: "02",
+    code: "SYSTEM_MAP",
+    title: "Architecting",
+    description: PROCESS_STEPS[1],
+    tone: "violet"
+  },
+  {
+    step: "03",
+    code: "PROTOTYPE_LOOP",
+    title: "Prototype",
+    description: PROCESS_STEPS[2],
+    tone: "cyan"
+  },
+  {
+    step: "04",
+    code: "BUILD_SEQUENCE",
+    title: "Development",
+    description: PROCESS_STEPS[3],
+    tone: "violet"
+  },
+  {
+    step: "05",
+    code: "LAUNCH_TRACK",
+    title: "Deployment",
+    description: PROCESS_STEPS[4],
+    tone: "cyan"
+  },
+  {
+    step: "06",
+    code: "OPTIMIZATION_LOOP",
+    title: "Optimization",
+    description: PROCESS_STEPS[5],
+    tone: "violet"
+  }
 ];
 
 export const AI_SOLUTIONS = [

@@ -1,66 +1,51 @@
 import Link from "next/link";
-import { CONTACT_INFO, NAV_LINKS } from "@/lib/content";
+import CookiePreferencesButton from "@/components/CookiePreferencesButton";
+import { NAV_LINKS } from "@/lib/content";
 
 export default function Footer() {
+  const primaryLinks = NAV_LINKS.filter((link) => link.href !== "/");
+
   return (
-    <footer className="border-t border-white/10 bg-[#050711]">
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 md:grid-cols-3 md:px-6">
+    <footer className="w-full border-t border-[#00f2ff]/5 bg-[#050505] py-12">
+      <div className="mx-auto grid max-w-[1440px] gap-10 px-6 md:grid-cols-[1.15fr_0.85fr_0.8fr] md:px-10">
         <div>
-          <p className="text-xl font-semibold tracking-[0.12em] text-white">Kappa404</p>
-          <p className="mt-3 max-w-sm text-sm leading-relaxed text-white/70">
-            AI Visual Engineering per brand e business che vogliono un sistema digitale elegante, misurabile e scalabile.
-          </p>
-        </div>
-
-        <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.12em] text-white/80">Navigazione</p>
-          <ul className="mt-4 space-y-2">
-            {NAV_LINKS.slice(0, 5).map((link) => (
-              <li key={link.href}>
-                <Link href={link.href} className="text-sm text-white/70 transition hover:text-white">
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.12em] text-white/80">Social</p>
-          <ul className="mt-4 space-y-2">
-            <li>
-              <a href={CONTACT_INFO.instagram} target="_blank" rel="noreferrer" className="text-sm text-white/70 hover:text-white">
-                Instagram
-              </a>
-            </li>
-            <li>
-              <a href={CONTACT_INFO.tiktok} target="_blank" rel="noreferrer" className="text-sm text-white/70 hover:text-white">
-                TikTok
-              </a>
-            </li>
-            <li>
-              <a href={CONTACT_INFO.whatsapp} target="_blank" rel="noreferrer" className="text-sm text-white/70 hover:text-white">
-                WhatsApp
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div className="border-t border-white/10">
-        <div className="mx-auto flex max-w-6xl flex-col items-start gap-3 px-4 py-5 text-xs text-white/60 md:flex-row md:items-center md:justify-between md:px-6">
-          <p>© {new Date().getFullYear()} Kappa404. Tutti i diritti riservati.</p>
-          <div className="flex gap-4">
-            <Link href="/privacy-policy" className="hover:text-white">
-              Privacy Policy
-            </Link>
-            <Link href="/cookie-policy" className="hover:text-white">
-              Cookie Policy
-            </Link>
-            <Link href="/termini" className="hover:text-white">
-              Termini
-            </Link>
+          <div className="font-mono text-[10px] uppercase tracking-[0.24em] text-[#00f2ff] opacity-70">
+            ©2026 KAPPA404 // DIGITAL SYSTEMS
           </div>
+
+          <div className="mt-6 flex flex-wrap gap-4">
+            <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-[#00f2ff]/52">
+              <span className="h-2 w-2 rounded-full bg-[#00f2ff] shadow-[0_0_14px_rgba(0,242,255,0.9)]" />
+              System online
+            </div>
+            <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-[#00f2ff]/52">
+              <span className="h-2 w-2 rounded-full bg-[#bc13fe] shadow-[0_0_14px_rgba(188,19,254,0.8)]" />
+              Secure routing
+            </div>
+          </div>
+        </div>
+
+        <div className="grid gap-3">
+          <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-white/36">Primary pages</p>
+          {primaryLinks.map((link) => (
+            <Link key={link.href} href={link.href} className="kappa-nav-link w-fit">
+              {link.label}
+            </Link>
+          ))}
+        </div>
+
+        <div className="grid gap-3">
+          <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-white/36">Legal</p>
+          <Link href="/privacy-policy" className="kappa-nav-link w-fit">
+            Privacy Policy
+          </Link>
+          <Link href="/cookie-policy" className="kappa-nav-link w-fit">
+            Cookie Policy
+          </Link>
+          <CookiePreferencesButton />
+          <Link href="/termini" className="kappa-nav-link w-fit">
+            Termini
+          </Link>
         </div>
       </div>
     </footer>

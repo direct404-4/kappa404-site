@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import ContactBlock from "@/components/ContactBlock";
+import PageHero from "@/components/PageHero";
 import { PROJECTS } from "@/lib/content";
 
 type ProjectPageProps = {
@@ -38,37 +39,61 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
     notFound();
   }
 
+  const heroActions = project.liveUrl
+    ? [
+        { label: "Vedi sito live", href: project.liveUrl, external: true as const },
+        { label: "Tutti i progetti", href: "/progetti", tone: "secondary" as const }
+      ]
+    : [
+        { label: "Tutti i progetti", href: "/progetti", tone: "secondary" as const },
+        { label: "Apri contatti", href: "/contatti" }
+      ];
+
   return (
     <>
-      <section className="section-gap border-b border-white/10 bg-[#060916]">
-        <div className="container-main">
-          <p className="text-xs uppercase tracking-[0.24em] text-violet/80">{project.categoria}</p>
-          <h1 className="mt-4 text-4xl font-semibold text-white md:text-5xl">{project.title}</h1>
-          <p className="mt-5 max-w-3xl text-base text-white/78">{project.descrizione}</p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow={`PROJECT ARCHIVE // ${project.categoria.toUpperCase()}`}
+        title={project.title}
+        description={project.descrizione}
+        chips={project.stack.slice(0, 3)}
+        actions={heroActions}
+      />
 
       <section className="section-gap">
         <div className="container-main grid gap-6 md:grid-cols-2">
           <article className="card-shell">
             <h2 className="text-xl font-semibold text-white">Overview</h2>
-            <p className="mt-4 text-sm text-white/76">
-              Progetto costruito per orchestrare estetica e funzionalita in un unico flusso operativo, con dashboard e componenti riutilizzabili.
-            </p>
+            <p className="mt-4 text-sm text-white/76">{project.overview ?? "Progetto costruito per orchestrare estetica e funzionalita in un unico flusso operativo, con dashboard e componenti riutilizzabili."}</p>
+          </article>
+
+          <article className="card-shell">
+            <h2 className="text-xl font-semibold text-white">Cliente</h2>
+            <div className="mt-4 space-y-3 text-sm text-white/76">
+              <p>
+                <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#00f2ff]">Brand //</span> {project.client ?? "Kappa404 selected client"}
+              </p>
+              <p>
+                <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#00f2ff]">Categoria //</span> {project.categoria}
+              </p>
+              {project.liveUrl ? (
+                <p>
+                  <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#00f2ff]">Live //</span>{" "}
+                  <a href={project.liveUrl} target="_blank" rel="noreferrer" className="text-white underline decoration-white/30 underline-offset-4 hover:text-[#00f2ff]">
+                    {project.liveUrl.replace(/^https?:\/\//, "")}
+                  </a>
+                </p>
+              ) : null}
+            </div>
           </article>
 
           <article className="card-shell">
             <h2 className="text-xl font-semibold text-white">Problema</h2>
-            <p className="mt-4 text-sm text-white/76">
-              Necessita di coordinare team creativi e tecnici senza dispersione di informazioni durante le fasi di delivery.
-            </p>
+            <p className="mt-4 text-sm text-white/76">{project.problem ?? "Necessita di coordinare team creativi e tecnici senza dispersione di informazioni durante le fasi di delivery."}</p>
           </article>
 
-          <article className="card-shell md:col-span-2">
+          <article className="card-shell">
             <h2 className="text-xl font-semibold text-white">Soluzione sviluppata</h2>
-            <p className="mt-4 text-sm text-white/76">
-              Architettura modulare con UI dedicata, automazioni di stato e layer di monitoraggio che riduce tempi di allineamento e errori di produzione.
-            </p>
+            <p className="mt-4 text-sm text-white/76">{project.solution ?? "Architettura modulare con UI dedicata, automazioni di stato e layer di monitoraggio che riduce tempi di allineamento e errori di produzione."}</p>
           </article>
         </div>
       </section>
@@ -98,25 +123,30 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
       </section>
 
       <section className="section-gap">
-        <div className="container-main grid gap-6 md:grid-cols-2">
+        <div className="container-main grid gap-6 lg:grid-cols-[1.35fr_0.65fr]">
           <div className="card-shell overflow-hidden p-0">
             <Image
-              src="/img-project-placeholder.jpg"
-              alt="Project placeholder"
-              width={1400}
-              height={900}
+              src={project.image ?? "/img-project-placeholder.jpg"}
+              alt={project.imageAlt ?? project.title}
+              width={2200}
+              height={1466}
               className="h-full w-full object-cover"
             />
           </div>
-          <div className="card-shell overflow-hidden p-0">
-            <Image
-              src="/img-project-placeholder.jpg"
-              alt="Project placeholder detail"
-              width={1400}
-              height={900}
-              className="h-full w-full object-cover"
-            />
-          </div>
+
+          <article className="kappa-data-card">
+            <span className="kappa-data-card__label">Project signal</span>
+            <h2 className="mt-6 font-headline text-3xl font-bold uppercase tracking-[-0.03em] text-white">Outcome</h2>
+            <p className="mt-4 text-sm leading-7 text-white/72">
+              {project.outcome ?? "Un sistema digitale più ordinato, credibile e leggibile, costruito per valorizzare il progetto e guidare meglio il visitatore tra contenuti, offerta e contatto."}
+            </p>
+
+            {project.liveUrl ? (
+              <a href={project.liveUrl} target="_blank" rel="noreferrer" className="btn-primary mt-8 w-full">
+                Apri il progetto online
+              </a>
+            ) : null}
+          </article>
         </div>
       </section>
 

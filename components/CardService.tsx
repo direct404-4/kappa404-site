@@ -9,31 +9,33 @@ type CardServiceProps = {
 
 export default function CardService({ service }: CardServiceProps) {
   return (
-    <article className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl transition-transform duration-300 hover:-translate-y-1">
-      <div
-        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-        style={{
-          background: "radial-gradient(520px circle at 20% 10%, rgba(0,229,255,0.16), transparent 42%)",
-        }}
-      />
+    <article className="group kappa-data-card transition-transform duration-300 hover:-translate-y-1">
       <div className="relative flex h-full flex-col">
-        <h3 className="text-xl font-semibold text-white">{service.nome}</h3>
-        <p className="mt-4 text-sm leading-relaxed text-white/75">{service.descrizione}</p>
+        <div className="mb-8 flex items-start justify-between gap-4">
+          <span className="kappa-data-card__label">Service node</span>
+          <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/30">{service.slug}</span>
+        </div>
 
-        <ul className="mt-6 space-y-2 text-sm text-white/80">
+        <h3 className="font-headline text-2xl font-bold uppercase tracking-[-0.03em] text-white">{service.nome}</h3>
+        <p className="mt-4 text-sm leading-7 text-white/72">{service.descrizione}</p>
+
+        <ul className="mt-8 space-y-3 text-sm text-white/76">
           <li>
-            <span className="text-cyan">Problema:</span> {service.bullet.problema}
+            <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#00f2ff]">Problema //</span> {service.bullet.problema}
           </li>
           <li>
-            <span className="text-cyan">Include:</span> {service.bullet.include}
+            <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#00f2ff]">Include //</span> {service.bullet.include}
           </li>
           <li>
-            <span className="text-cyan">Risultato:</span> {service.bullet.risultato}
+            <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#00f2ff]">Risultato //</span> {service.bullet.risultato}
           </li>
         </ul>
 
-        <Link href={`/servizi/${service.slug}`} className="mt-7 inline-flex items-center gap-2 text-sm font-medium text-cyan hover:text-white">
-          Vedi servizio <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
+        <Link
+          href={`/servizi/${service.slug}`}
+          className="mt-8 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.22em] text-[#00f2ff] transition-colors hover:text-white"
+        >
+          Apri servizio <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
         </Link>
       </div>
     </article>

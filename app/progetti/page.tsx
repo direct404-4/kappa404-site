@@ -1,6 +1,6 @@
-import SectionTitle from "@/components/SectionTitle";
 import CardProject from "@/components/CardProject";
 import ContactBlock from "@/components/ContactBlock";
+import PageHero from "@/components/PageHero";
 import { PROJECTS } from "@/lib/content";
 
 export const metadata = {
@@ -10,27 +10,15 @@ export const metadata = {
 export default function ProgettiPage() {
   return (
     <>
-      <section className="section-gap border-b border-white/10 bg-[#060916]">
-        <div className="container-main">
-          <SectionTitle
-            title="Progetti / Portfolio"
-            subtitle="Selezione di sistemi digitali realizzati per contesti premium, con focus su resa visiva e controllo tecnico."
-          />
-        </div>
-      </section>
-
-      <section className="py-10">
-        <div className="container-main flex flex-wrap gap-3">
-          {["Web", "AI", "Software", "Visual", "Automation"].map((filter) => (
-            <button key={filter} type="button" className="btn-secondary text-xs uppercase tracking-[0.18em]">
-              {filter}
-            </button>
-          ))}
-        </div>
-      </section>
+      <PageHero
+        eyebrow="ARCHIVE // SELECTED DEPLOYMENTS"
+        title="Progetti / Portfolio"
+        description="Archivio attuale dei lavori pubblicati: per ora rimane online solo il progetto realizzato per Kalamata Yachting e Kapouleas Cruise, gli altri case study verranno inseriti appena pronti."
+        chips={["Website", "Drone video", "Photography"]}
+      />
 
       <section className="pb-20">
-        <div className="container-main grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <div className="container-main mx-auto grid max-w-2xl gap-6">
           {PROJECTS.map((project) => (
             <CardProject key={project.slug} project={project} />
           ))}

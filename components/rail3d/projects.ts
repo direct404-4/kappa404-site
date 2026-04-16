@@ -17,45 +17,13 @@ export const RAIL_LANE_X = [-5.4, -1.8, 1.8, 5.4] as const;
 
 export const RAIL_PROJECTS: RailProject[] = [
   {
-    id: "yacht",
-    title: "Luxury Yacht Photoshoot",
-    tag: "Visual",
-    href: "/progetti/luxury-yacht-photoshoot",
-    markerPosition: [-5.4, 0.2, -48],
-    description: "Pipeline visuale ad alta fedelta per campagne marine premium.",
-  },
-  {
-    id: "architecture",
-    title: "Luxury Digital Architecture",
-    tag: "Web",
-    href: "/progetti/luxury-digital-architecture",
-    markerPosition: [-1.8, 0.15, -92],
-    description: "Esperienza web immersiva con contenuti cinematici e UX orientata al brand.",
-  },
-  {
-    id: "skyline",
-    title: "Luxury Skyline Flight",
-    tag: "AI",
-    href: "/progetti/luxury-skyline-flight",
-    markerPosition: [1.8, 0.1, -136],
-    description: "Pre-visualizzazione assistita da AI per riprese drone in ambiente urbano.",
-  },
-  {
-    id: "automation",
-    title: "Automation Control Deck",
-    tag: "Automation",
-    href: "/soluzioni-ai",
-    markerPosition: [5.4, 0.05, -180],
-    description: "Orchestrazione dei flussi operativi con sistemi AI e monitoraggio centralizzato.",
-  },
-  {
-    id: "retainer",
-    title: "AI Performance Retainer",
-    tag: "Ops",
-    href: "/contatti",
-    markerPosition: [1.8, 0.1, -224],
-    description: "Ottimizzazione continua tra contenuti, automazioni e presenza digitale.",
-  },
+    id: "kalamata",
+    title: "Kalamata Yachting VIP Services",
+    tag: "Website + Visuals",
+    href: "/progetti/kalamata-yachting-vip-services",
+    markerPosition: [0, 0.12, -78],
+    description: "Sito ufficiale e produzione foto/video per Kapouleas Cruise tra fleet, charter e servizi premium.",
+  }
 ];
 
 const clamp01 = (value: number) => Math.max(0, Math.min(1, value));
@@ -80,6 +48,17 @@ export function getCameraPose(progress: number): RailCameraPose {
     return {
       position: [Math.sin(t * Math.PI * 1.45) * 1.35, lerp(0.96, 0.72, t), lerp(12, -26, t)],
       lookAt: [Math.cos(t * Math.PI * 2.1) * 0.26, Math.sin(t * 2.2) * 0.12, lerp(-76, -132, t)],
+    };
+  }
+
+  if (RAIL_PROJECTS.length < 2) {
+    const onlyProject = RAIL_PROJECTS[0];
+    const targetZ = onlyProject?.markerPosition[2] ?? -78;
+    const t = smooth((p - 0.65) / 0.35);
+
+    return {
+      position: [Math.sin(t * Math.PI) * 0.22, lerp(0.72, 0.38, t), lerp(-26, targetZ + 18, t)],
+      lookAt: [0, 0.06, lerp(targetZ - 18, targetZ - 6, t)],
     };
   }
 

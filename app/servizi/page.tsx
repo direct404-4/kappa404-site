@@ -1,6 +1,7 @@
 import SectionTitle from "@/components/SectionTitle";
 import CardService from "@/components/CardService";
 import ContactBlock from "@/components/ContactBlock";
+import PageHero from "@/components/PageHero";
 import { SERVICES } from "@/lib/content";
 
 export const metadata = {
@@ -10,14 +11,12 @@ export const metadata = {
 export default function ServiziPage() {
   return (
     <>
-      <section className="section-gap border-b border-white/10 bg-[#060916]">
-        <div className="container-main">
-          <SectionTitle
-            title="Servizi digitali ad alte prestazioni"
-            subtitle="Dalla presenza web alle automazioni AI: ogni modulo e progettato per ridurre complessita e aumentare output operativo."
-          />
-        </div>
-      </section>
+      <PageHero
+        eyebrow="SYSTEM MAP // SERVICE MODULES"
+        title="Servizi digitali ad alte prestazioni"
+        description="Dalla presenza web alle automazioni AI: ogni modulo e progettato per ridurre complessita, aumentare output operativo e mantenere la stessa identita della homepage."
+        chips={["Web ecosystems", "Landing funnels", "Automation stacks"]}
+      />
 
       <section className="section-gap">
         <div className="container-main grid gap-6 md:grid-cols-2 xl:grid-cols-3">
@@ -32,6 +31,7 @@ export default function ServiziPage() {
           <SectionTitle
             title="Metodo operativo: Starter / Pro / Custom"
             subtitle="Tre livelli di attivazione in base a priorita, complessita tecnica e ritmo di rilascio richiesto dal progetto."
+            eyebrow="Delivery model // release modes"
           />
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             <article className="card-shell">
@@ -55,6 +55,7 @@ export default function ServiziPage() {
           <SectionTitle
             title="FAQ essenziali"
             subtitle="Domande ricorrenti prima di avviare una collaborazione tecnica e creativa con Kappa404."
+            eyebrow="Support node // quick answers"
           />
           <div className="mt-10 grid gap-4">
             <article className="card-shell">

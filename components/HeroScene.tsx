@@ -1,5 +1,6 @@
 "use client";
 
+import { HOME_HERO } from "@/lib/content";
 import { useLenisSmoothScroll } from "@/lib/scrollEngine";
 import gsap from "gsap";
 import Link from "next/link";
@@ -40,6 +41,12 @@ export default function HeroScene() {
           "-=0.45",
         )
         .fromTo(
+          ".hero-seq-metadata",
+          { opacity: 0, y: 16 },
+          { opacity: 1, y: 0, duration: 0.7, stagger: 0.06 },
+          "-=0.35",
+        )
+        .fromTo(
           ".hero-seq-cta",
           { opacity: 0, y: 10 },
           { opacity: 1, y: 0, duration: 0.72, stagger: 0.08 },
@@ -51,37 +58,50 @@ export default function HeroScene() {
   }, []);
 
   return (
-    <section className="kappa-cinematic-hero" aria-label="Kappa404 Intro">
+    <section className="kappa-command-hero" aria-label="Kappa404 Intro">
+      <div className="kappa-hero-media">
+        <img src={HOME_HERO.backgroundImage} alt={HOME_HERO.backgroundAlt} className="kappa-hero-media__image" />
+      </div>
       <div className="kappa-hero-deepfade" />
-      <div className="kappa-hero-stars" />
-      <div className="kappa-hero-digital-noise" />
+      <div className="kappa-hero-dot-grid" />
+      <div className="kappa-hero-grid-plane" />
       <div className="kappa-hero-energy-core" />
+      <div className="kappa-hero-noise" />
 
-      <div ref={containerRef} className="container-main relative z-10 py-24 text-center md:py-32">
-        <span className="kappa-hero-chip hero-seq-chip">Digital Architect / AI Creative Technologist</span>
+      <div ref={containerRef} className="container-main relative z-10 flex min-h-[calc(100svh-4rem)] items-center justify-center py-16 text-center md:py-20">
+        <div className="max-w-5xl">
+          <span className="kappa-command-chip hero-seq-chip">
+            <span className="kappa-command-chip__dot" />
+            {HOME_HERO.eyebrow}
+          </span>
 
-        <h1 className="kappa-hero-title hero-seq-logo kappa-logo-glow">
-          KAPPA404
-          <span>Digital Vision Craft</span>
-        </h1>
+          <p className="hero-seq-copy mt-8 font-mono text-[0.7rem] uppercase tracking-[0.34em] text-[rgba(138,210,227,0.7)]">
+            KAPPA404 // Neural Infrastructure Platform
+          </p>
 
-        <p className="kappa-hero-copy hero-seq-copy">
-          Entra in un ecosistema digitale dove infrastruttura, visual engineering e automazione AI convergono in un unico sistema.
-        </p>
+          <h1 className="kappa-command-title hero-seq-logo">
+            {HOME_HERO.title}
+            <span>{HOME_HERO.highlight}</span>
+          </h1>
 
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-          <Link href="/contatti#form" className="btn-primary hero-seq-cta">
-            Avvia il progetto
-          </Link>
-          <Link href="/servizi" className="btn-secondary hero-seq-cta">
-            Esplora i servizi
-          </Link>
-        </div>
+          <p className="kappa-command-copy hero-seq-copy mx-auto">{HOME_HERO.description}</p>
 
-        <div className="mt-12 flex flex-wrap justify-center gap-3">
-          <span className="kappa-pill">Neural Infrastructure</span>
-          <span className="kappa-pill">Data Stream Systems</span>
-          <span className="kappa-pill">AI Visual Engineering</span>
+          <div className="mt-10 flex flex-wrap justify-center gap-3">
+            <a href={HOME_HERO.primaryCta.href} target="_blank" rel="noreferrer" className="btn-primary hero-seq-cta">
+              {HOME_HERO.primaryCta.label}
+            </a>
+            <Link href={HOME_HERO.secondaryCta.href} className="btn-secondary hero-seq-cta">
+              {HOME_HERO.secondaryCta.label}
+            </Link>
+          </div>
+
+          <div className="mt-12 flex flex-wrap justify-center gap-3">
+            {HOME_HERO.metadata.map((item) => (
+              <span key={item} className="kappa-signal-pill hero-seq-metadata">
+                {item}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </section>
