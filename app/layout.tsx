@@ -15,6 +15,7 @@ export const metadata: Metadata = {
     "Kappa404 realizza sistemi digitali premium: web development, AI automation, software custom e direzione visuale ad alte prestazioni.",
   icons: {
     icon: [
+      { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
       { url: "/favicon.ico", sizes: "any" },
       { url: "/favicon.svg", type: "image/svg+xml" }
     ],
