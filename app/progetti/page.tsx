@@ -1,15 +1,27 @@
 import CardProject from "@/components/CardProject";
 import ContactBlock from "@/components/ContactBlock";
+import JsonLd from "@/components/JsonLd";
 import PageHero from "@/components/PageHero";
 import { PROJECTS } from "@/lib/content";
+import { breadcrumbJsonLd, createPageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Progetti"
-};
+export const metadata = createPageMetadata({
+  title: "Progetti",
+  description:
+    "Portfolio Kappa404 con progetti web, visual engineering e contenuti premium realizzati per brand e servizi orientati alla crescita.",
+  path: "/progetti"
+});
 
 export default function ProgettiPage() {
   return (
     <>
+      <JsonLd
+        id="kappa404-progetti-breadcrumb"
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Progetti", path: "/progetti" }
+        ])}
+      />
       <PageHero
         eyebrow="ARCHIVE // SELECTED DEPLOYMENTS"
         title="Progetti / Portfolio"

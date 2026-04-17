@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import JsonLd from "@/components/JsonLd";
 import ContactBlock from "@/components/ContactBlock";
 import PageHero from "@/components/PageHero";
 import { PROJECTS } from "@/lib/content";
+import { breadcrumbJsonLd, createPageMetadata, projectJsonLd } from "@/lib/seo";
 
 type ProjectPageProps = {
   params: Promise<{
@@ -26,8 +28,11 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
   }
 
   return {
-    title: project.title,
-    description: project.descrizione
+    ...createPageMetadata({
+      title: project.title,
+      description: project.descrizione,
+      path: `/progetti/${project.slug}`
+    })
   };
 }
 
@@ -51,6 +56,15 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
 
   return (
     <>
+      <JsonLd
+        id={`kappa404-project-${project.slug}-breadcrumb`}
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Progetti", path: "/progetti" },
+          { name: project.title, path: `/progetti/${project.slug}` }
+        ])}
+      />
+      <JsonLd id={`kappa404-project-${project.slug}`} data={projectJsonLd(project)} />
       <PageHero
         eyebrow={`PROJECT ARCHIVE // ${project.categoria.toUpperCase()}`}
         title={project.title}

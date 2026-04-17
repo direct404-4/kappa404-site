@@ -80,6 +80,11 @@ export type HomeHero = {
   metadata: string[];
 };
 
+export type FaqItem = {
+  question: string;
+  answer: string;
+};
+
 export type HomeOutcome = {
   code: string;
   title: string;
@@ -225,8 +230,8 @@ export const PROJECTS: Project[] = [
 
 export const CONTACT_INFO: ContactInfo = {
   whatsapp: "https://wa.me/393520007587",
-  instagram: "https://www.instagram.com/kappa404_?igsh=N3NlN29tcGY4aTRv&utm_source=qr",
-  tiktok: "https://www.tiktok.com/@amk404_?_r=1&_t=ZN-94Qv7yuanwc",
+  instagram: "https://www.instagram.com/kappa404_/",
+  tiktok: "https://www.tiktok.com/@amk404_",
   city: "Milan",
   base: "Milan",
   mission: "Engineering luxury visuals through drone cinema, digital systems, and creative direction."
@@ -262,9 +267,8 @@ export const HOME_HERO: HomeHero = {
   highlight: "che generano risultati",
   description:
     "Ingegneria digitale avanzata per scalare il tuo business attraverso infrastrutture ad alte prestazioni e automazione intelligente.",
-  backgroundImage:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuDpaSKtEWMdkhsUR5YDuCLM4wSOWd49vuplT2oC8tu25jvjUgXUeinlluxU3B2NDGDK7g8AF4m4RFmKW1M__wrA3euwJuKZLCyNHAY7Ag_e6KfP7ErwNajOlyVaKFtH1uplQP5oJ1_Nwm0KHQVPCixACMode8yKIRh39w7zlGGX16tWWeprKCKmN3EUmfDGJ1flLg01NXxA8PYtVdKmt0qxNU0YRHCovFcla-ll7DxzcZ4unytgUvtTcrQQ8HLYw1XCMoSDXYF9AhCv",
-  backgroundAlt: "Neural core con energia cyan e magenta in ambiente obsidian",
+  backgroundImage: "/intro-kappa404.jpg",
+  backgroundAlt: "Sistema digitale Kappa404 con core luminoso cyan e magenta",
   primaryCta: {
     label: "Avvia il progetto",
     href: CONTACT_INFO.whatsapp
@@ -341,8 +345,7 @@ export const HOME_PROOF_SIGNALS: HomeProofSignal[] = [
 ];
 
 export const HOME_PROOF_VISUAL = {
-  image:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuCwsSxESHJrjbF-JGSB9axgZKYnpUiivmDx-822R8466_ck62L6UctzrPYOhe3mbI0qQdyz7dstRqE0TovZF-4sxafCEK_kV-g4kS9y0o1H8QLaVHrYLQ2xWya7fi4ba-gMCR3hgcpXycymKU9yI2CBYpqFSEgBz0oMvQMLWMH5x_vFlcsQcfpD049jDP4HAFukYFktvkRypEFLqF0MvEUVVnVYQ8-jjds7kDs0_InzvtsmwD_VElOxVCHVrIOEgpYRvd8Dx9zDj3L5",
+  image: "/og-image.png",
   alt: "Visualizzazione olografica dati in cyan e magenta"
 };
 
@@ -413,6 +416,25 @@ export const AI_SOLUTIONS = [
   "Content generation per campagne editoriali",
   "Internal tools per analisi e controllo operativo",
   "Workflow documentation con assistenza AI"
+];
+
+export const SERVICE_FAQS: FaqItem[] = [
+  {
+    question: "Quanto tempo serve per avviare un progetto digitale con Kappa404?",
+    answer: "Di norma un progetto parte entro 5-10 giorni lavorativi dopo l'allineamento su obiettivi, priorita, canali e materiali disponibili."
+  },
+  {
+    question: "Kappa404 lavora anche su siti o sistemi gia esistenti?",
+    answer: "Si. Prima viene eseguito un audit tecnico e visuale per capire vincoli, debito tecnico, opportunita SEO e margini di miglioramento conversione."
+  },
+  {
+    question: "Le automazioni AI vengono costruite su misura?",
+    answer: "Si. Le automazioni vengono progettate intorno a processi reali: lead flow, contenuti, risposte clienti, workflow interni e integrazioni operative."
+  },
+  {
+    question: "Come avviene il primo contatto?",
+    answer: "Il canale piu rapido e WhatsApp: invii obiettivo, contesto e tempistiche, poi viene definito il prossimo step operativo."
+  }
 ];
 
 

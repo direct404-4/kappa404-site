@@ -1,10 +1,15 @@
 import PageHero from "@/components/PageHero";
 import CookiePreferencesButton from "@/components/CookiePreferencesButton";
 import { COOKIE_CONSENT_STORAGE_KEY } from "@/lib/cookie-consent";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Cookie Policy"
-};
+export const metadata = createPageMetadata({
+  title: "Cookie Policy",
+  description:
+    "Cookie Policy Kappa404: cookie tecnici, memoria locale per consenso e misurazione Vercel opzionale caricata solo dopo accettazione esplicita.",
+  path: "/cookie-policy",
+  noIndex: true
+});
 
 export default function CookiePolicyPage() {
   return (

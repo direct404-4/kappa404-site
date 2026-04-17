@@ -1,16 +1,30 @@
+import JsonLd from "@/components/JsonLd";
 import SectionTitle from "@/components/SectionTitle";
 import CardService from "@/components/CardService";
 import ContactBlock from "@/components/ContactBlock";
 import PageHero from "@/components/PageHero";
-import { SERVICES } from "@/lib/content";
+import { SERVICE_FAQS, SERVICES } from "@/lib/content";
+import { breadcrumbJsonLd, createPageMetadata, faqJsonLd, servicesItemListJsonLd } from "@/lib/seo";
 
-export const metadata = {
-  title: "Servizi"
-};
+export const metadata = createPageMetadata({
+  title: "Servizi",
+  description:
+    "Servizi digitali Kappa404: web development, landing page, e-commerce, automazioni AI, software custom e pipeline video/content per brand premium.",
+  path: "/servizi"
+});
 
 export default function ServiziPage() {
   return (
     <>
+      <JsonLd
+        id="kappa404-servizi-breadcrumb"
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Servizi", path: "/servizi" }
+        ])}
+      />
+      <JsonLd id="kappa404-servizi-list" data={servicesItemListJsonLd(SERVICES)} />
+      <JsonLd id="kappa404-servizi-faq" data={faqJsonLd(SERVICE_FAQS)} />
       <PageHero
         eyebrow="SYSTEM MAP // SERVICE MODULES"
         title="Servizi digitali ad alte prestazioni"
@@ -58,18 +72,12 @@ export default function ServiziPage() {
             eyebrow="Support node // quick answers"
           />
           <div className="mt-10 grid gap-4">
-            <article className="card-shell">
-              <h3 className="text-lg font-semibold text-white">In quanto tempo parte un progetto?</h3>
-              <p className="mt-2 text-sm text-white/75">In media entro 5-10 giorni lavorativi dopo allineamento scope e priorita.</p>
-            </article>
-            <article className="card-shell">
-              <h3 className="text-lg font-semibold text-white">Lavori anche su stack gia esistenti?</h3>
-              <p className="mt-2 text-sm text-white/75">Si, con audit iniziale per stimare vincoli, debt tecnica e margini di ottimizzazione.</p>
-            </article>
-            <article className="card-shell">
-              <h3 className="text-lg font-semibold text-white">Gestisci anche la parte visuale?</h3>
-              <p className="mt-2 text-sm text-white/75">Si, direzione creativa e produzione visual sono integrate nel framework operativo.</p>
-            </article>
+            {SERVICE_FAQS.map((faq) => (
+              <article key={faq.question} className="card-shell">
+                <h3 className="text-lg font-semibold text-white">{faq.question}</h3>
+                <p className="mt-2 text-sm text-white/75">{faq.answer}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>

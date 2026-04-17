@@ -1,6 +1,9 @@
 import Link from "next/link";
 import DataPerformanceCore from "@/components/DataPerformanceCore";
+import JsonLd from "@/components/JsonLd";
+import WhatsAppProjectForm from "@/components/WhatsAppProjectForm";
 import { CONTACT_INFO, HOME_SYSTEM_MODULES } from "@/lib/content";
+import { breadcrumbJsonLd } from "@/lib/seo";
 
 const outcomeCards = [
   {
@@ -94,13 +97,15 @@ const processSteps = [
 export default function HomePage() {
   return (
     <div className="-mt-16 bg-[#050505] text-on-surface">
+      <JsonLd id="kappa404-home-breadcrumb" data={breadcrumbJsonLd([{ name: "Home", path: "/" }])} />
       <section className="relative min-h-[760px] overflow-hidden px-6 pb-20 pt-32 md:min-h-[1024px]">
         <div className="absolute inset-0 z-0 opacity-40">
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#050505] to-[#050505]" />
           <img
             className="h-full w-full object-cover"
-            alt="ultra-realistic 3D rendering of a central neural core with glowing cyan energy filaments and deep obsidian structural cables in a void"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpaSKtEWMdkhsUR5YDuCLM4wSOWd49vuplT2oC8tu25jvjUgXUeinlluxU3B2NDGDK7g8AF4m4RFmKW1M__wrA3euwJuKZLCyNHAY7Ag_e6KfP7ErwNajOlyVaKFtH1uplQP5oJ1_Nwm0KHQVPCixACMode8yKIRh39w7zlGGX16tWWeprKCKmN3EUmfDGJ1flLg01NXxA8PYtVdKmt0qxNU0YRHCovFcla-ll7DxzcZ4unytgUvtTcrQQ8HLYw1XCMoSDXYF9AhCv"
+            alt="Sistema digitale Kappa404 con core luminoso cyan e magenta"
+            src="/intro-kappa404.jpg"
+            fetchPriority="high"
           />
         </div>
 
@@ -284,41 +289,7 @@ export default function HomePage() {
         </div>
 
         <div className="glass-panel mx-auto max-w-2xl p-8 md:p-12">
-          <form action="#" className="space-y-8">
-            <div className="relative">
-              <label className="mb-2 block font-mono text-[10px] uppercase tracking-widest text-[#00f2ff]">Operator_Name</label>
-              <input
-                className="w-full border-b border-outline-variant bg-transparent px-0 py-2 font-body text-white outline-none transition-all placeholder:text-white/40 focus:border-[#00f2ff]"
-                placeholder="Inserisci il tuo nome"
-                type="text"
-              />
-            </div>
-
-            <div className="relative">
-              <label className="mb-2 block font-mono text-[10px] uppercase tracking-widest text-[#00f2ff]">Comms_Endpoint</label>
-              <input
-                className="w-full border-b border-outline-variant bg-transparent px-0 py-2 font-body text-white outline-none transition-all placeholder:text-white/40 focus:border-[#00f2ff]"
-                placeholder="WhatsApp, Instagram o TikTok"
-                type="text"
-              />
-            </div>
-
-            <div className="relative">
-              <label className="mb-2 block font-mono text-[10px] uppercase tracking-widest text-[#00f2ff]">Mission_Objective</label>
-              <textarea
-                className="w-full resize-none border-b border-outline-variant bg-transparent px-0 py-2 font-body text-white outline-none transition-all placeholder:text-white/40 focus:border-[#00f2ff]"
-                placeholder="Descrivi il tuo progetto..."
-                rows={3}
-              />
-            </div>
-
-            <button
-              className="w-full bg-gradient-to-r from-[#00f2ff] to-[#006a71] py-4 font-headline font-bold uppercase tracking-[0.2em] text-on-primary transition-all hover:shadow-[0_0_25px_rgba(0,242,255,0.3)]"
-              type="button"
-            >
-              Execute Connection
-            </button>
-          </form>
+          <WhatsAppProjectForm mode="home" />
         </div>
       </section>
     </div>

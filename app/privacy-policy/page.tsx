@@ -1,10 +1,15 @@
 import PageHero from "@/components/PageHero";
 import CookiePreferencesButton from "@/components/CookiePreferencesButton";
 import { CONTACT_INFO } from "@/lib/content";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Privacy Policy"
-};
+export const metadata = createPageMetadata({
+  title: "Privacy Policy",
+  description:
+    "Informativa privacy Kappa404 su navigazione, canali di contatto, form WhatsApp e strumenti opzionali di misurazione attivati solo dopo consenso.",
+  path: "/privacy-policy",
+  noIndex: true
+});
 
 export default function PrivacyPolicyPage() {
   return (
@@ -13,12 +18,12 @@ export default function PrivacyPolicyPage() {
         eyebrow="LEGAL // PRIVACY POLICY"
         title="Privacy Policy"
         description="Informativa sul trattamento dei dati personali effettuato attraverso kappa404.it e i canali di contatto collegati al progetto Kappa404."
-        chips={["Aggiornata 14 aprile 2026", "Italia", "Opt-in measurement"]}
+        chips={["Aggiornata 17 aprile 2026", "Italia", "Opt-in measurement"]}
       />
 
       <section className="section-gap">
         <div className="container-main legal-shell">
-          <p>Ultimo aggiornamento: 14 aprile 2026</p>
+          <p>Ultimo aggiornamento: 17 aprile 2026</p>
 
           <h2>Titolare del trattamento</h2>
           <p>
@@ -47,9 +52,9 @@ export default function PrivacyPolicyPage() {
 
           <h2>Form presente sul sito</h2>
           <p>
-            Alla data del 14 aprile 2026 il form presente nella pagina contatti ha funzione di interfaccia e non invia dati a un backend applicativo di
-            Kappa404. La semplice compilazione del form, senza un futuro collegamento a un sistema di invio reale, non produce trasmissione di dati verso il
-            titolare.
+            Alla data del 17 aprile 2026 i form presenti su homepage e pagina contatti generano localmente un messaggio WhatsApp precompilato e aprono il
+            canale scelto dall&apos;utente. Il sito non salva i dati inseriti in un database Kappa404 e non li invia a un backend applicativo proprietario prima
+            dell&apos;apertura volontaria di WhatsApp.
           </p>
 
           <h2>Finalita e basi giuridiche</h2>

@@ -14,10 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/progetti",
     "/soluzioni-ai",
     "/chi-sono",
-    "/contatti",
-    "/privacy-policy",
-    "/cookie-policy",
-    "/termini"
+    "/contatti"
   ].map((path) => ({
     url: `${BASE_URL}${path}`,
     lastModified: now,

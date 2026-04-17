@@ -60,10 +60,10 @@ const config: Config = {
         "surface-container": "#201f1f"
       },
       fontFamily: {
-        headline: ["Space Grotesk", "sans-serif"],
-        body: ["Inter", "sans-serif"],
-        label: ["Space Grotesk", "sans-serif"],
-        mono: ["JetBrains Mono", "monospace"]
+        headline: ["var(--font-space-grotesk)", "sans-serif"],
+        body: ["var(--font-inter)", "sans-serif"],
+        label: ["var(--font-space-grotesk)", "sans-serif"],
+        mono: ["var(--font-jetbrains-mono)", "monospace"]
       },
       borderRadius: {
         DEFAULT: "0px",

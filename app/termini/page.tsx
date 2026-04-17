@@ -1,8 +1,13 @@
 import PageHero from "@/components/PageHero";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Termini"
-};
+export const metadata = createPageMetadata({
+  title: "Termini di utilizzo",
+  description:
+    "Termini di utilizzo Kappa404: condizioni di consultazione del sito, proprieta intellettuale, responsabilita e gestione dei link esterni.",
+  path: "/termini",
+  noIndex: true
+});
 
 export default function TerminiPage() {
   return (

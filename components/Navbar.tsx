@@ -13,7 +13,7 @@ export default function Navbar() {
       <div className="mx-auto flex h-full max-w-[1440px] items-center justify-between gap-6 px-4 md:px-6">
         <Link href="/" className="flex shrink-0 items-center gap-3">
           <span className="h-2.5 w-2.5 rounded-full bg-[#00f2ff] shadow-[0_0_18px_rgba(0,242,255,0.9)]" />
-          <span className="font-['Space_Grotesk'] text-xl font-black tracking-tighter text-[#00f2ff] drop-shadow-[0_0_8px_rgba(0,242,255,0.5)]">
+          <span className="font-headline text-xl font-black tracking-tighter text-[#00f2ff] drop-shadow-[0_0_8px_rgba(0,242,255,0.5)]">
             KAPPA404
           </span>
         </Link>

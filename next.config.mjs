@@ -40,5 +40,44 @@ export default {
       }
     ];
   },
+  async redirects() {
+    return [
+      {
+        source: "/services",
+        destination: "/servizi",
+        permanent: true
+      },
+      {
+        source: "/archive",
+        destination: "/progetti",
+        permanent: true
+      },
+      {
+        source: "/terminal",
+        destination: "/soluzioni-ai",
+        permanent: true
+      },
+      {
+        source: "/contact",
+        destination: "/contatti",
+        permanent: true
+      },
+      {
+        source: "/portfolio",
+        destination: "/progetti",
+        permanent: true
+      },
+      {
+        source: "/about",
+        destination: "/chi-sono",
+        permanent: true
+      },
+      {
+        source: "/privacy",
+        destination: "/privacy-policy",
+        permanent: true
+      }
+    ];
+  },
   outputFileTracingRoot: __dirname,
 };

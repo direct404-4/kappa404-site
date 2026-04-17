@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import JsonLd from "@/components/JsonLd";
 import ContactBlock from "@/components/ContactBlock";
 import CardService from "@/components/CardService";
 import PageHero from "@/components/PageHero";
 import { SERVICES } from "@/lib/content";
+import { breadcrumbJsonLd, createPageMetadata, serviceJsonLd } from "@/lib/seo";
 
 type ServicePageProps = {
   params: Promise<{
@@ -27,8 +29,11 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
   }
 
   return {
-    title: service.nome,
-    description: service.descrizione
+    ...createPageMetadata({
+      title: service.nome,
+      description: service.descrizione,
+      path: `/servizi/${service.slug}`
+    })
   };
 }
 
@@ -44,6 +49,15 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
   return (
     <>
+      <JsonLd
+        id={`kappa404-service-${service.slug}-breadcrumb`}
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Servizi", path: "/servizi" },
+          { name: service.nome, path: `/servizi/${service.slug}` }
+        ])}
+      />
+      <JsonLd id={`kappa404-service-${service.slug}`} data={serviceJsonLd(service)} />
       <PageHero
         eyebrow={`SERVICE NODE // ${service.slug.toUpperCase()}`}
         title={service.nome}

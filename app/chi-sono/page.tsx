@@ -1,16 +1,28 @@
 import Link from "next/link";
 import ContactBlock from "@/components/ContactBlock";
+import JsonLd from "@/components/JsonLd";
 import PageHero from "@/components/PageHero";
 import SectionTitle from "@/components/SectionTitle";
 import { CONTACT_INFO } from "@/lib/content";
+import { breadcrumbJsonLd, createPageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Chi Sono"
-};
+export const metadata = createPageMetadata({
+  title: "Chi Sono",
+  description:
+    "Profilo Kappa404: visual engineer e digital builder a Milano, specializzato in web engineering, automazioni AI e direzione creativa premium.",
+  path: "/chi-sono"
+});
 
 export default function ChiSonoPage() {
   return (
     <>
+      <JsonLd
+        id="kappa404-chi-sono-breadcrumb"
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Chi Sono", path: "/chi-sono" }
+        ])}
+      />
       <PageHero
         eyebrow="IDENTITY // KAPPA404 PROFILE"
         title="Chi sono"
