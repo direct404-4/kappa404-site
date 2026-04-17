@@ -81,3 +81,5 @@ export default {
   },
   outputFileTracingRoot: __dirname,
 };
+
+import('@opennextjs/cloudflare').then(m => m.initOpenNextCloudflareForDev());
