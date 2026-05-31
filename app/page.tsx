@@ -1,5 +1,6 @@
 import Link from "next/link";
 import DataPerformanceCore from "@/components/DataPerformanceCore";
+import HomeImmersiveBackground, { type HomeSceneCue } from "@/components/HomeImmersiveBackground";
 import JsonLd from "@/components/JsonLd";
 import WhatsAppProjectForm from "@/components/WhatsAppProjectForm";
 import { CONTACT_INFO, HOME_SYSTEM_MODULES } from "@/lib/content";
@@ -94,25 +95,74 @@ const processSteps = [
   }
 ] as const;
 
+const homeSectionCopy = {
+  heroStatus: "SYSTEM_CONNECTED // NEURAL_READY",
+  outcomesTitle: "Cosa Ottieni",
+  outcomesDescription: "Non vendiamo servizi. Costruiamo sistemi digitali che lavorano per te.",
+  infrastructureEyebrow: "Architecture Selection",
+  infrastructureTitle: "Sistemi di Infrastruttura",
+  performanceTitle: "Data Performance",
+  protocolTitle: "Protocol Execution",
+  contactTitle: "Costruiamo il tuo sistema digitale",
+  contactDescription: "Inizializza la richiesta di consulenza tecnica // Slot limitati"
+} as const;
+
+const homeSceneCues: HomeSceneCue[] = [
+  {
+    id: "hero",
+    label: homeSectionCopy.heroStatus,
+    accent: "#00f2ff",
+    progressRange: [0, 0.16],
+    hudLines: ["KAPPA404 // Neural Infrastructure Platform", "HIGH_PERFORMANCE_SYSTEMS // ARMED", "CTA_STACK // READY"]
+  },
+  {
+    id: "outcomes",
+    label: homeSectionCopy.outcomesTitle,
+    accent: "#ff00e4",
+    progressRange: [0.16, 0.34],
+    hudLines: outcomeCards.map((card) => `${card.id} // ${card.title}`)
+  },
+  {
+    id: "infrastructure",
+    label: homeSectionCopy.infrastructureTitle,
+    accent: "#00f2ff",
+    progressRange: [0.34, 0.52],
+    hudLines: HOME_SYSTEM_MODULES.map((module) => `${module.code} // ${module.title}`)
+  },
+  {
+    id: "performance",
+    label: homeSectionCopy.performanceTitle,
+    accent: "#bc13fe",
+    progressRange: [0.52, 0.68],
+    hudLines: performanceStats.map((stat) => `${stat.label} // ${stat.value}`)
+  },
+  {
+    id: "protocol",
+    label: homeSectionCopy.protocolTitle,
+    accent: "#00f2ff",
+    progressRange: [0.68, 0.86],
+    hudLines: processSteps.map((step) => `${step.id} // ${step.title}`)
+  },
+  {
+    id: "contact",
+    label: homeSectionCopy.contactTitle,
+    accent: "#bc13fe",
+    progressRange: [0.86, 1],
+    hudLines: [homeSectionCopy.contactDescription, "WHATSAPP_CHANNEL // READY", "CONSULTING_SLOT // LIMITED"]
+  }
+];
+
 export default function HomePage() {
   return (
-    <div className="-mt-16 bg-[#050505] text-on-surface">
+    <div className="relative isolate -mt-16 overflow-hidden bg-[#050505] text-on-surface">
       <JsonLd id="kappa404-home-breadcrumb" data={breadcrumbJsonLd([{ name: "Home", path: "/" }])} />
-      <section className="relative min-h-[760px] overflow-hidden px-6 pb-20 pt-32 md:min-h-[1024px]">
-        <div className="absolute inset-0 z-0 opacity-40">
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#050505] to-[#050505]" />
-          <img
-            className="h-full w-full object-cover"
-            alt="Sistema digitale Kappa404 con core luminoso cyan e magenta"
-            src="/intro-kappa404.jpg"
-            fetchPriority="high"
-          />
-        </div>
+      <HomeImmersiveBackground cues={homeSceneCues} />
 
+      <section className="home-immersive-hero relative z-10 min-h-[760px] overflow-hidden px-6 pb-20 pt-32 md:min-h-[1024px]">
         <div className="relative z-10 mx-auto flex max-w-7xl flex-col items-center text-center">
           <div className="mb-6 flex items-center gap-2 border border-[#00f2ff]/30 bg-[#00f2ff]/5 px-4 py-1 font-mono text-[10px] tracking-widest text-[#00f2ff]">
             <span className="h-2 w-2 animate-pulse bg-[#00f2ff]" />
-            SYSTEM_CONNECTED // NEURAL_READY
+            {homeSectionCopy.heroStatus}
           </div>
 
           <h1 className="mb-8 font-headline text-5xl font-bold leading-tight tracking-tight text-white md:text-7xl lg:text-8xl">
@@ -145,13 +195,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-surface px-6 py-24">
+      <section className="home-section-surface relative z-10 px-6 py-24">
         <div className="mx-auto max-w-7xl">
           <div className="mb-16 flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
             <div className="max-w-xl">
-              <h2 className="mb-4 font-headline text-3xl font-bold uppercase tracking-tighter md:text-5xl">Cosa Ottieni</h2>
+              <h2 className="mb-4 font-headline text-3xl font-bold uppercase tracking-tighter md:text-5xl">{homeSectionCopy.outcomesTitle}</h2>
               <p className="border-l-2 border-[#bc13fe] pl-4 font-mono text-sm uppercase tracking-widest text-on-surface-variant">
-                Non vendiamo servizi. Costruiamo sistemi digitali che lavorano per te.
+                {homeSectionCopy.outcomesDescription}
               </p>
             </div>
           </div>
@@ -179,11 +229,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-surface-container-lowest px-6 py-24">
+      <section className="home-section-surface home-section-surface--deep relative z-10 overflow-hidden px-6 py-24">
         <div className="relative z-10 mx-auto max-w-7xl">
           <div className="mb-20 text-center">
-            <span className="font-mono text-xs uppercase tracking-[0.3em] text-[#00f2ff]">Architecture Selection</span>
-            <h2 className="mt-4 font-headline text-4xl font-bold uppercase md:text-6xl">Sistemi di Infrastruttura</h2>
+            <span className="font-mono text-xs uppercase tracking-[0.3em] text-[#00f2ff]">{homeSectionCopy.infrastructureEyebrow}</span>
+            <h2 className="mt-4 font-headline text-4xl font-bold uppercase md:text-6xl">{homeSectionCopy.infrastructureTitle}</h2>
           </div>
 
           <div className="grid grid-cols-1 gap-px bg-[#00f2ff]/10 md:grid-cols-2 lg:grid-cols-3">
@@ -195,7 +245,7 @@ export default function HomePage() {
               <Link
                 key={module.code}
                 href={module.href}
-                className={`group bg-[#050505] p-10 transition-all duration-500 ${
+                className={`group bg-[#050505]/90 p-10 backdrop-blur-sm transition-all duration-500 ${
                   module.tone === "violet" ? "hover:bg-[#bc13fe]/5" : "hover:bg-[#00f2ff]/5"
                 }`}
               >
@@ -226,10 +276,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="overflow-hidden border-y border-[#00f2ff]/5 bg-surface px-6 py-24">
+      <section className="home-section-surface relative z-10 overflow-hidden border-y border-[#00f2ff]/5 px-6 py-24">
         <div className="mx-auto flex max-w-7xl flex-col items-center gap-12 md:flex-row">
           <div className="w-full md:w-1/2">
-            <h2 className="mb-8 font-headline text-4xl font-bold uppercase tracking-tight md:text-5xl">Data Performance</h2>
+            <h2 className="mb-8 font-headline text-4xl font-bold uppercase tracking-tight md:text-5xl">{homeSectionCopy.performanceTitle}</h2>
             <div className="space-y-12">
               {performanceStats.map((stat) => (
                 <div key={stat.label} className="relative">
@@ -255,10 +305,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-[#050505] px-6 py-24">
+      <section className="home-section-surface home-section-surface--clear relative z-10 px-6 py-24">
         <div className="mx-auto max-w-7xl">
           <div className="mb-20">
-            <h2 className="font-headline text-4xl font-bold uppercase tracking-widest">Protocol Execution</h2>
+            <h2 className="font-headline text-4xl font-bold uppercase tracking-widest">{homeSectionCopy.protocolTitle}</h2>
             <div className="mt-4 h-1 w-20 bg-[#bc13fe]" />
           </div>
 
@@ -278,13 +328,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-surface-container-lowest px-6 py-24">
+      <section className="home-section-surface home-section-surface--deep relative z-10 overflow-hidden px-6 py-24">
         <div className="absolute left-1/2 top-0 h-px w-full -translate-x-1/2 bg-gradient-to-r from-transparent via-[#00f2ff] to-transparent" />
 
         <div className="mx-auto mb-16 max-w-4xl text-center">
-          <h2 className="mb-8 font-headline text-4xl font-bold uppercase tracking-tighter md:text-6xl">Costruiamo il tuo sistema digitale</h2>
+          <h2 className="mb-8 font-headline text-4xl font-bold uppercase tracking-tighter md:text-6xl">{homeSectionCopy.contactTitle}</h2>
           <p className="font-mono text-xs uppercase tracking-widest text-on-surface-variant opacity-60">
-            Inizializza la richiesta di consulenza tecnica // Slot limitati
+            {homeSectionCopy.contactDescription}
           </p>
         </div>
 
