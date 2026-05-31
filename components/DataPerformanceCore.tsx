@@ -722,8 +722,8 @@ export default function DataPerformanceCore({ stats }: DataPerformanceCoreProps)
         rotation: new THREE.Euler(0.02, 0.3, 0.08),
         size: [2.52, 1.78] as const,
         accent: stats[0]?.accent ?? "#00f2ff",
-        label: stats[0]?.label ?? "CONVERSION_RATE_INCREASE",
-        value: stats[0]?.value ?? "+40.00%",
+        label: stats[0]?.label ?? "CONVERSION_PATH",
+        value: stats[0]?.value ?? "MAPPED",
         variant: "charts" as const,
         opacity: 0.58
       },
@@ -732,8 +732,8 @@ export default function DataPerformanceCore({ stats }: DataPerformanceCoreProps)
         rotation: new THREE.Euler(0.02, -0.3, -0.08),
         size: [2.52, 1.78] as const,
         accent: stats[1]?.accent ?? "#bc13fe",
-        label: stats[1]?.label ?? "ANNUAL_REVENUE_LIFT",
-        value: stats[1]?.value ?? "+30.00%",
+        label: stats[1]?.label ?? "REVENUE_FLOW",
+        value: stats[1]?.value ?? "STRUCTURED",
         variant: "metrics" as const,
         opacity: 0.58
       },
@@ -743,7 +743,7 @@ export default function DataPerformanceCore({ stats }: DataPerformanceCoreProps)
         size: [2.34, 1.62] as const,
         accent: "#9af8ff",
         label: "INFRA_GRID_STATUS",
-        value: stats[2]?.value ?? "99.99%",
+        value: stats[2]?.value ?? "MONITORED",
         variant: "telemetry" as const,
         opacity: 0.52
       },

@@ -8,6 +8,7 @@ export type Service = {
   nome: string;
   descrizione: string;
   homeHook: string;
+  solution: string;
   bullet: {
     problema: string;
     include: string;
@@ -132,6 +133,8 @@ export const SERVICES: Service[] = [
     descrizione:
       "Siti ad alte prestazioni con architettura moderna, UX curata e identita visiva allineata al posizionamento premium.",
     homeHook: "Una presenza digitale chiara, solida e pronta a sostenere la crescita.",
+    solution:
+      "Definizione della struttura informativa, progettazione UI coerente con il brand e sviluppo Next.js orientato a performance, SEO tecnica e percorsi di contatto chiari.",
     bullet: {
       problema: "Presenza digitale lenta, poco distintiva e senza conversioni costanti.",
       include: "Research, UI architecture, sviluppo frontend/backend e ottimizzazione Core Web Vitals.",
@@ -144,6 +147,8 @@ export const SERVICES: Service[] = [
     descrizione:
       "Landing orientate a lead e vendite con narrativa visuale, copy strategico e componenti modulari da testare.",
     homeHook: "Percorsi pensati per guidare l’attenzione e trasformarla in azione.",
+    solution:
+      "Costruzione di una pagina focalizzata su una singola offerta, con gerarchia dei messaggi, CTA dirette, form o WhatsApp intake e sezioni pensate per ridurre attrito decisionale.",
     bullet: {
       problema: "Traffico pagato disperso su pagine generiche senza focus.",
       include: "Wireframe conversion-first, copy funnel, tracciamenti e varianti per A/B test.",
@@ -156,6 +161,8 @@ export const SERVICES: Service[] = [
     descrizione:
       "Store digitali con cataloghi performanti, checkout semplificato e integrazione operativa con logistica e CRM.",
     homeHook: "Un sistema di vendita più ordinato, credibile e pronto a crescere.",
+    solution:
+      "Organizzazione di catalogo, schede prodotto e flussi checkout con integrazioni operative essenziali, così vendita, ordini e monitoraggio restano nello stesso sistema.",
     bullet: {
       problema: "Vendite online discontinue e processi post-ordine frammentati.",
       include: "Design system commerce, automazioni carrello, setup analytics e monitoraggio ordini.",
@@ -168,6 +175,8 @@ export const SERVICES: Service[] = [
     descrizione:
       "Flussi AI per ridurre attivita manuali, migliorare i tempi di risposta e orchestrare operazioni ripetitive.",
     homeHook: "Processi più fluidi, meno attrito operativo, più spazio per contare davvero.",
+    solution:
+      "Mappatura del processo attuale, scelta dei punti dove l'AI riduce lavoro manuale e integrazione di trigger supervisionati con strumenti già usati dal team.",
     bullet: {
       problema: "Team bloccati su compiti manuali e dati non sincronizzati.",
       include: "Mappatura workflow, integrazioni API, trigger intelligenti e supervisione operativa.",
@@ -180,6 +189,8 @@ export const SERVICES: Service[] = [
     descrizione:
       "Applicazioni su misura per casi complessi, con logica business dedicata e controllo completo dell'infrastruttura.",
     homeHook: "Strumenti costruiti intorno al tuo modo di lavorare, non il contrario.",
+    solution:
+      "Traduzione delle regole operative in interfacce, dati e automazioni proprietarie, con sviluppo modulare e rilascio progressivo per validare ogni blocco.",
     bullet: {
       problema: "Tool standard non adatti ai requisiti reali dell'azienda.",
       include: "Analisi requisiti, prototipazione tecnica, sviluppo modulare e hardening del rilascio.",
@@ -192,6 +203,8 @@ export const SERVICES: Service[] = [
     descrizione:
       "Pipeline creative che uniscono direzione visuale, AI generation e ottimizzazione cross-platform.",
     homeHook: "Contenuti più rapidi da produrre, più coerenti da distribuire.",
+    solution:
+      "Definizione di un linguaggio visivo, setup di prompt e workflow di produzione, poi adattamento degli output ai canali dove il brand deve pubblicare.",
     bullet: {
       problema: "Produzione contenuti lenta, costosa e non coerente nel tono.",
       include: "Creative strategy, prompt engineering, editing workflow e output multi-formato.",

@@ -37,22 +37,22 @@ const systemModuleIcons = ["language", "filter_list", "shopping_cart", "smart_to
 
 const performanceStats = [
   {
-    label: "CONVERSION_RATE_INCREASE",
-    value: "+40.00%",
+    label: "CONVERSION_PATH",
+    value: "MAPPED",
     accent: "#00f2ff",
-    width: "40%"
+    width: "72%"
   },
   {
-    label: "ANNUAL_REVENUE_LIFT",
-    value: "+30.00%",
+    label: "REVENUE_FLOW",
+    value: "STRUCTURED",
     accent: "#bc13fe",
-    width: "30%"
+    width: "64%"
   },
   {
-    label: "INFRASTRUCTURE_UPTIME",
-    value: "99.99%",
+    label: "SYSTEM_HEALTH",
+    value: "MONITORED",
     accent: "#00f2ff",
-    width: "99%"
+    width: "88%"
   }
 ] as const;
 

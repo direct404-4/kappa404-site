@@ -78,9 +78,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
           <article className="card-shell">
             <h2 className="text-xl font-semibold text-white">Soluzione proposta</h2>
-            <p className="mt-4 text-sm text-white/76">
-              Un framework dedicato che combina sviluppo modulare, direzione visuale e monitoraggio continuo per mantenere coerenza e risultati.
-            </p>
+            <p className="mt-4 text-sm text-white/76">{service.solution}</p>
           </article>
 
           <article className="card-shell">
