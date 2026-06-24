@@ -111,7 +111,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <JsonLd id="kappa404-organization" data={organizationJsonLd()} />
         <JsonLd id="kappa404-website" data={websiteJsonLd()} />
         <Navbar />
-        <main className="kappa-home min-h-screen pt-16">{children}</main>
+        <main className="kappa-home min-h-screen pt-[var(--header-height)]">{children}</main>
         <Footer />
         <CookieBanner />
         <ConsentManagedAnalytics />

@@ -15,8 +15,8 @@ export default function Navbar() {
   }, [pathname]);
 
   return (
-    <header className="fixed top-0 z-50 h-16 w-full border-b border-[#00f2ff]/10 bg-[#050505]/80 backdrop-blur-xl">
-      <div className="mx-auto flex h-full max-w-[1440px] items-center justify-between gap-6 px-4 md:px-6">
+    <header className="kappa-site-header fixed top-0 z-50 w-full border-b border-[#00f2ff]/10 bg-[#050505]/80 backdrop-blur-xl">
+      <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between gap-6 px-4 md:px-6">
         <Link href="/" className="flex min-h-11 shrink-0 items-center gap-3">
           <span className="h-2.5 w-2.5 rounded-full bg-[#00f2ff] shadow-[0_0_18px_rgba(0,242,255,0.9)]" aria-hidden="true" />
           <span className="font-headline text-xl font-black tracking-tighter text-[#00f2ff] drop-shadow-[0_0_8px_rgba(0,242,255,0.5)]">
@@ -63,7 +63,7 @@ export default function Navbar() {
       {mobileOpen ? (
         <div
           id="kappa-mobile-menu"
-          className="absolute left-0 right-0 top-16 border-b border-[#00f2ff]/10 bg-[#050505]/96 px-4 py-4 shadow-[0_18px_40px_rgba(0,0,0,0.45)] backdrop-blur-xl lg:hidden"
+          className="kappa-mobile-menu absolute left-0 right-0 border-b border-[#00f2ff]/10 bg-[#050505]/96 px-4 py-4 shadow-[0_18px_40px_rgba(0,0,0,0.45)] backdrop-blur-xl lg:hidden"
         >
           <nav className="grid gap-2">
             {NAV_LINKS.map((item) => {

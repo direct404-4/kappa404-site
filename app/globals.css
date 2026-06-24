@@ -12,7 +12,10 @@
 
 :root {
   color-scheme: dark;
-  --header-height: 4rem;
+  --safe-area-top: env(safe-area-inset-top, 0px);
+  --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+  --header-core-height: 4rem;
+  --header-height: calc(var(--header-core-height) + var(--safe-area-top));
   --kappa-bg: #050505;
   --kappa-surface: #101113;
   --kappa-surface-low: #17191d;
@@ -645,6 +648,19 @@ main {
   bottom: 0.35rem;
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(0, 242, 255, 0.9), transparent);
+}
+
+.kappa-site-header {
+  height: var(--header-height);
+  padding-top: var(--safe-area-top);
+}
+
+.kappa-mobile-menu {
+  top: var(--header-height);
+  max-height: calc(100svh - var(--header-height));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-bottom: calc(1rem + var(--safe-area-bottom));
 }
 
 .kappa-command-hero {
