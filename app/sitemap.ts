@@ -14,12 +14,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/progetti",
     "/soluzioni-ai",
     "/chi-sono",
-    "/contatti"
+    "/contatti",
+    "/privacy-policy",
+    "/cookie-policy",
+    "/termini"
   ].map((path) => ({
     url: `${BASE_URL}${path}`,
     lastModified: now,
     changeFrequency: "monthly" as const,
-    priority: path === "" ? 1 : 0.7
+    priority: path === "" ? 1 : path === "/privacy-policy" || path === "/cookie-policy" || path === "/termini" ? 0.35 : 0.7
   }));
 
   const serviceRoutes = SERVICES.map((service) => ({

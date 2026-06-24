@@ -27,9 +27,10 @@ export default function ChiSonoPage() {
         eyebrow="IDENTITY // KAPPA404 PROFILE"
         title="Chi sono"
         description="Visual engineer e digital builder basato a Milano: progetto ecosistemi dove creativita, infrastruttura e automazione lavorano come un unico sistema."
-        chips={["Milan base", "Web engineering", "AI automation"]}
+        chips={["Milan base", "Web engineering", "AI automation", "LinkedIn"]}
         actions={[
           { label: "Vai ai contatti", href: "/contatti" },
+          { label: "Apri LinkedIn", href: CONTACT_INFO.linkedin, external: true, tone: "secondary" },
           { label: "Esplora i servizi", href: "/servizi", tone: "secondary" }
         ]}
       />

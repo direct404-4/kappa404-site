@@ -47,7 +47,10 @@ export type HomeAbout = {
 };
 
 export type ContactInfo = {
+  email: string;
+  emailHref: string;
   whatsapp: string;
+  linkedin: string;
   instagram: string;
   tiktok: string;
   city: string;
@@ -242,7 +245,10 @@ export const PROJECTS: Project[] = [
 ];
 
 export const CONTACT_INFO: ContactInfo = {
+  email: "info@kappa404.it",
+  emailHref: "mailto:info@kappa404.it",
   whatsapp: "https://wa.me/393520007587",
+  linkedin: "https://www.linkedin.com/in/amine-khabir-30363a417",
   instagram: "https://www.instagram.com/kappa404_/",
   tiktok: "https://www.tiktok.com/@amk404_",
   city: "Milan",
@@ -252,11 +258,25 @@ export const CONTACT_INFO: ContactInfo = {
 
 export const CONTACT_CHANNELS: ContactChannel[] = [
   {
+    id: "email",
+    label: "Email",
+    value: CONTACT_INFO.email,
+    href: CONTACT_INFO.emailHref,
+    note: "Canale professionale principale per richieste, brief e documenti."
+  },
+  {
     id: "whatsapp",
     label: "WhatsApp",
     value: "+39 352 000 7587",
     href: CONTACT_INFO.whatsapp,
-    note: "Canale rapido per allineamento e primo contatto."
+    note: "Canale rapido per allineamento operativo e primo contatto."
+  },
+  {
+    id: "linkedin",
+    label: "LinkedIn",
+    value: "Amine Khabir",
+    href: CONTACT_INFO.linkedin,
+    note: "Profilo professionale, background e aggiornamenti business."
   },
   {
     id: "instagram",
@@ -283,8 +303,8 @@ export const HOME_HERO: HomeHero = {
   backgroundImage: "/intro-kappa404.jpg",
   backgroundAlt: "Sistema digitale Kappa404 con core luminoso cyan e magenta",
   primaryCta: {
-    label: "Avvia il progetto",
-    href: CONTACT_INFO.whatsapp
+    label: "Scrivi via email",
+    href: CONTACT_INFO.emailHref
   },
   secondaryCta: {
     label: "Esplora i servizi",
@@ -352,7 +372,7 @@ export const HOME_PROOF_SIGNALS: HomeProofSignal[] = [
     label: "CHANNEL_STATUS",
     state: "READY",
     title: "Conversion path reali",
-    description: "WhatsApp e social principali sono attivabili subito come ingressi concreti.",
+    description: "Email professionale, WhatsApp e LinkedIn sono attivabili subito come ingressi concreti.",
     tone: "magenta"
   }
 ];
@@ -446,7 +466,7 @@ export const SERVICE_FAQS: FaqItem[] = [
   },
   {
     question: "Come avviene il primo contatto?",
-    answer: "Il canale piu rapido e WhatsApp: invii obiettivo, contesto e tempistiche, poi viene definito il prossimo step operativo."
+    answer: "Il canale professionale principale e info@kappa404.it. Per un allineamento rapido puoi usare anche WhatsApp con obiettivo, contesto e tempistiche."
   }
 ];
 

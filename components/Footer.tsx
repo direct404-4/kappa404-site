@@ -1,6 +1,6 @@
 import Link from "next/link";
 import CookiePreferencesButton from "@/components/CookiePreferencesButton";
-import { NAV_LINKS } from "@/lib/content";
+import { CONTACT_CHANNELS, NAV_LINKS } from "@/lib/content";
 
 export default function Footer() {
   const primaryLinks = NAV_LINKS.filter((link) => link.href !== "/");
@@ -23,6 +23,24 @@ export default function Footer() {
               Secure routing
             </div>
           </div>
+
+          <div className="mt-7 grid gap-2 text-sm text-white/70">
+            {CONTACT_CHANNELS.map((channel) => {
+              const isExternal = channel.href.startsWith("http");
+
+              return (
+                <a
+                  key={channel.id}
+                  href={channel.href}
+                  target={isExternal ? "_blank" : undefined}
+                  rel={isExternal ? "noreferrer" : undefined}
+                  className="w-fit break-all transition hover:text-[#00f2ff]"
+                >
+                  {channel.label === "Email" ? channel.value : channel.label}
+                </a>
+              );
+            })}
+          </div>
         </div>
 
         <div className="grid gap-3">
@@ -44,7 +62,7 @@ export default function Footer() {
           </Link>
           <CookiePreferencesButton />
           <Link href="/termini" className="kappa-nav-link w-fit">
-            Termini
+            Termini e Condizioni
           </Link>
         </div>
       </div>

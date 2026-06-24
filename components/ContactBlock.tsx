@@ -6,7 +6,14 @@ type ContactBlockProps = {
   description?: string;
 };
 
-const PRIMARY_CHANNELS = CONTACT_CHANNELS.slice(0, 2);
+const PRIMARY_CHANNEL_IDS = ["email", "whatsapp"] as const;
+const PRIMARY_CHANNELS = PRIMARY_CHANNEL_IDS.map((id) => CONTACT_CHANNELS.find((channel) => channel.id === id)).filter(
+  (channel): channel is (typeof CONTACT_CHANNELS)[number] => Boolean(channel)
+);
+
+function isExternalHref(href: string) {
+  return href.startsWith("http");
+}
 
 export default function ContactBlock({
   variant = "panel",
@@ -27,8 +34,8 @@ export default function ContactBlock({
                 <a
                   key={channel.id}
                   href={channel.href}
-                  target={channel.href.startsWith("http") ? "_blank" : undefined}
-                  rel={channel.href.startsWith("http") ? "noreferrer" : undefined}
+                  target={isExternalHref(channel.href) ? "_blank" : undefined}
+                  rel={isExternalHref(channel.href) ? "noreferrer" : undefined}
                   className={index === 0 ? "btn-primary" : "btn-secondary"}
                 >
                   {channel.label}
@@ -42,8 +49,8 @@ export default function ContactBlock({
               <a
                 key={channel.id}
                 href={channel.href}
-                target={channel.href.startsWith("http") ? "_blank" : undefined}
-                rel={channel.href.startsWith("http") ? "noreferrer" : undefined}
+                target={isExternalHref(channel.href) ? "_blank" : undefined}
+                rel={isExternalHref(channel.href) ? "noreferrer" : undefined}
                 className="kappa-contact-channel"
               >
                 <span className="kappa-contact-channel__label">{channel.label}</span>
@@ -68,8 +75,8 @@ export default function ContactBlock({
           <a
             key={channel.id}
             href={channel.href}
-            target={channel.href.startsWith("http") ? "_blank" : undefined}
-            rel={channel.href.startsWith("http") ? "noreferrer" : undefined}
+            target={isExternalHref(channel.href) ? "_blank" : undefined}
+            rel={isExternalHref(channel.href) ? "noreferrer" : undefined}
             className="kappa-contact-channel"
           >
             <span className="kappa-contact-channel__label">{channel.label}</span>

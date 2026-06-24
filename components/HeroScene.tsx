@@ -10,6 +10,7 @@ export default function HeroScene() {
   useLenisSmoothScroll(true);
 
   const containerRef = useRef<HTMLDivElement>(null);
+  const primaryCtaIsExternal = HOME_HERO.primaryCta.href.startsWith("http");
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -87,7 +88,12 @@ export default function HeroScene() {
           <p className="kappa-command-copy hero-seq-copy mx-auto">{HOME_HERO.description}</p>
 
           <div className="mt-10 flex flex-wrap justify-center gap-3">
-            <a href={HOME_HERO.primaryCta.href} target="_blank" rel="noreferrer" className="btn-primary hero-seq-cta">
+            <a
+              href={HOME_HERO.primaryCta.href}
+              target={primaryCtaIsExternal ? "_blank" : undefined}
+              rel={primaryCtaIsExternal ? "noreferrer" : undefined}
+              className="btn-primary hero-seq-cta"
+            >
               {HOME_HERO.primaryCta.label}
             </a>
             <Link href={HOME_HERO.secondaryCta.href} className="btn-secondary hero-seq-cta">

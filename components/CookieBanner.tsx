@@ -50,7 +50,15 @@ export default function CookieBanner() {
             <p className="font-mono text-[9px] uppercase tracking-[0.22em] text-[#00f2ff]/82">Privacy notice // opt-in</p>
             <h2 className="font-headline text-xl font-bold uppercase tracking-[-0.03em] text-white">Preferenze cookie</h2>
             <p className="text-xs leading-5 text-white/74 md:text-sm md:leading-6">
-              Usiamo memoria locale necessaria per ricordare la scelta. Analytics e Speed Insights partono solo se accetti.
+              Usiamo memoria locale necessaria per ricordare la scelta. Analytics e Speed Insights partono solo se accetti. Leggi{" "}
+              <Link href="/privacy-policy" className="underline decoration-white/25 underline-offset-4 hover:text-[#00f2ff]">
+                Privacy Policy
+              </Link>{" "}
+              e{" "}
+              <Link href="/cookie-policy" className="underline decoration-white/25 underline-offset-4 hover:text-[#00f2ff]">
+                Cookie Policy
+              </Link>
+              .
             </p>
           </div>
 

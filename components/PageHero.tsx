@@ -16,6 +16,8 @@ type PageHeroProps = {
 };
 
 export default function PageHero({ eyebrow, title, description, chips = [], actions = [] }: PageHeroProps) {
+  const getButtonClassName = (tone?: HeroAction["tone"]) => (tone === "secondary" ? "btn-secondary" : "btn-primary");
+
   return (
     <section className="kappa-subpage-hero">
       <div className="kappa-hero-dot-grid" />
@@ -47,23 +49,26 @@ export default function PageHero({ eyebrow, title, description, chips = [], acti
 
           {actions.length > 0 ? (
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              {actions.map((action) =>
-                action.external ? (
+              {actions.map((action) => {
+                const shouldUseAnchor = action.external || !action.href.startsWith("/");
+                const shouldOpenNewTab = action.href.startsWith("http");
+
+                return shouldUseAnchor ? (
                   <a
                     key={action.href}
                     href={action.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className={action.tone === "secondary" ? "btn-secondary" : "btn-primary"}
+                    target={shouldOpenNewTab ? "_blank" : undefined}
+                    rel={shouldOpenNewTab ? "noreferrer" : undefined}
+                    className={getButtonClassName(action.tone)}
                   >
                     {action.label}
                   </a>
                 ) : (
-                  <Link key={action.href} href={action.href} className={action.tone === "secondary" ? "btn-secondary" : "btn-primary"}>
+                  <Link key={action.href} href={action.href} className={getButtonClassName(action.tone)}>
                     {action.label}
                   </Link>
-                )
-              )}
+                );
+              })}
             </div>
           ) : null}
         </div>

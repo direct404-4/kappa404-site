@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import type { Project, Service } from "@/lib/content";
+import { CONTACT_INFO, type Project, type Service } from "@/lib/content";
 
 export const SITE_URL = "https://www.kappa404.it";
 export const SITE_NAME = "Kappa404";
@@ -107,6 +107,7 @@ export function organizationJsonLd() {
     logo: absoluteUrl("/icon-512.png"),
     image: absoluteUrl(DEFAULT_OG_IMAGE.url),
     description: SITE_DESCRIPTION,
+    email: CONTACT_INFO.email,
     areaServed: ["Italia", "Milano", "Europa"],
     address: {
       "@type": "PostalAddress",
@@ -117,12 +118,13 @@ export function organizationJsonLd() {
       {
         "@type": "ContactPoint",
         contactType: "sales",
+        email: CONTACT_INFO.email,
         telephone: "+39 352 000 7587",
         availableLanguage: ["it", "en"],
         url: absoluteUrl("/contatti")
       }
     ],
-    sameAs: ["https://www.instagram.com/kappa404_/", "https://www.tiktok.com/@amk404_"]
+    sameAs: [CONTACT_INFO.linkedin, CONTACT_INFO.instagram, CONTACT_INFO.tiktok]
   };
 }
 

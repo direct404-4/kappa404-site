@@ -67,7 +67,7 @@ export default function WhatsAppProjectForm({ mode = "contact" }: WhatsAppProjec
           <p className="kappa-section-tag">FORM // PROJECT INTAKE</p>
           <h2 className="text-2xl font-semibold text-white">Invia una richiesta</h2>
           <p className="text-sm text-white/72">
-            Compila il brief: il sito genera un messaggio WhatsApp pronto da inviare, senza salvare dati su un backend.
+            Compila il brief rapido: il sito genera un messaggio WhatsApp pronto da inviare, senza salvare dati su un backend. Per documenti e richieste formali usa info@kappa404.it.
           </p>
         </>
       ) : null}
@@ -97,7 +97,7 @@ export default function WhatsAppProjectForm({ mode = "contact" }: WhatsAppProjec
             name="canale"
             value={state.channel}
             onChange={(event) => updateField("channel", event.target.value)}
-            placeholder="WhatsApp, Instagram o TikTok"
+            placeholder="Email, WhatsApp o LinkedIn"
             className={mode === "home" ? "kappa-proto-input border-b px-0" : "kappa-proto-input mt-2"}
           />
         </label>

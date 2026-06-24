@@ -104,7 +104,7 @@ const homeSectionCopy = {
   performanceTitle: "Data Performance",
   protocolTitle: "Protocol Execution",
   contactTitle: "Costruiamo il tuo sistema digitale",
-  contactDescription: "Inizializza la richiesta di consulenza tecnica // Slot limitati"
+  contactDescription: "Scrivi via email per un contatto professionale // WhatsApp resta attivo per intake rapido"
 } as const;
 
 const homeSceneCues: HomeSceneCue[] = [
@@ -148,7 +148,7 @@ const homeSceneCues: HomeSceneCue[] = [
     label: homeSectionCopy.contactTitle,
     accent: "#bc13fe",
     progressRange: [0.86, 1],
-    hudLines: [homeSectionCopy.contactDescription, "WHATSAPP_CHANNEL // READY", "CONSULTING_SLOT // LIMITED"]
+    hudLines: [homeSectionCopy.contactDescription, "EMAIL_CHANNEL // PRIMARY", "LINKEDIN_PROFILE // VERIFIED", "WHATSAPP_CHANNEL // READY"]
   }
 ];
 
@@ -176,12 +176,10 @@ export default function HomePage() {
 
           <div className="flex flex-col gap-6 md:flex-row">
             <a
-              href={CONTACT_INFO.whatsapp}
-              target="_blank"
-              rel="noreferrer"
+              href={CONTACT_INFO.emailHref}
               className="flex items-center gap-3 bg-primary-container px-8 py-4 font-headline font-bold uppercase tracking-widest text-on-primary transition-all hover:shadow-[0_0_20px_rgba(0,242,255,0.4)]"
             >
-              Avvia il progetto
+              Scrivi via email
               <span className="material-symbols-outlined">trending_up</span>
             </a>
 
@@ -336,6 +334,14 @@ export default function HomePage() {
           <p className="font-mono text-xs uppercase tracking-widest text-on-surface-variant opacity-60">
             {homeSectionCopy.contactDescription}
           </p>
+          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+            <a href={CONTACT_INFO.emailHref} className="btn-primary">
+              {CONTACT_INFO.email}
+            </a>
+            <a href={CONTACT_INFO.linkedin} target="_blank" rel="noreferrer" className="btn-secondary">
+              LinkedIn
+            </a>
+          </div>
         </div>
 
         <div className="glass-panel mx-auto max-w-2xl p-8 md:p-12">
