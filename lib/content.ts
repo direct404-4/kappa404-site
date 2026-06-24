@@ -9,6 +9,10 @@ export type Service = {
   descrizione: string;
   homeHook: string;
   solution: string;
+  example: string;
+  process: string[];
+  deliverables: string[];
+  entryCriteria: string[];
   bullet: {
     problema: string;
     include: string;
@@ -31,6 +35,15 @@ export type Project = {
   problem?: string;
   solution?: string;
   outcome?: string;
+  objectives?: string[];
+  informationArchitecture?: string[];
+  creativeProcess?: string[];
+  gallery?: {
+    src: string;
+    alt: string;
+    label: string;
+  }[];
+  outputs?: string[];
 };
 
 
@@ -134,10 +147,27 @@ export const SERVICES: Service[] = [
     slug: "web-development",
     nome: "Web Design & Development",
     descrizione:
-      "Siti ad alte prestazioni con architettura moderna, UX curata e identita visiva allineata al posizionamento premium.",
+      "Siti ad alte prestazioni con architettura moderna, UX curata e identità visiva allineata al posizionamento premium.",
     homeHook: "Una presenza digitale chiara, solida e pronta a sostenere la crescita.",
     solution:
       "Definizione della struttura informativa, progettazione UI coerente con il brand e sviluppo Next.js orientato a performance, SEO tecnica e percorsi di contatto chiari.",
+    example:
+      "Sito corporate o portfolio premium con homepage narrativa, pagine servizio, progetto pubblicabile, contatti professionali e base SEO tecnica.",
+    process: [
+      "Audit rapido di obiettivi, contenuti, competitor e priorità commerciali.",
+      "Mappa informativa, wireframe e direzione UI coerente con il posizionamento.",
+      "Sviluppo, ottimizzazione performance, metadata, JSON-LD e rilascio su hosting moderno."
+    ],
+    deliverables: [
+      "Design system leggero e componenti riutilizzabili",
+      "Pagine principali responsive e ottimizzate",
+      "Setup SEO tecnico, analytics opzionali e checklist di lancio"
+    ],
+    entryCriteria: [
+      "Obiettivo primario del sito definito",
+      "Materiali brand o riferimenti visuali disponibili",
+      "Contenuti base, servizi e canali di contatto confermati"
+    ],
     bullet: {
       problema: "Presenza digitale lenta, poco distintiva e senza conversioni costanti.",
       include: "Research, UI architecture, sviluppo frontend/backend e ottimizzazione Core Web Vitals.",
@@ -152,10 +182,27 @@ export const SERVICES: Service[] = [
     homeHook: "Percorsi pensati per guidare l’attenzione e trasformarla in azione.",
     solution:
       "Costruzione di una pagina focalizzata su una singola offerta, con gerarchia dei messaggi, CTA dirette, form o WhatsApp intake e sezioni pensate per ridurre attrito decisionale.",
+    example:
+      "Pagina per campagna ads, servizio locale, lancio offerta o raccolta richieste con CTA email/WhatsApp e sezioni di fiducia essenziali.",
+    process: [
+      "Definizione promessa, pubblico, obiezioni e azione principale.",
+      "Wireframe conversion-first con copy, proof, FAQ e blocchi di decisione.",
+      "Sviluppo responsive, tracking consenso-first e varianti testabili."
+    ],
+    deliverables: [
+      "Landing completa con gerarchia di conversione",
+      "Copy strategico e CTA coerenti",
+      "Setup eventi principali e documentazione per campagne"
+    ],
+    entryCriteria: [
+      "Offerta o servizio specifico da promuovere",
+      "Canale traffico previsto",
+      "Proof, immagini o materiali minimi disponibili"
+    ],
     bullet: {
       problema: "Traffico pagato disperso su pagine generiche senza focus.",
       include: "Wireframe conversion-first, copy funnel, tracciamenti e varianti per A/B test.",
-      risultato: "Maggiore qualita dei contatti e riduzione del costo per acquisizione."
+      risultato: "Maggiore qualità dei contatti e riduzione del costo per acquisizione."
     }
   },
   {
@@ -166,24 +213,58 @@ export const SERVICES: Service[] = [
     homeHook: "Un sistema di vendita più ordinato, credibile e pronto a crescere.",
     solution:
       "Organizzazione di catalogo, schede prodotto e flussi checkout con integrazioni operative essenziali, così vendita, ordini e monitoraggio restano nello stesso sistema.",
+    example:
+      "Store con catalogo snello, schede prodotto curate, percorsi di acquisto leggibili e automazioni base per ordini e recupero contatti.",
+    process: [
+      "Analisi catalogo, margini, logistica, pagamenti e flusso post-ordine.",
+      "Progettazione UX commerce, schede prodotto, checkout e messaggi di fiducia.",
+      "Implementazione, test acquisto, monitoraggio eventi e handoff operativo."
+    ],
+    deliverables: [
+      "Struttura catalogo e template prodotto",
+      "Checkout e flussi transazionali configurati",
+      "Tracciamento eventi commerciali principali"
+    ],
+    entryCriteria: [
+      "Catalogo prodotti e prezzi definiti",
+      "Regole spedizione, pagamento e reso disponibili",
+      "Responsabile operativo per ordini e assistenza identificato"
+    ],
     bullet: {
       problema: "Vendite online discontinue e processi post-ordine frammentati.",
       include: "Design system commerce, automazioni carrello, setup analytics e monitoraggio ordini.",
-      risultato: "Incremento della resa commerciale e controllo piu preciso dei margini."
+      risultato: "Incremento della resa commerciale e controllo più preciso dei margini."
     }
   },
   {
     slug: "ai-automation",
     nome: "AI Automation",
     descrizione:
-      "Flussi AI per ridurre attivita manuali, migliorare i tempi di risposta e orchestrare operazioni ripetitive.",
-    homeHook: "Processi più fluidi, meno attrito operativo, più spazio per contare davvero.",
+      "Flussi AI per ridurre attività manuali, migliorare i tempi di risposta e orchestrare operazioni ripetitive.",
+    homeHook: "Processi più fluidi, meno attrito operativo, più spazio per il lavoro ad alto valore.",
     solution:
       "Mappatura del processo attuale, scelta dei punti dove l'AI riduce lavoro manuale e integrazione di trigger supervisionati con strumenti già usati dal team.",
+    example:
+      "Pre-qualifica lead, sintesi richieste, generazione bozze operative, smistamento contatti o assistenza interna con controllo umano.",
+    process: [
+      "Mappatura workflow, input, output, rischi e passaggi manuali ripetitivi.",
+      "Prototipo controllato con prompt, trigger, regole e fallback.",
+      "Test su casi reali, metriche operative e rilascio con supervisione."
+    ],
+    deliverables: [
+      "Workflow AI documentato",
+      "Prompt, trigger e regole di escalation",
+      "Dashboard o log essenziali per controllo qualità"
+    ],
+    entryCriteria: [
+      "Processo ripetitivo già osservabile",
+      "Esempi reali di input/output disponibili",
+      "Responsabile umano per revisione e approvazione definito"
+    ],
     bullet: {
       problema: "Team bloccati su compiti manuali e dati non sincronizzati.",
       include: "Mappatura workflow, integrazioni API, trigger intelligenti e supervisione operativa.",
-      risultato: "Processi veloci, meno errori e maggiore capacita produttiva a parita di risorse."
+      risultato: "Processi veloci, meno errori e maggiore capacità produttiva a parità di risorse."
     }
   },
   {
@@ -194,6 +275,23 @@ export const SERVICES: Service[] = [
     homeHook: "Strumenti costruiti intorno al tuo modo di lavorare, non il contrario.",
     solution:
       "Traduzione delle regole operative in interfacce, dati e automazioni proprietarie, con sviluppo modulare e rilascio progressivo per validare ogni blocco.",
+    example:
+      "Dashboard interna, area operativa, configuratore, pannello di controllo o strumento verticale che sostituisce fogli e passaggi manuali.",
+    process: [
+      "Raccolta requisiti, utenti, permessi, dati e casi limite.",
+      "Prototipo funzionale e validazione dei flussi critici.",
+      "Sviluppo modulare, hardening, test e rilascio progressivo."
+    ],
+    deliverables: [
+      "Specifiche funzionali essenziali",
+      "Interfaccia operativa responsive",
+      "Logica business custom e piano di evoluzione"
+    ],
+    entryCriteria: [
+      "Processo interno spiegabile e proprietario",
+      "Priorità funzionali ordinate",
+      "Vincoli tecnici o strumenti esistenti dichiarati"
+    ],
     bullet: {
       problema: "Tool standard non adatti ai requisiti reali dell'azienda.",
       include: "Analisi requisiti, prototipazione tecnica, sviluppo modulare e hardening del rilascio.",
@@ -208,6 +306,23 @@ export const SERVICES: Service[] = [
     homeHook: "Contenuti più rapidi da produrre, più coerenti da distribuire.",
     solution:
       "Definizione di un linguaggio visivo, setup di prompt e workflow di produzione, poi adattamento degli output ai canali dove il brand deve pubblicare.",
+    example:
+      "Sistema editoriale per reel, short, contenuti luxury, visual AI, foto/video reali e varianti adv con tono coerente.",
+    process: [
+      "Definizione identità visiva, canali, formati e ritmo di pubblicazione.",
+      "Setup prompt, riferimenti, template e workflow di revisione.",
+      "Produzione batch, adattamento formati e ottimizzazione post-pubblicazione."
+    ],
+    deliverables: [
+      "Direzione visuale e prompt framework",
+      "Asset multi-formato pronti per social e adv",
+      "Workflow di produzione riutilizzabile"
+    ],
+    entryCriteria: [
+      "Obiettivo editoriale o commerciale definito",
+      "Canali di pubblicazione selezionati",
+      "Linee guida brand o riferimenti visivi disponibili"
+    ],
     bullet: {
       problema: "Produzione contenuti lenta, costosa e non coerente nel tono.",
       include: "Creative strategy, prompt engineering, editing workflow e output multi-formato.",
@@ -239,6 +354,34 @@ export const PROJECTS: Project[] = [
       "Il brand aveva bisogno di mostrare non solo i servizi e la flotta, ma anche l’esperienza complessiva: sito, immagini e video dovevano lavorare insieme per trasmettere qualità, affidabilità e desiderabilità del servizio.",
     solution:
       "Ho realizzato il sito e prodotto foto e video con drone e fotocamera per costruire una narrazione più credibile e immersiva, mettendo in risalto yacht, crociere, destinazioni e servizi premium del brand.",
+    objectives: [
+      "Presentare fleet, cruises, destinations e VIP services in modo chiaro e premium.",
+      "Unire sito pubblico e contenuti visuali originali in un racconto coerente.",
+      "Rendere più credibile il posizionamento luxury con materiale reale prodotto sul campo."
+    ],
+    informationArchitecture: [
+      "Homepage con ingresso rapido su offerta, destinazioni e valore esperienziale.",
+      "Sezioni dedicate a fleet, cruises, destinations e VIP services.",
+      "Percorsi di contatto orientati a richieste dirette e valutazione del servizio."
+    ],
+    creativeProcess: [
+      "Analisi del tono luxury e dei touchpoint più importanti per il pubblico charter.",
+      "Produzione foto e video con drone e fotocamera per mostrare yacht, mare ed esperienza a bordo.",
+      "Selezione e adattamento degli asset visuali per sostenere sito, percezione premium e contenuti digitali."
+    ],
+    gallery: [
+      {
+        src: "/kalamata-yachting-yacht.jpg",
+        alt: "Yacht Kalamata Yachting con gruppo a bordo durante una crociera",
+        label: "Produzione foto/video reale"
+      }
+    ],
+    outputs: [
+      "Sito ufficiale pubblico",
+      "Asset foto e video originali",
+      "Linguaggio visuale coordinato per servizi luxury",
+      "Base contenutistica riutilizzabile per comunicazione digitale"
+    ],
     outcome:
       "Il risultato è un progetto completo di presenza digitale e contenuti visuali: il sito presenta meglio l’universo Kalamata Yachting, mentre il materiale foto/video rafforza percezione premium e valore dell’esperienza a bordo."
   }
@@ -251,9 +394,9 @@ export const CONTACT_INFO: ContactInfo = {
   linkedin: "https://www.linkedin.com/in/amine-khabir-30363a417",
   instagram: "https://www.instagram.com/kappa404_/",
   tiktok: "https://www.tiktok.com/@amk404_",
-  city: "Milan",
-  base: "Milan",
-  mission: "Engineering luxury visuals through drone cinema, digital systems, and creative direction."
+  city: "Milano",
+  base: "Milano",
+  mission: "Progetto sistemi digitali, automazioni AI e contenuti visuali premium con base a Milano."
 };
 
 export const CONTACT_CHANNELS: ContactChannel[] = [
@@ -299,16 +442,16 @@ export const HOME_HERO: HomeHero = {
   title: "Costruisco sistemi digitali",
   highlight: "che generano risultati",
   description:
-    "Ingegneria digitale avanzata per scalare il tuo business attraverso infrastrutture ad alte prestazioni e automazione intelligente.",
+    "Ingegneria digitale, UX e automazione AI per trasformare presenza online, lead flow e contenuti in un sistema professionale misurabile.",
   backgroundImage: "/intro-kappa404.jpg",
   backgroundAlt: "Sistema digitale Kappa404 con core luminoso cyan e magenta",
   primaryCta: {
-    label: "Scrivi via email",
-    href: CONTACT_INFO.emailHref
+    label: "Richiedi un audit iniziale",
+    href: "/contatti#form"
   },
   secondaryCta: {
-    label: "Esplora i servizi",
-    href: "/servizi"
+    label: "Scrivi via email",
+    href: CONTACT_INFO.emailHref
   },
   metadata: ["Neural infrastructure", "Data stream systems", "AI visual engineering"]
 };
@@ -316,13 +459,13 @@ export const HOME_HERO: HomeHero = {
 export const HOME_OUTCOMES: HomeOutcome[] = [
   {
     code: "LEAD_GEN",
-    title: "Piu Lead",
+    title: "Più Lead",
     description: "Acquisizione costante di contatti qualificati pronti alla conversione tramite funnel predittivi.",
     tone: "cyan"
   },
   {
     code: "REVENUE_FLOW",
-    title: "Piu Vendite",
+    title: "Più Vendite",
     description: "Sistemi e-commerce e transazionali ottimizzati per massimizzare il valore medio dell'ordine.",
     tone: "violet"
   },
@@ -454,31 +597,31 @@ export const AI_SOLUTIONS = [
 export const SERVICE_FAQS: FaqItem[] = [
   {
     question: "Quanto tempo serve per avviare un progetto digitale con Kappa404?",
-    answer: "Di norma un progetto parte entro 5-10 giorni lavorativi dopo l'allineamento su obiettivi, priorita, canali e materiali disponibili."
+    answer: "Di norma un progetto parte entro 5-10 giorni lavorativi dopo l'allineamento su obiettivi, priorità, canali e materiali disponibili."
   },
   {
-    question: "Kappa404 lavora anche su siti o sistemi gia esistenti?",
-    answer: "Si. Prima viene eseguito un audit tecnico e visuale per capire vincoli, debito tecnico, opportunita SEO e margini di miglioramento conversione."
+    question: "Kappa404 lavora anche su siti o sistemi già esistenti?",
+    answer: "Sì. Prima viene eseguito un audit tecnico e visuale per capire vincoli, debito tecnico, opportunità SEO e margini di miglioramento conversione."
   },
   {
     question: "Le automazioni AI vengono costruite su misura?",
-    answer: "Si. Le automazioni vengono progettate intorno a processi reali: lead flow, contenuti, risposte clienti, workflow interni e integrazioni operative."
+    answer: "Sì. Le automazioni vengono progettate intorno a processi reali: lead flow, contenuti, risposte clienti, workflow interni e integrazioni operative."
   },
   {
     question: "Come avviene il primo contatto?",
-    answer: "Il canale professionale principale e info@kappa404.it. Per un allineamento rapido puoi usare anche WhatsApp con obiettivo, contesto e tempistiche."
+    answer: "Il canale professionale principale è info@kappa404.it. Per un allineamento rapido puoi usare anche WhatsApp con obiettivo, contesto e tempistiche."
   }
 ];
 
 
 export const HOME_ABOUT: HomeAbout = {
   label: "Chi sono",
-  headline: "Creo esperienze digitali, visual design e soluzioni AI con identita forte.",
+  headline: "Creo esperienze digitali, visual design e soluzioni AI con identità forte.",
   mainText:
-    "Sono KAPPA404. Unisco creativita, tecnologia e visione strategica per costruire siti web, contenuti visuali, automazioni e sistemi digitali con un impatto reale. Il mio approccio parte dall'estetica, ma punta sempre alla funzione: ogni progetto deve apparire premium, comunicare valore e generare risultati.",
+    "Sono Amine Khabir, il profilo dietro Kappa404. Unisco creatività, tecnologia e visione strategica per costruire siti web, contenuti visuali, automazioni e sistemi digitali con un impatto reale. Il mio approccio parte dall'estetica, ma punta sempre alla funzione: ogni progetto deve apparire premium, comunicare valore e generare risultati.",
   secondaryText:
     "Lavoro tra design futuristico, sviluppo web, branding visivo, contenuti creativi e integrazione di strumenti AI per trasformare idee in prodotti, immagini, pagine e sistemi pronti da usare. Non mi interessa creare qualcosa di vuoto: ogni elemento deve avere presenza, coerenza e direzione.",
-  identityIntro: "KAPPA404 non e solo un nome. E un'identita digitale costruita per unire:",
+  identityIntro: "Kappa404 non è solo un nome. È un'identità digitale costruita per unire:",
   identityPoints: [
     "design visivo ad alto impatto",
     "sviluppo moderno",

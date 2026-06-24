@@ -28,7 +28,7 @@ export default function ServiziPage() {
       <PageHero
         eyebrow="SYSTEM MAP // SERVICE MODULES"
         title="Servizi digitali ad alte prestazioni"
-        description="Dalla presenza web alle automazioni AI: ogni modulo e progettato per ridurre complessita, aumentare output operativo e mantenere la stessa identita della homepage."
+        description="Dalla presenza web alle automazioni AI: ogni modulo è progettato per ridurre complessità, aumentare output operativo e mantenere la stessa identità della homepage."
         chips={["Web ecosystems", "Landing funnels", "Automation stacks"]}
       />
 
@@ -44,7 +44,7 @@ export default function ServiziPage() {
         <div className="container-main">
           <SectionTitle
             title="Metodo operativo: Starter / Pro / Custom"
-            subtitle="Tre livelli di attivazione in base a priorita, complessita tecnica e ritmo di rilascio richiesto dal progetto."
+            subtitle="Tre livelli di attivazione in base a priorità, complessità tecnica e ritmo di rilascio richiesto dal progetto."
             eyebrow="Delivery model // release modes"
           />
           <div className="mt-10 grid gap-6 md:grid-cols-3">

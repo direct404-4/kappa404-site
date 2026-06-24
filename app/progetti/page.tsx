@@ -25,7 +25,7 @@ export default function ProgettiPage() {
       <PageHero
         eyebrow="ARCHIVE // SELECTED DEPLOYMENTS"
         title="Progetti / Portfolio"
-        description="Archivio attuale dei lavori pubblicati: per ora rimane online solo il progetto realizzato per Kalamata Yachting e Kapouleas Cruise, gli altri case study verranno inseriti appena pronti."
+        description="Selezione di progetti pubblicabili. Ulteriori casi e materiali riservati vengono presentati durante il briefing, quando pertinenti."
         chips={["Website", "Drone video", "Photography"]}
       />
 

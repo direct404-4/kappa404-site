@@ -27,7 +27,7 @@ export default function PageHero({ eyebrow, title, description, chips = [], acti
       <div className="container-main relative z-10 py-16 md:py-20">
         <div className="max-w-4xl">
           <p className="kappa-command-chip">
-            <span className="kappa-command-chip__dot" />
+            <span className="kappa-command-chip__dot" aria-hidden="true" />
             {eyebrow}
           </p>
 

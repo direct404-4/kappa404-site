@@ -19,6 +19,7 @@ export default function CardProject({ project }: CardProjectProps) {
               alt={project.imageAlt ?? project.title}
               width={1200}
               height={800}
+              priority
               className="aspect-[16/10] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
             />
           </div>

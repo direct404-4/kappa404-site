@@ -26,8 +26,8 @@ export default function ChiSonoPage() {
       <PageHero
         eyebrow="IDENTITY // KAPPA404 PROFILE"
         title="Chi sono"
-        description="Visual engineer e digital builder basato a Milano: progetto ecosistemi dove creativita, infrastruttura e automazione lavorano come un unico sistema."
-        chips={["Milan base", "Web engineering", "AI automation", "LinkedIn"]}
+        description="Sono Amine Khabir, visual engineer e digital builder a Milano: progetto ecosistemi dove creatività, infrastruttura e automazione lavorano come un unico sistema."
+        chips={["Milano", "Web engineering", "AI automation", "LinkedIn"]}
         actions={[
           { label: "Vai ai contatti", href: "/contatti" },
           { label: "Apri LinkedIn", href: CONTACT_INFO.linkedin, external: true, tone: "secondary" },
@@ -55,7 +55,7 @@ export default function ChiSonoPage() {
           <article className="card-shell md:col-span-2">
             <h2 className="text-2xl font-semibold text-white">Filosofia</h2>
             <p className="mt-4 text-sm text-white/78">
-              La tecnologia e efficace quando resta invisibile e lascia emergere chiarezza: meno attrito operativo, piu velocita di decisione, identita forte in ogni touchpoint.
+              La tecnologia è efficace quando resta invisibile e lascia emergere chiarezza: meno attrito operativo, più velocità di decisione, identità forte in ogni touchpoint.
             </p>
           </article>
         </div>
@@ -65,7 +65,7 @@ export default function ChiSonoPage() {
         <div className="container-main">
           <SectionTitle
             title="Timeline sintetica"
-            subtitle="Il percorso si e costruito integrando progressivamente visual storytelling, sviluppo e architettura di sistemi digitali."
+            subtitle="Il percorso si è costruito integrando progressivamente visual storytelling, sviluppo e architettura di sistemi digitali."
             eyebrow="Career path // evolution"
           />
           <ol className="mt-8 grid gap-4 md:grid-cols-3">

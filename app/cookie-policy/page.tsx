@@ -28,12 +28,12 @@ export default function CookiePolicyPage() {
           <h2>Stato attuale del sito</h2>
           <p>
             Alla data del 24 giugno 2026 kappa404.it non usa cookie di profilazione, remarketing, advertising pixel o strumenti pubblicitari. Il sito usa
-            strumenti tecnici necessari e puo attivare Vercel Web Analytics e Vercel Speed Insights solo dopo consenso espresso.
+            strumenti tecnici necessari e può attivare Vercel Web Analytics e Vercel Speed Insights solo dopo consenso espresso.
           </p>
 
           <h2>Strumenti utilizzati</h2>
           <ul>
-            <li>Strumenti tecnici necessari per erogare il sito, mantenere sicurezza, stabilita, routing, caching e continuita operativa.</li>
+            <li>Strumenti tecnici necessari per erogare il sito, mantenere sicurezza, stabilità, routing, caching e continuità operativa.</li>
             <li>Memoria locale del browser per ricordare la scelta dell&apos;utente sulle misurazioni opzionali.</li>
             <li>Vercel Web Analytics per statistiche aggregate sul traffico, senza cookie di terze parti, attivato solo dopo consenso.</li>
             <li>Vercel Speed Insights per metriche prestazionali e Core Web Vitals, attivato solo dopo consenso.</li>
@@ -43,14 +43,14 @@ export default function CookiePolicyPage() {
           <ul>
             <li>Chiave tecnica: <code>{COOKIE_CONSENT_STORAGE_KEY}</code>.</li>
             <li>Valori possibili: consenso alla misurazione oppure rifiuto della misurazione opzionale.</li>
-            <li>Finalita: evitare di riproporre il banner a ogni visita e rispettare la scelta dell&apos;utente.</li>
+            <li>Finalità: evitare di riproporre il banner a ogni visita e rispettare la scelta dell&apos;utente.</li>
             <li>Durata: fino a modifica tramite Preferenze cookie o cancellazione dei dati locali dal browser.</li>
           </ul>
 
           <h2>Banner e scelta dell&apos;utente</h2>
           <p>
             Al primo accesso viene mostrato un banner che permette di accettare la misurazione o continuare solo con strumenti tecnici. Se l&apos;utente rifiuta, gli
-            strumenti opzionali restano disattivati e la navigazione continua normalmente. La scelta puo essere modificata in qualsiasi momento dal comando
+            strumenti opzionali restano disattivati e la navigazione continua normalmente. La scelta può essere modificata in qualsiasi momento dal comando
             &quot;Preferenze cookie&quot; presente nel footer.
           </p>
 
@@ -68,7 +68,7 @@ export default function CookiePolicyPage() {
 
           <h2>Rapporto con la Privacy Policy</h2>
           <p>
-            Per categorie di dati, finalita, basi giuridiche, destinatari, trasferimenti e diritti dell&apos;interessato consulta anche la{" "}
+            Per categorie di dati, finalità, basi giuridiche, destinatari, trasferimenti e diritti dell&apos;interessato consulta anche la{" "}
             <Link href="/privacy-policy" className="text-white underline decoration-white/20 underline-offset-4 hover:text-[#00f2ff]">
               Privacy Policy
             </Link>

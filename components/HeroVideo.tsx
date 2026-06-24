@@ -23,7 +23,7 @@ export default function HeroVideo() {
             Sistemi digitali e visual premium per brand che vogliono accelerare.
           </h1>
           <p className="mt-6 max-w-2xl text-base text-white/80 md:text-lg">
-            Progettiamo esperienze web, automazioni AI e direzione creativa orientata a performance e identita.
+            Progettiamo esperienze web, automazioni AI e direzione creativa orientata a performance e identità.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link href="/servizi" className="btn-primary">

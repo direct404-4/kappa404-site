@@ -1,9 +1,10 @@
+import Image from "next/image";
 import Link from "next/link";
 import DataPerformanceCore from "@/components/DataPerformanceCore";
 import HomeImmersiveBackground, { type HomeSceneCue } from "@/components/HomeImmersiveBackground";
 import JsonLd from "@/components/JsonLd";
 import WhatsAppProjectForm from "@/components/WhatsAppProjectForm";
-import { CONTACT_INFO, HOME_SYSTEM_MODULES } from "@/lib/content";
+import { CONTACT_INFO, HOME_SYSTEM_MODULES, PROJECTS } from "@/lib/content";
 import { breadcrumbJsonLd } from "@/lib/seo";
 
 const outcomeCards = [
@@ -54,6 +55,15 @@ const performanceStats = [
     accent: "#00f2ff",
     width: "88%"
   }
+] as const;
+
+const caseStudy = PROJECTS[0];
+
+const trustSignals = [
+  "Sito pubblico e contenuti originali",
+  "Architettura informativa per servizi premium",
+  "Foto e video prodotti sul campo",
+  "Canali di contatto professionali"
 ] as const;
 
 const processSteps = [
@@ -158,37 +168,30 @@ export default function HomePage() {
       <JsonLd id="kappa404-home-breadcrumb" data={breadcrumbJsonLd([{ name: "Home", path: "/" }])} />
       <HomeImmersiveBackground cues={homeSceneCues} />
 
-      <section className="home-immersive-hero relative z-10 min-h-[760px] overflow-hidden px-6 pb-20 pt-32 md:min-h-[1024px]">
-        <div className="relative z-10 mx-auto flex max-w-7xl flex-col items-center text-center">
-          <div className="mb-6 flex items-center gap-2 border border-[#00f2ff]/30 bg-[#00f2ff]/5 px-4 py-1 font-mono text-[10px] tracking-widest text-[#00f2ff]">
-            <span className="h-2 w-2 animate-pulse bg-[#00f2ff]" />
+      <section className="home-immersive-hero">
+        <div className="home-hero-content">
+          <div className="home-hero-status">
+            <span className="home-hero-status__dot" aria-hidden="true" />
             {homeSectionCopy.heroStatus}
           </div>
 
-          <h1 className="mb-8 font-headline text-5xl font-bold leading-tight tracking-tight text-white md:text-7xl lg:text-8xl">
-            COSTRUISCO SISTEMI DIGITALI <br />
-            <span className="bg-gradient-to-r from-[#00f2ff] to-[#bc13fe] bg-clip-text text-transparent">CHE GENERANO RISULTATI</span>
+          <h1 className="home-hero-title">
+            <span className="home-hero-title__line">Costruisco sistemi digitali</span>
+            <span className="home-hero-title__highlight">che generano risultati</span>
           </h1>
 
-          <p className="mb-12 max-w-2xl font-body text-lg text-on-surface-variant opacity-80 md:text-xl">
-            Ingegneria digitale avanzata per scalare il tuo business attraverso infrastrutture ad alte prestazioni e automazione intelligente.
+          <p className="home-hero-copy">
+            Ingegneria digitale, UX e automazione AI per trasformare presenza online, lead flow e contenuti in un sistema professionale misurabile.
           </p>
 
-          <div className="flex flex-col gap-6 md:flex-row">
-            <a
-              href={CONTACT_INFO.emailHref}
-              className="flex items-center gap-3 bg-primary-container px-8 py-4 font-headline font-bold uppercase tracking-widest text-on-primary transition-all hover:shadow-[0_0_20px_rgba(0,242,255,0.4)]"
-            >
-              Scrivi via email
-              <span className="material-symbols-outlined">trending_up</span>
-            </a>
-
-            <Link
-              href="/servizi"
-              className="border border-[#00f2ff]/40 px-8 py-4 font-headline font-bold uppercase tracking-widest text-[#00f2ff] transition-all hover:bg-[#00f2ff]/10"
-            >
-              Esplora i servizi
+          <div className="home-hero-actions">
+            <Link href="/contatti#form" className="btn-primary">
+              Richiedi un audit iniziale
             </Link>
+
+            <a href={CONTACT_INFO.emailHref} className="btn-secondary">
+              Scrivi via email
+            </a>
           </div>
         </div>
       </section>
@@ -213,7 +216,7 @@ export default function HomePage() {
                 <div className="absolute right-0 top-0 p-4 font-mono text-[10px]" style={{ color: `${card.accent}33` }}>
                   ID_LOG: {card.id}
                 </div>
-                <span className="material-symbols-outlined mb-6 text-4xl" style={{ color: card.accent }}>
+                <span className="material-symbols-outlined mb-6 text-4xl" style={{ color: card.accent }} aria-hidden="true">
                   {card.icon}
                 </span>
                 <h3 className="mb-4 font-headline text-2xl font-bold uppercase tracking-wide">{card.title}</h3>
@@ -249,7 +252,7 @@ export default function HomePage() {
               >
                 <div className="mb-12 flex items-start justify-between">
                   <div className="border px-3 py-3" style={{ borderColor: `${accent}33`, backgroundColor: `${accent}0d` }}>
-                    <span className="material-symbols-outlined" style={{ color: accent }}>
+                    <span className="material-symbols-outlined" style={{ color: accent }} aria-hidden="true">
                       {icon}
                     </span>
                   </div>
@@ -265,11 +268,56 @@ export default function HomePage() {
                 </h4>
                 <p className="mb-8 text-sm leading-relaxed text-on-surface-variant">{module.description}</p>
                 <span className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest" style={{ color: accent }}>
-                  Initialize System <span className="material-symbols-outlined text-xs">arrow_forward</span>
+                  Apri modulo <span className="material-symbols-outlined text-xs" aria-hidden="true">arrow_forward</span>
                 </span>
               </Link>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      <section className="home-section-surface relative z-10 overflow-hidden border-y border-white/10 px-6 py-24">
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <div className="card-shell overflow-hidden p-0">
+            <Image
+              src={caseStudy.image ?? "/kalamata-yachting-yacht.jpg"}
+              alt={caseStudy.imageAlt ?? caseStudy.title}
+              width={1600}
+              height={1066}
+              className="aspect-[4/3] w-full object-cover"
+              sizes="(min-width: 1024px) 42vw, 100vw"
+            />
+          </div>
+
+          <div>
+            <p className="font-mono text-xs uppercase tracking-[0.28em] text-[#00f2ff]">Case study pubblicabile</p>
+            <h2 className="mt-4 font-headline text-3xl font-bold uppercase tracking-[-0.03em] text-white md:text-5xl">
+              Kalamata Yachting: sito ufficiale e contenuti visuali originali
+            </h2>
+            <p className="mt-6 max-w-3xl text-sm leading-7 text-white/76 md:text-base">
+              Un progetto reale dove sito, architettura dei contenuti, fotografia e drone video lavorano insieme per presentare fleet,
+              destinazioni e servizi VIP con un linguaggio premium verificabile.
+            </p>
+
+            <div className="mt-8 grid gap-4 sm:grid-cols-2">
+              {trustSignals.map((signal) => (
+                <div key={signal} className="border border-white/10 bg-white/[0.03] px-4 py-4">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/72">{signal}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Link href={`/progetti/${caseStudy.slug}`} className="btn-primary">
+                Leggi il case study
+              </Link>
+              {caseStudy.liveUrl ? (
+                <a href={caseStudy.liveUrl} target="_blank" rel="noreferrer" className="btn-secondary">
+                  Vedi sito live
+                </a>
+              ) : null}
+            </div>
           </div>
         </div>
       </section>

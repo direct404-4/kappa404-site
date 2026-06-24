@@ -18,7 +18,7 @@ function isExternalHref(href: string) {
 export default function ContactBlock({
   variant = "panel",
   title = "Parliamo del tuo prossimo sistema digitale.",
-  description = "Raccontami obiettivo, tempistiche e priorita: riceverai un primo allineamento chiaro su direzione tecnica, visuale e prossimo step."
+  description = "Raccontami obiettivo, tempistiche e priorità: riceverai un primo allineamento chiaro su direzione tecnica, visuale e prossimo step."
 }: ContactBlockProps) {
   if (variant === "home") {
     return (

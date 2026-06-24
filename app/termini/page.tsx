@@ -5,7 +5,7 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata = createPageMetadata({
   title: "Termini e Condizioni",
   description:
-    "Termini e Condizioni Kappa404: uso del sito, contenuti, proprieta intellettuale, link esterni, limitazioni e contatti professionali.",
+    "Termini e Condizioni Kappa404: uso del sito, contenuti, proprietà intellettuale, link esterni, limitazioni e contatti professionali.",
   path: "/termini"
 });
 
@@ -25,14 +25,14 @@ export default function TerminiPage() {
 
           <h2>Ambito del sito</h2>
           <p>
-            kappa404.it presenta attivita, portfolio, servizi digitali e contatti professionali di Kappa404. Le informazioni pubblicate hanno finalita descrittiva,
+            kappa404.it presenta attività, portfolio, servizi digitali e contatti professionali di Kappa404. Le informazioni pubblicate hanno finalità descrittiva,
             informativa e promozionale e non costituiscono automaticamente un&apos;offerta vincolante, un preventivo definitivo o un contratto.
           </p>
 
           <h2>Uso consentito</h2>
           <p>
-            L&apos;utente puo consultare il sito per informarsi sui servizi, visualizzare contenuti pubblici e contattare Kappa404 tramite i canali indicati. Non e
-            consentito usare il sito per attivita illecite, tentativi di accesso non autorizzato, scraping abusivo, interferenze tecniche o invio di contenuti dannosi.
+            L&apos;utente può consultare il sito per informarsi sui servizi, visualizzare contenuti pubblici e contattare Kappa404 tramite i canali indicati. Non è
+            consentito usare il sito per attività illecite, tentativi di accesso non autorizzato, scraping abusivo, interferenze tecniche o invio di contenuti dannosi.
           </p>
 
           <h2>Servizi, preventivi e collaborazioni</h2>
@@ -41,22 +41,22 @@ export default function TerminiPage() {
             Descrizioni, esempi, portfolio e contenuti del sito non garantiscono risultati identici per progetti futuri.
           </p>
 
-          <h2>Proprieta intellettuale</h2>
+          <h2>Proprietà intellettuale</h2>
           <p>
-            Testi, struttura, visual, codice, marchi, layout, immagini e asset pubblicati sul sito restano di proprieta dei rispettivi titolari. Non e consentito
+            Testi, struttura, visual, codice, marchi, layout, immagini e asset pubblicati sul sito restano di proprietà dei rispettivi titolari. Non è consentito
             copiare, riutilizzare, distribuire o modificare tali contenuti senza autorizzazione esplicita, salvo usi consentiti dalla legge.
           </p>
 
           <h2>Link e servizi esterni</h2>
           <p>
-            Il sito puo contenere collegamenti a client email, WhatsApp, LinkedIn, Instagram, TikTok, siti di clienti, piattaforme o servizi terzi. Tali collegamenti
-            sono forniti per praticita; contenuti, disponibilita, sicurezza e trattamenti dati dei servizi esterni restano sotto la responsabilita dei rispettivi provider.
+            Il sito può contenere collegamenti a client email, WhatsApp, LinkedIn, Instagram, TikTok, siti di clienti, piattaforme o servizi terzi. Tali collegamenti
+            sono forniti per praticità; contenuti, disponibilità, sicurezza e trattamenti dati dei servizi esterni restano sotto la responsabilità dei rispettivi provider.
           </p>
 
-          <h2>Disponibilita e responsabilita</h2>
+          <h2>Disponibilità e responsabilità</h2>
           <p>
             Kappa404 adotta misure ragionevoli per mantenere il sito aggiornato, accessibile e sicuro, ma non garantisce assenza totale di errori, interruzioni,
-            incompatibilita, link non aggiornati o indisponibilita temporanee.
+            incompatibilità, link non aggiornati o indisponibilità temporanee.
           </p>
 
           <h2>Privacy e cookie</h2>
@@ -76,7 +76,7 @@ export default function TerminiPage() {
 
           <h2>Legge applicabile</h2>
           <p>
-            L&apos;utilizzo del sito e regolato dalla normativa italiana applicabile, salvo diverse disposizioni inderogabili previste dalla legge. Eventuali modifiche
+            L&apos;utilizzo del sito è regolato dalla normativa italiana applicabile, salvo diverse disposizioni inderogabili previste dalla legge. Eventuali modifiche
             saranno pubblicate in questa pagina con nuova data di aggiornamento.
           </p>
         </div>

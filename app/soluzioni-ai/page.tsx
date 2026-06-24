@@ -5,7 +5,7 @@ import { breadcrumbJsonLd, createPageMetadata } from "@/lib/seo";
 export const metadata = createPageMetadata({
   title: "Soluzioni AI",
   description:
-    "Terminale interattivo Kappa404 per mappare identita, colli di bottiglia e obiettivi prima di progettare automazioni AI e sistemi digitali.",
+    "Terminale interattivo Kappa404 per mappare identità, colli di bottiglia e obiettivi prima di progettare automazioni AI e sistemi digitali.",
   path: "/soluzioni-ai"
 });
 

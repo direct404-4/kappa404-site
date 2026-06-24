@@ -78,6 +78,95 @@ const constraintOptions: ChoiceOption<Constraint>[] = [
   { value: "stack", note: "legacy infrastructure" }
 ];
 
+const stageOrder: Array<Stage | "blueprint"> = ["identity", "bottleneck", "objective", "constraint", "blueprint"];
+
+const stageCopy: Record<Stage, { title: string; eyebrow: string; description: string }> = {
+  identity: {
+    title: "Identità",
+    eyebrow: "Step 01",
+    description: "Seleziona il tipo di assetto da cui parte il sistema digitale."
+  },
+  bottleneck: {
+    title: "Collo di bottiglia",
+    eyebrow: "Step 02",
+    description: "Indica dove oggi si perde più energia: traffico, vendite, operatività, contenuti o autorevolezza."
+  },
+  objective: {
+    title: "Obiettivo",
+    eyebrow: "Step 03",
+    description: "Definisci il risultato operativo che il sistema deve supportare per primo."
+  },
+  constraint: {
+    title: "Vincolo",
+    eyebrow: "Step 04",
+    description: "Scegli il vincolo dominante: tempo, budget, team, traffico o stack esistente."
+  }
+};
+
+const optionLabels: Record<Stage, Record<string, string>> = {
+  identity: {
+    brand: "Brand",
+    creator: "Creator",
+    studio: "Studio",
+    service: "Servizio",
+    ecommerce: "E-commerce",
+    internal: "Team interno"
+  },
+  bottleneck: {
+    leads: "Lead dispersi",
+    sales: "Vendite deboli",
+    ops: "Operazioni manuali",
+    content: "Contenuti lenti",
+    authority: "Autorevolezza bassa"
+  },
+  objective: {
+    bookings: "Prenotazioni qualificate",
+    revenue: "Più ricavi",
+    automation: "Automazione",
+    positioning: "Posizionamento",
+    scale: "Scalabilità"
+  },
+  constraint: {
+    time: "Tempo",
+    budget: "Budget",
+    team: "Team limitato",
+    traffic: "Traffico instabile",
+    stack: "Stack esistente"
+  }
+};
+
+const optionNotesIt: Record<Stage, Record<string, string>> = {
+  identity: {
+    brand: "Architettura commerciale e percezione di marca.",
+    creator: "Produzione contenuti e presenza editoriale.",
+    studio: "Sistema per delivery clienti e portfolio.",
+    service: "Business guidato da richieste e appuntamenti.",
+    ecommerce: "Infrastruttura di vendita online.",
+    internal: "Supporto a processi e operatività interna."
+  },
+  bottleneck: {
+    leads: "Il traffico arriva ma non diventa richiesta utile.",
+    sales: "Il valore commerciale si perde nel percorso.",
+    ops: "Troppi passaggi manuali rallentano il team.",
+    content: "La produzione media non regge il ritmo dei canali.",
+    authority: "Il mercato non percepisce abbastanza fiducia."
+  },
+  objective: {
+    bookings: "Ridurre la distanza tra visita e richiesta.",
+    revenue: "Aumentare resa commerciale e continuità.",
+    automation: "Tagliare attività ripetitive con controllo umano.",
+    positioning: "Costruire segnale forte e riconoscibile.",
+    scale: "Rendere il sistema pronto a crescere."
+  },
+  constraint: {
+    time: "Serve un primo rilascio rapido.",
+    budget: "Serve massimizzare il valore del perimetro iniziale.",
+    team: "Le persone disponibili sono poche.",
+    traffic: "Gli input non sono ancora costanti.",
+    stack: "Esistono strumenti o vincoli tecnici da rispettare."
+  }
+};
+
 const topologyNodes: TopologyNode[] = [
   { id: "web_ecosystem", label: "WEB", title: "Web Ecosystem", x: 110, y: 82 },
   { id: "landing_funnel", label: "FUNNEL", title: "Landing Funnel", x: 254, y: 52 },
@@ -400,6 +489,19 @@ export default function TerminalExperience() {
   const blueprint = buildBlueprint(session);
   const deployHref = buildDeployHref(blueprint, session);
   const suggestions = getStageSuggestions(session, mapped, simulated, compiled, deployed);
+  const currentStage = getCurrentStage(session);
+  const wizardProgressIndex = currentStage ? stageOrder.indexOf(currentStage) : stageOrder.indexOf("blueprint");
+  const wizardProgress = Math.round(((wizardProgressIndex + 1) / stageOrder.length) * 100);
+  const wizardOptions =
+    currentStage === "identity"
+      ? identityOptions
+      : currentStage === "bottleneck"
+        ? bottleneckOptions
+        : currentStage === "objective"
+          ? objectiveOptions
+          : currentStage === "constraint"
+            ? constraintOptions
+            : [];
 
   const pushLines = (kind: LineKind, nextLines: string[]) => {
     setLines((current) => [
@@ -643,23 +745,92 @@ export default function TerminalExperience() {
     }, 150);
   };
 
+  const handleWizardSelect = (value: string) => {
+    if (currentStage === "identity") applySelection("identity", value as Identity);
+    if (currentStage === "bottleneck") applySelection("bottleneck", value as Bottleneck);
+    if (currentStage === "objective") applySelection("objective", value as Objective);
+    if (currentStage === "constraint") applySelection("constraint", value as Constraint);
+  };
+
   return (
-    <section className="relative overflow-hidden bg-[#050505] px-6 py-16 md:py-24">
+    <section className="relative overflow-hidden bg-[#050505] px-4 py-10 md:px-6 md:py-24">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_15%,rgba(0,242,255,0.08),transparent_22%),radial-gradient(circle_at_82%_14%,rgba(188,19,254,0.1),transparent_24%),linear-gradient(180deg,rgba(255,255,255,0.02),transparent_30%)]" />
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#00f2ff]/50 to-transparent" />
 
       <div className="relative mx-auto max-w-[1440px]">
         <div className="max-w-4xl">
           <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-[#00f2ff]">TERMINAL // STRATEGIC OPERATOR CONSOLE</p>
-          <h1 className="mt-4 font-headline text-4xl font-bold uppercase tracking-[-0.04em] text-white md:text-6xl">
+          <h1 className="mt-4 font-headline text-3xl font-bold uppercase tracking-[-0.04em] text-white md:text-6xl">
             Terminal Of Becoming
           </h1>
-          <p className="mt-6 max-w-3xl text-base leading-8 text-white/72 md:text-lg">
+          <p className="mt-4 max-w-3xl text-sm leading-7 text-white/72 md:mt-6 md:text-lg md:leading-8">
             Questa non è una demo decorativa. Il terminale legge il tuo assetto, individua l’attrito dominante e compila un blueprint operativo unico prima di aprire il canale di contatto.
           </p>
         </div>
 
-        <div className="mt-12 grid gap-8 xl:grid-cols-[1.4fr_0.86fr]">
+        <div className="mt-6 lg:hidden">
+          <div className="glass-panel overflow-hidden">
+            <div className="border-b border-white/10 px-5 py-4">
+              <div className="flex items-center justify-between gap-4">
+                <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#00f2ff]">
+                  {currentStage ? stageCopy[currentStage].eyebrow : "Step 05"}
+                </p>
+                <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/46">{wizardProgress}%</p>
+              </div>
+              <div className="mt-3 h-1 overflow-hidden bg-white/10">
+                <div className="h-full bg-[#00f2ff]" style={{ width: `${wizardProgress}%` }} />
+              </div>
+            </div>
+
+            <div className="px-5 py-6">
+              {currentStage ? (
+                <>
+                  <h2 className="font-headline text-3xl font-bold uppercase tracking-[-0.03em] text-white">
+                    {stageCopy[currentStage].title}
+                  </h2>
+                  <p className="mt-3 text-sm leading-7 text-white/70">{stageCopy[currentStage].description}</p>
+
+                  <div className="mt-6 grid gap-3">
+                    {wizardOptions.map((option) => (
+                      <button
+                        key={option.value}
+                        type="button"
+                        onClick={() => handleWizardSelect(option.value)}
+                        className="min-h-12 border border-white/10 bg-white/[0.03] px-4 py-4 text-left transition hover:border-[#00f2ff]/40 hover:bg-[#00f2ff]/[0.04] focus-visible:border-[#00f2ff]"
+                      >
+                        <span className="block font-mono text-[11px] uppercase tracking-[0.18em] text-white">
+                          {optionLabels[currentStage][option.value]}
+                        </span>
+                        <span className="mt-2 block text-sm leading-6 text-white/62">{optionNotesIt[currentStage][option.value]}</span>
+                      </button>
+                    ))}
+                  </div>
+                </>
+              ) : blueprint ? (
+                <>
+                  <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#00f2ff]">Blueprint</p>
+                  <h2 className="mt-3 font-headline text-3xl font-bold uppercase tracking-[-0.03em] text-white">{blueprint.name}</h2>
+                  <p className="mt-4 text-sm leading-7 text-white/70">{blueprint.narrative}</p>
+                  <div className="mt-5 grid gap-3 font-mono text-[10px] uppercase tracking-[0.18em] text-white/66">
+                    <p>primary_gain // {blueprint.primaryGain}</p>
+                    <p>failure_point // {blueprint.failurePoint}</p>
+                    <p>deploy_order // {blueprint.deployOrder.join(" -> ")}</p>
+                  </div>
+                  <div className="mt-6 flex flex-col gap-3">
+                    <a href={deployHref} target="_blank" rel="noreferrer" className="btn-primary">
+                      Apri contatto WhatsApp
+                    </a>
+                    <button type="button" onClick={resetTerminal} className="btn-secondary">
+                      Ricomincia
+                    </button>
+                  </div>
+                </>
+              ) : null}
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-12 hidden gap-8 lg:grid xl:grid-cols-[1.4fr_0.86fr]">
           <div className="glass-panel overflow-hidden">
             <div className="flex items-center justify-between border-b border-white/10 bg-white/[0.02] px-5 py-4">
               <div className="flex items-center gap-3">
@@ -871,7 +1042,7 @@ export default function TerminalExperience() {
           </aside>
         </div>
 
-        <div className="glass-panel mt-6 overflow-hidden">
+        <div className="glass-panel mt-6 hidden overflow-hidden lg:block">
           <div className="grid gap-px bg-white/6 md:grid-cols-[1fr_1fr_1fr_1fr_auto]">
             {[
               ["identity", session.identity ?? "pending"],

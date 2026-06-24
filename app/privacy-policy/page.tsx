@@ -26,7 +26,7 @@ export default function PrivacyPolicyPage() {
 
           <h2>Titolare del trattamento</h2>
           <p>
-            Il trattamento dei dati personali relativo a kappa404.it e gestito da Kappa404, progetto professionale di Amine Khabir con base a {CONTACT_INFO.base}.
+            Il trattamento dei dati personali relativo a kappa404.it è gestito da Kappa404, progetto professionale di Amine Khabir con base a {CONTACT_INFO.base}.
             Per richieste privacy puoi scrivere a{" "}
             <a href={CONTACT_INFO.emailHref} className="text-white underline decoration-white/20 underline-offset-4 hover:text-[#00f2ff]">
               {CONTACT_INFO.email}
@@ -43,7 +43,7 @@ export default function PrivacyPolicyPage() {
 
           <h2>Dati trattati</h2>
           <ul>
-            <li>Dati tecnici necessari alla navigazione, sicurezza, diagnostica, protezione da abusi e continuita del servizio.</li>
+            <li>Dati tecnici necessari alla navigazione, sicurezza, diagnostica, protezione da abusi e continuità del servizio.</li>
             <li>Dati inviati volontariamente via email, WhatsApp o altri canali esterni: nome, recapiti, contenuto del messaggio, informazioni sul progetto e allegati eventualmente trasmessi.</li>
             <li>Dati inseriti nel form di contatto del sito, usati localmente nel browser per creare un messaggio WhatsApp precompilato.</li>
             <li>Dati statistici e prestazionali aggregati raccolti da Vercel Web Analytics e Vercel Speed Insights solo dopo consenso esplicito.</li>
@@ -57,9 +57,9 @@ export default function PrivacyPolicyPage() {
             disponibile la mail {CONTACT_INFO.email}.
           </p>
 
-          <h2>Finalita e basi giuridiche</h2>
+          <h2>Finalità e basi giuridiche</h2>
           <ul>
-            <li>Fornire il sito, garantirne sicurezza, stabilita e funzionamento tecnico: interesse legittimo del titolare.</li>
+            <li>Fornire il sito, garantirne sicurezza, stabilità e funzionamento tecnico: interesse legittimo del titolare.</li>
             <li>Rispondere a richieste commerciali, progettuali o informative inviate dall&apos;utente: misure precontrattuali richieste dall&apos;interessato.</li>
             <li>Gestire eventuali obblighi amministrativi, fiscali, contabili o legali connessi a un rapporto professionale: obbligo di legge o esecuzione del rapporto.</li>
             <li>Misurare traffico e performance tramite Vercel Web Analytics e Speed Insights: consenso dell&apos;utente, revocabile in qualsiasi momento.</li>
@@ -67,8 +67,8 @@ export default function PrivacyPolicyPage() {
 
           <h2>Natura del conferimento</h2>
           <p>
-            I dati tecnici necessari sono indispensabili per usare il sito. L&apos;invio di richieste via email, WhatsApp o altri canali e facoltativo, ma senza i dati
-            necessari potrebbe non essere possibile rispondere. La misurazione opzionale e facoltativa: il rifiuto non limita la navigazione.
+            I dati tecnici necessari sono indispensabili per usare il sito. L&apos;invio di richieste via email, WhatsApp o altri canali è facoltativo, ma senza i dati
+            necessari potrebbe non essere possibile rispondere. La misurazione opzionale è facoltativa: il rifiuto non limita la navigazione.
           </p>
 
           <h2>Destinatari e fornitori</h2>
@@ -87,7 +87,7 @@ export default function PrivacyPolicyPage() {
 
           <h2>Conservazione</h2>
           <ul>
-            <li>I log tecnici e di sicurezza seguono i tempi di conservazione del provider e le esigenze di continuita operativa.</li>
+            <li>I log tecnici e di sicurezza seguono i tempi di conservazione del provider e le esigenze di continuità operativa.</li>
             <li>Le richieste di contatto e gli scambi professionali possono essere conservati fino a 24 mesi, salvo prosecuzione del rapporto o obblighi ulteriori.</li>
             <li>I documenti amministrativi, fiscali o contrattuali sono conservati per i tempi previsti dalla legge, quando applicabile.</li>
             <li>La preferenza privacy salvata nel browser resta memorizzata fino a modifica tramite Preferenze cookie o cancellazione dei dati locali.</li>
@@ -95,11 +95,11 @@ export default function PrivacyPolicyPage() {
 
           <h2>Diritti dell&apos;interessato</h2>
           <p>
-            Puoi chiedere accesso, rettifica, cancellazione, limitazione, opposizione, portabilita quando applicabile e revoca del consenso scrivendo a{" "}
+            Puoi chiedere accesso, rettifica, cancellazione, limitazione, opposizione, portabilità quando applicabile e revoca del consenso scrivendo a{" "}
             <a href={CONTACT_INFO.emailHref} className="text-white underline decoration-white/20 underline-offset-4 hover:text-[#00f2ff]">
               {CONTACT_INFO.email}
             </a>
-            . La revoca del consenso agli strumenti opzionali di misurazione puo essere effettuata anche dal comando &quot;Preferenze cookie&quot; nel footer.
+            . La revoca del consenso agli strumenti opzionali di misurazione può essere effettuata anche dal comando &quot;Preferenze cookie&quot; nel footer.
           </p>
 
           <h2>Profilazione e decisioni automatizzate</h2>
@@ -110,12 +110,12 @@ export default function PrivacyPolicyPage() {
           <h2>Reclamo al Garante</h2>
           <p>
             Se ritieni che il trattamento violi la normativa applicabile, puoi proporre reclamo al Garante per la protezione dei dati personali secondo le
-            modalita pubblicate sul sito ufficiale dell&apos;Autorita.
+            modalità pubblicate sul sito ufficiale dell&apos;Autorità.
           </p>
 
           <h2>Aggiornamenti</h2>
           <p>
-            Questa informativa viene aggiornata quando cambiano strumenti, finalita, fornitori, canali di contatto o obblighi applicabili. Le modifiche rilevanti
+            Questa informativa viene aggiornata quando cambiano strumenti, finalità, fornitori, canali di contatto o obblighi applicabili. Le modifiche rilevanti
             saranno pubblicate in questa pagina con nuova data di aggiornamento.
           </p>
 

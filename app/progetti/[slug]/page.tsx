@@ -77,7 +77,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
         <div className="container-main grid gap-6 md:grid-cols-2">
           <article className="card-shell">
             <h2 className="text-xl font-semibold text-white">Overview</h2>
-            <p className="mt-4 text-sm text-white/76">{project.overview ?? "Progetto costruito per orchestrare estetica e funzionalita in un unico flusso operativo, con dashboard e componenti riutilizzabili."}</p>
+            <p className="mt-4 text-sm text-white/76">{project.overview ?? "Progetto costruito per orchestrare estetica e funzionalità in un unico flusso operativo, con dashboard e componenti riutilizzabili."}</p>
           </article>
 
           <article className="card-shell">
@@ -102,7 +102,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
 
           <article className="card-shell">
             <h2 className="text-xl font-semibold text-white">Problema</h2>
-            <p className="mt-4 text-sm text-white/76">{project.problem ?? "Necessita di coordinare team creativi e tecnici senza dispersione di informazioni durante le fasi di delivery."}</p>
+            <p className="mt-4 text-sm text-white/76">{project.problem ?? "Necessità di coordinare team creativi e tecnici senza dispersione di informazioni durante le fasi di delivery."}</p>
           </article>
 
           <article className="card-shell">
@@ -136,6 +136,45 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
         </div>
       </section>
 
+      {(project.objectives?.length || project.informationArchitecture?.length || project.creativeProcess?.length) ? (
+        <section className="section-gap">
+          <div className="container-main grid gap-6 lg:grid-cols-3">
+            {project.objectives?.length ? (
+              <article className="card-shell">
+                <h2 className="text-xl font-semibold text-white">Obiettivi</h2>
+                <ul className="mt-5 list-disc space-y-2 pl-5 text-sm text-white/76">
+                  {project.objectives.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </article>
+            ) : null}
+
+            {project.informationArchitecture?.length ? (
+              <article className="card-shell">
+                <h2 className="text-xl font-semibold text-white">Architettura informativa</h2>
+                <ul className="mt-5 list-disc space-y-2 pl-5 text-sm text-white/76">
+                  {project.informationArchitecture.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </article>
+            ) : null}
+
+            {project.creativeProcess?.length ? (
+              <article className="card-shell">
+                <h2 className="text-xl font-semibold text-white">Processo creativo</h2>
+                <ul className="mt-5 list-disc space-y-2 pl-5 text-sm text-white/76">
+                  {project.creativeProcess.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </article>
+            ) : null}
+          </div>
+        </section>
+      ) : null}
+
       <section className="section-gap">
         <div className="container-main grid gap-6 lg:grid-cols-[1.35fr_0.65fr]">
           <div className="card-shell overflow-hidden p-0">
@@ -163,6 +202,38 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
           </article>
         </div>
       </section>
+
+      {(project.gallery?.length || project.outputs?.length) ? (
+        <section className="section-gap border-y border-white/10 bg-[#070a18]">
+          <div className="container-main grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+            {project.gallery?.length ? (
+              <div className="grid gap-6">
+                {project.gallery.map((item) => (
+                  <figure key={item.src} className="card-shell overflow-hidden p-0">
+                    <Image src={item.src} alt={item.alt} width={1600} height={1066} className="aspect-[16/10] w-full object-cover" />
+                    <figcaption className="border-t border-white/10 px-5 py-4 font-mono text-[10px] uppercase tracking-[0.2em] text-white/62">
+                      {item.label}
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
+            ) : null}
+
+            {project.outputs?.length ? (
+              <article className="card-shell">
+                <h2 className="text-xl font-semibold text-white">Output consegnati</h2>
+                <ul className="mt-5 grid gap-3 text-sm text-white/76">
+                  {project.outputs.map((item) => (
+                    <li key={item} className="border border-white/10 bg-white/[0.03] px-4 py-3">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            ) : null}
+          </div>
+        </section>
+      ) : null}
 
       <section className="section-gap pt-0">
         <div className="container-main">
