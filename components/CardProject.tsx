@@ -36,7 +36,7 @@ export default function CardProject({ project }: CardProjectProps) {
 
         <Link
           href={`/progetti/${project.slug}`}
-          className="mt-8 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.22em] text-[#00f2ff] transition-colors hover:text-white"
+          className="mt-8 inline-flex min-h-11 items-center gap-2 font-mono text-[11px] uppercase tracking-[0.22em] text-[#00f2ff] transition-colors hover:text-white"
         >
           Apri progetto <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
         </Link>

@@ -884,7 +884,7 @@ export default function TerminalExperience() {
                       key={command}
                       type="button"
                       onClick={() => handleExecute(command)}
-                      className="border border-white/10 bg-white/[0.03] px-3 py-2 font-mono text-[11px] uppercase tracking-[0.18em] text-white/74 transition hover:border-[#00f2ff]/40 hover:text-[#00f2ff]"
+                      className="min-h-11 border border-white/10 bg-white/[0.03] px-3 py-2 font-mono text-[11px] uppercase tracking-[0.18em] text-white/74 transition hover:border-[#00f2ff]/40 hover:text-[#00f2ff]"
                     >
                       {command}
                     </button>

@@ -33,7 +33,7 @@ export default function CardService({ service }: CardServiceProps) {
 
         <Link
           href={`/servizi/${service.slug}`}
-          className="mt-8 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.22em] text-[#00f2ff] transition-colors hover:text-white"
+          className="mt-8 inline-flex min-h-11 items-center gap-2 font-mono text-[11px] uppercase tracking-[0.22em] text-[#00f2ff] transition-colors hover:text-white"
         >
           Apri servizio <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
         </Link>

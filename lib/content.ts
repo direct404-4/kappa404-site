@@ -102,6 +102,21 @@ export type FaqItem = {
   answer: string;
 };
 
+export type AuditLanding = {
+  hero: {
+    title: string;
+    description: string;
+    primaryCta: string;
+    secondaryCta: string;
+  };
+  auditPoints: Array<{
+    title: string;
+    description: string;
+  }>;
+  serviceFocus: string[];
+  faqs: FaqItem[];
+};
+
 export type HomeOutcome = {
   code: string;
   title: string;
@@ -447,13 +462,60 @@ export const HOME_HERO: HomeHero = {
   backgroundAlt: "Sistema digitale Kappa404 con core luminoso cyan e magenta",
   primaryCta: {
     label: "Richiedi un audit iniziale",
-    href: "/contatti#form"
+    href: "/audit-iniziale"
   },
   secondaryCta: {
     label: "Scrivi via email",
     href: CONTACT_INFO.emailHref
   },
   metadata: ["Neural infrastructure", "Data stream systems", "AI visual engineering"]
+};
+
+export const AUDIT_LANDING: AuditLanding = {
+  hero: {
+    title: "Audit iniziale per capire cosa blocca il tuo sistema digitale",
+    description:
+      "Una prima analisi per orientare sito, funnel, automazioni AI e contenuti verso un percorso più chiaro, credibile e misurabile.",
+    primaryCta: "Richiedi un audit iniziale",
+    secondaryCta: "Scrivi via email"
+  },
+  auditPoints: [
+    {
+      title: "Presenza web",
+      description: "Controllo di struttura, messaggio, performance percepita, SEO tecnica di base e chiarezza dei percorsi di contatto."
+    },
+    {
+      title: "Conversione",
+      description: "Lettura dei punti in cui il traffico perde direzione: CTA, proof, offerte, obiezioni e passaggi verso email o WhatsApp."
+    },
+    {
+      title: "Automazione AI",
+      description: "Individuazione delle attività manuali dove un workflow supervisionato può ridurre tempi, errori e dispersione operativa."
+    },
+    {
+      title: "Contenuti visuali",
+      description: "Verifica della coerenza tra identità, immagini, video, social e materiali reali disponibili per sostenere il posizionamento."
+    }
+  ],
+  serviceFocus: ["web-development", "landing-pages", "ai-automation", "video-content-ai"],
+  faqs: [
+    {
+      question: "Quanto dura il primo audit?",
+      answer: "Il primo allineamento serve a chiarire obiettivi, vincoli, materiali disponibili e priorità. Dopo il contatto ricevi un prossimo step concreto."
+    },
+    {
+      question: "È necessario avere già un sito online?",
+      answer: "No. L'audit può partire da un sito esistente, da una landing, da materiali visuali o da un'idea di sistema digitale ancora da strutturare."
+    },
+    {
+      question: "Ricevo subito un preventivo?",
+      answer: "Prima viene definito il perimetro reale. Il preventivo arriva solo dopo aver capito obiettivo, complessità, canali e livello di intervento necessario."
+    },
+    {
+      question: "Qual è il canale migliore per iniziare?",
+      answer: "Per richieste strutturate usa l'email professionale. Per un intake rapido puoi usare WhatsApp con obiettivo, contesto e tempistiche."
+    }
+  ]
 };
 
 export const HOME_OUTCOMES: HomeOutcome[] = [

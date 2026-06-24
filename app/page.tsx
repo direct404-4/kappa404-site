@@ -185,7 +185,7 @@ export default function HomePage() {
           </p>
 
           <div className="home-hero-actions">
-            <Link href="/contatti#form" className="btn-primary">
+            <Link href="/audit-iniziale" className="btn-primary">
               Richiedi un audit iniziale
             </Link>
 

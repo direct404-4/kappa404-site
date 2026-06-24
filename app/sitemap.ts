@@ -12,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "",
     "/servizi",
     "/progetti",
+    "/audit-iniziale",
     "/soluzioni-ai",
     "/chi-sono",
     "/contatti",

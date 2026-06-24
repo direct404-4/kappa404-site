@@ -621,6 +621,9 @@ main {
 
 .kappa-nav-link {
   position: relative;
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
   font-family: var(--font-jetbrains-mono), monospace;
   font-size: 0.7rem;
   letter-spacing: 0.18em;
@@ -639,7 +642,7 @@ main {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -0.5rem;
+  bottom: 0.35rem;
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(0, 242, 255, 0.9), transparent);
 }

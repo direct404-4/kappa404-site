@@ -50,6 +50,7 @@ export default function WhatsAppProjectForm({ mode = "contact" }: WhatsAppProjec
   const [errors, setErrors] = useState<FormErrors>({});
   const [showSummary, setShowSummary] = useState(false);
   const href = useMemo(() => buildWhatsAppHref(state, mode), [mode, state]);
+  const formId = `${mode}-whatsapp-form`;
 
   const updateField = (field: keyof FormState, value: string) => {
     setState((current) => ({
@@ -88,7 +89,7 @@ export default function WhatsAppProjectForm({ mode = "contact" }: WhatsAppProjec
 
   return (
     <form
-      id="form"
+      id={formId}
       noValidate
       className={mode === "home" ? "space-y-8" : "kappa-contact-panel space-y-4"}
       onSubmit={(event) => {
